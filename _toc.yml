@@ -2,9 +2,8 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: intro
+root: Introducao
 chapters:
-- file: python
-- file: pandas
-- file: seaborn
-- file: notebooks
+- file: Python
+- file: Pandas
+- file: Seaborn
