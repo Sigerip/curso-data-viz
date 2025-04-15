@@ -1,0 +1,77 @@
+Traceback (most recent call last):
+  File "/home/codespace/.local/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/asyncio/base_events.py", line 684, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# Careegar Tábuas do Github em formato Parquet
+tabua_mas = pd.read_parquet("https://raw.githubusercontent.com/Sigerip/curso-data-viz/main/tabua_homens.parquet")
+tabua_fem = pd.read_parquet("https://raw.githubusercontent.com/Sigerip/curso-data-viz/main/tabua_mulheres.parquet")
+
+# Visualizar primeiras linhas da tábua masculina
+print("Tábuas de Mortalidade - Homens")
+tabua_mas.head(20)
+------------------
+
+
+[31m---------------------------------------------------------------------------[39m
+[31mImportError[39m                               Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[2][39m[32m, line 2[39m
+[32m      1[39m [38;5;66;03m# Careegar Tábuas do Github em formato Parquet[39;00m
+[32m----> [39m[32m2[39m tabua_mas = [43mpd[49m[43m.[49m[43mread_parquet[49m[43m([49m[33;43m"[39;49m[33;43mhttps://raw.githubusercontent.com/Sigerip/curso-data-viz/main/tabua_homens.parquet[39;49m[33;43m"[39;49m[43m)[49m
+[32m      3[39m tabua_fem = pd.read_parquet([33m"[39m[33mhttps://raw.githubusercontent.com/Sigerip/curso-data-viz/main/tabua_mulheres.parquet[39m[33m"[39m)
+[32m      5[39m [38;5;66;03m# Visualizar primeiras linhas da tábua masculina[39;00m
+
+[36mFile [39m[32m~/.local/lib/python3.12/site-packages/pandas/io/parquet.py:651[39m, in [36mread_parquet[39m[34m(path, engine, columns, storage_options, use_nullable_dtypes, dtype_backend, filesystem, filters, **kwargs)[39m
+[32m    498[39m [38;5;129m@doc[39m(storage_options=_shared_docs[[33m"[39m[33mstorage_options[39m[33m"[39m])
+[32m    499[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34mread_parquet[39m(
+[32m    500[39m     path: FilePath | ReadBuffer[[38;5;28mbytes[39m],
+[32m   (...)[39m[32m    508[39m     **kwargs,
+[32m    509[39m ) -> DataFrame:
+[32m    510[39m [38;5;250m    [39m[33;03m"""[39;00m
+[32m    511[39m [33;03m    Load a parquet object from the file path, returning a DataFrame.[39;00m
+[32m    512[39m 
+[32m   (...)[39m[32m    648[39m [33;03m    1    4    9[39;00m
+[32m    649[39m [33;03m    """[39;00m
+[32m--> [39m[32m651[39m     impl = [43mget_engine[49m[43m([49m[43mengine[49m[43m)[49m
+[32m    653[39m     [38;5;28;01mif[39;00m use_nullable_dtypes [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m lib.no_default:
+[32m    654[39m         msg = (
+[32m    655[39m             [33m"[39m[33mThe argument [39m[33m'[39m[33muse_nullable_dtypes[39m[33m'[39m[33m is deprecated and will be removed [39m[33m"[39m
+[32m    656[39m             [33m"[39m[33min a future version.[39m[33m"[39m
+[32m    657[39m         )
+
+[36mFile [39m[32m~/.local/lib/python3.12/site-packages/pandas/io/parquet.py:67[39m, in [36mget_engine[39m[34m(engine)[39m
+[32m     64[39m         [38;5;28;01mexcept[39;00m [38;5;167;01mImportError[39;00m [38;5;28;01mas[39;00m err:
+[32m     65[39m             error_msgs += [33m"[39m[38;5;130;01m\n[39;00m[33m - [39m[33m"[39m + [38;5;28mstr[39m(err)
+[32m---> [39m[32m67[39m     [38;5;28;01mraise[39;00m [38;5;167;01mImportError[39;00m(
+[32m     68[39m         [33m"[39m[33mUnable to find a usable engine; [39m[33m"[39m
+[32m     69[39m         [33m"[39m[33mtried using: [39m[33m'[39m[33mpyarrow[39m[33m'[39m[33m, [39m[33m'[39m[33mfastparquet[39m[33m'[39m[33m.[39m[38;5;130;01m\n[39;00m[33m"[39m
+[32m     70[39m         [33m"[39m[33mA suitable version of [39m[33m"[39m
+[32m     71[39m         [33m"[39m[33mpyarrow or fastparquet is required for parquet [39m[33m"[39m
+[32m     72[39m         [33m"[39m[33msupport.[39m[38;5;130;01m\n[39;00m[33m"[39m
+[32m     73[39m         [33m"[39m[33mTrying to import the above resulted in these errors:[39m[33m"[39m
+[32m     74[39m         [33mf[39m[33m"[39m[38;5;132;01m{[39;00merror_msgs[38;5;132;01m}[39;00m[33m"[39m
+[32m     75[39m     )
+[32m     77[39m [38;5;28;01mif[39;00m engine == [33m"[39m[33mpyarrow[39m[33m"[39m:
+[32m     78[39m     [38;5;28;01mreturn[39;00m PyArrowImpl()
+
+[31mImportError[39m: Unable to find a usable engine; tried using: 'pyarrow', 'fastparquet'.
+A suitable version of pyarrow or fastparquet is required for parquet support.
+Trying to import the above resulted in these errors:
+ - Missing optional dependency 'pyarrow'. pyarrow is required for parquet support. Use pip or conda to install pyarrow.
+ - Missing optional dependency 'fastparquet'. fastparquet is required for parquet support. Use pip or conda to install fastparquet.
+

@@ -1,0 +1,1395 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Análise de Dados Demográficos com Seaborn &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Demograficos';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Bem-vindo(a) ao Curso de Visualização Gráfica com Seaborn no Google Colab!
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Python.html">1. Python Básico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Pandas.html">2. Pandas básico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Matplotlib.html">3. Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Seaborn.html">4. Introdução ao Seaborn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Datasets_Seaborn.html">5. Datasets do Seaborn</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Sigerip/curso-data-viz/tree/main" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Sigerip/curso-data-viz/tree/main/issues/new?title=Issue%20on%20page%20%2FDemograficos.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Demograficos.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Análise de Dados Demográficos com Seaborn</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Análise de Dados Demográficos com Seaborn</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introducao-aos-dados-demograficos">Introdução aos Dados Demográficos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analise-de-tabuas-de-mortalidade">Análise de Tábuas de Mortalidade</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacao-da-probabilidade-de-morte-qx">Visualização da Probabilidade de Morte (qx)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacao-de-tabuas-de-mortalidade-por-sexo">Comparação de Tábuas de Mortalidade por Sexo</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#evolucao-do-comportamento-da-probabilidade-de-morte">Evolução do Comportamento da Probabilidade de Morte</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analise-de-expectativa-de-vida">Análise de Expectativa de Vida</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evolucao-da-expectativa-de-vida-ao-longo-do-tempo">Evolução da Expectativa de Vida ao Longo do Tempo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacao-da-expectativa-de-vida-entre-regioes">Comparação da Expectativa de Vida entre Regiões</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analise-de-mortalidade-infantil">Análise de Mortalidade Infantil</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacao-da-mortalidade-infatil-entre-regioes">Comparação da Mortalidade Infatil entre Regiões</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relacao-entre-mortalidade-infantil-e-outros-indicadores">Relação entre Mortalidade Infantil e Outros Indicadores</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusao">Conclusão</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p><a href="https://colab.research.google.com/github/Sigerip/curso-data-viz/blob/main/Demograficos.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+<section class="tex2jax_ignore mathjax_ignore" id="analise-de-dados-demograficos-com-seaborn">
+<h1>Análise de Dados Demográficos com Seaborn<a class="headerlink" href="#analise-de-dados-demograficos-com-seaborn" title="Link to this heading">#</a></h1>
+<p>Neste capítulo, aplicaremos os conhecimentos adquiridos sobre visualização de dados com Seaborn para analisar dados demográficos, com foco em tábuas de mortalidade, expectativa de vida e mortalidade infantil. Esses tipos de dados são fundamentais para compreender a dinâmica populacional e para o planejamento de políticas públicas.</p>
+<section id="introducao-aos-dados-demograficos">
+<h2>Introdução aos Dados Demográficos<a class="headerlink" href="#introducao-aos-dados-demograficos" title="Link to this heading">#</a></h2>
+<p>Dados demográficos são estatísticas que descrevem características de uma população, como idade, sexo, mortalidade, natalidade, migração, entre outros. Neste capítulo, focaremos em três aspectos importantes:</p>
+<ol class="arabic simple">
+<li><p><strong>Tábuas de Mortalidade</strong>: Tabelas que mostram a probabilidade de morte em diferentes idades</p></li>
+<li><p><strong>Expectativa de Vida</strong>: Estimativa do número médio de anos que uma pessoa viverá</p></li>
+<li><p><strong>Mortalidade Infantil</strong>: Taxa de mortes de crianças menores de um ano</p></li>
+</ol>
+<p>Vamos começar importando as bibliotecas necessárias e configurando o ambiente:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.colors</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mcolors</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+
+<span class="c1"># Configurar o estilo</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;deep&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="analise-de-tabuas-de-mortalidade">
+<h2>Análise de Tábuas de Mortalidade<a class="headerlink" href="#analise-de-tabuas-de-mortalidade" title="Link to this heading">#</a></h2>
+<p>As tábuas de mortalidade são ferramentas fundamentais em demografia e atuária. Elas mostram a probabilidade de morte em cada idade e são usadas para calcular a expectativa de vida e para precificar seguros de vida e planos de previdência.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Careegar Tábuas do Github em formato Parquet</span>
+<span class="n">tabua_mas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/Sigerip/curso-data-viz/main/tabua_homens.parquet&quot;</span><span class="p">)</span>
+<span class="n">tabua_fem</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/Sigerip/curso-data-viz/main/tabua_mulheres.parquet&quot;</span><span class="p">)</span>
+
+<span class="c1"># Visualizar primeiras linhas da tábua masculina</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tábuas de Mortalidade - Homens&quot;</span><span class="p">)</span>
+<span class="n">tabua_mas</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Careegar Tábuas do Github em formato Parquet</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">tabua_mas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/Sigerip/curso-data-viz/main/tabua_homens.parquet&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">tabua_fem</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/Sigerip/curso-data-viz/main/tabua_mulheres.parquet&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># Visualizar primeiras linhas da tábua masculina</span>
+
+<span class="nn">File ~/.local/lib/python3.12/site-packages/pandas/io/parquet.py:651,</span> in <span class="ni">read_parquet</span><span class="nt">(path, engine, columns, storage_options, use_nullable_dtypes, dtype_backend, filesystem, filters, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">498</span> <span class="nd">@doc</span><span class="p">(</span><span class="n">storage_options</span><span class="o">=</span><span class="n">_shared_docs</span><span class="p">[</span><span class="s2">&quot;storage_options&quot;</span><span class="p">])</span>
+<span class="g g-Whitespace">    </span><span class="mi">499</span> <span class="k">def</span><span class="w"> </span><span class="nf">read_parquet</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">500</span>     <span class="n">path</span><span class="p">:</span> <span class="n">FilePath</span> <span class="o">|</span> <span class="n">ReadBuffer</span><span class="p">[</span><span class="nb">bytes</span><span class="p">],</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>    <span class="mi">508</span>     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">509</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">510</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">511</span><span class="sd">     Load a parquet object from the file path, returning a DataFrame.</span>
+<span class="g g-Whitespace">    </span><span class="mi">512</span><span class="sd"> </span>
+<span class="sd">   (...)    648     1    4    9</span>
+<span class="g g-Whitespace">    </span><span class="mi">649</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">651</span>     <span class="n">impl</span> <span class="o">=</span> <span class="n">get_engine</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">653</span>     <span class="k">if</span> <span class="n">use_nullable_dtypes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">lib</span><span class="o">.</span><span class="n">no_default</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">654</span>         <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">655</span>             <span class="s2">&quot;The argument &#39;use_nullable_dtypes&#39; is deprecated and will be removed &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">656</span>             <span class="s2">&quot;in a future version.&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">657</span>         <span class="p">)</span>
+
+<span class="nn">File ~/.local/lib/python3.12/site-packages/pandas/io/parquet.py:67,</span> in <span class="ni">get_engine</span><span class="nt">(engine)</span>
+<span class="g g-Whitespace">     </span><span class="mi">64</span>         <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">65</span>             <span class="n">error_msgs</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> - &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">67</span>     <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">68</span>         <span class="s2">&quot;Unable to find a usable engine; &quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">69</span>         <span class="s2">&quot;tried using: &#39;pyarrow&#39;, &#39;fastparquet&#39;.</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span>         <span class="s2">&quot;A suitable version of &quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span>         <span class="s2">&quot;pyarrow or fastparquet is required for parquet &quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">72</span>         <span class="s2">&quot;support.</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">73</span>         <span class="s2">&quot;Trying to import the above resulted in these errors:&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">74</span>         <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">error_msgs</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">75</span>     <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">77</span> <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;pyarrow&quot;</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">78</span>     <span class="k">return</span> <span class="n">PyArrowImpl</span><span class="p">()</span>
+
+<span class="ne">ImportError</span>: Unable to find a usable engine; tried using: &#39;pyarrow&#39;, &#39;fastparquet&#39;.
+<span class="n">A</span> <span class="n">suitable</span> <span class="n">version</span> <span class="n">of</span> <span class="n">pyarrow</span> <span class="ow">or</span> <span class="n">fastparquet</span> <span class="ow">is</span> <span class="n">required</span> <span class="k">for</span> <span class="n">parquet</span> <span class="n">support</span><span class="o">.</span>
+<span class="n">Trying</span> <span class="n">to</span> <span class="kn">import</span><span class="w"> </span><span class="nn">the</span> <span class="n">above</span> <span class="n">resulted</span> <span class="ow">in</span> <span class="n">these</span> <span class="n">errors</span><span class="p">:</span>
+ <span class="o">-</span> <span class="n">Missing</span> <span class="n">optional</span> <span class="n">dependency</span> <span class="s1">&#39;pyarrow&#39;</span><span class="o">.</span> <span class="n">pyarrow</span> <span class="ow">is</span> <span class="n">required</span> <span class="k">for</span> <span class="n">parquet</span> <span class="n">support</span><span class="o">.</span> <span class="n">Use</span> <span class="n">pip</span> <span class="ow">or</span> <span class="n">conda</span> <span class="n">to</span> <span class="n">install</span> <span class="n">pyarrow</span><span class="o">.</span>
+ <span class="o">-</span> <span class="n">Missing</span> <span class="n">optional</span> <span class="n">dependency</span> <span class="s1">&#39;fastparquet&#39;</span><span class="o">.</span> <span class="n">fastparquet</span> <span class="ow">is</span> <span class="n">required</span> <span class="k">for</span> <span class="n">parquet</span> <span class="n">support</span><span class="o">.</span> <span class="n">Use</span> <span class="n">pip</span> <span class="ow">or</span> <span class="n">conda</span> <span class="n">to</span> <span class="n">install</span> <span class="n">fastparquet</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualizar primeiras linhas da tábua feminina</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tábua de Mortalidade - Mulheres&quot;</span><span class="p">)</span>
+<span class="n">tabua_fem</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tábua de Mortalidade - Mulheres
+</pre></div>
+</div>
+<div class="output text_html">
+  <div id="df-58269b22-109c-45e5-ace5-068eaf3c68a3" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Ano</th>
+      <th>Grupo Etário</th>
+      <th>nMx</th>
+      <th>nqx</th>
+      <th>nAx</th>
+      <th>lx</th>
+      <th>ndx</th>
+      <th>nLx</th>
+      <th>Tx</th>
+      <th>ex</th>
+      <th>Local</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2000</td>
+      <td>0</td>
+      <td>0.024971</td>
+      <td>0.024436</td>
+      <td>0.123308</td>
+      <td>100000.000000</td>
+      <td>2443.606753</td>
+      <td>97857.710004</td>
+      <td>7.507655e+06</td>
+      <td>75.076554</td>
+      <td>Brasil</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2000</td>
+      <td>1-4</td>
+      <td>0.001049</td>
+      <td>0.004185</td>
+      <td>1.484223</td>
+      <td>97556.393247</td>
+      <td>408.240564</td>
+      <td>389198.530691</td>
+      <td>7.409798e+06</td>
+      <td>75.953993</td>
+      <td>Brasil</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2000</td>
+      <td>5-9</td>
+      <td>0.000310</td>
+      <td>0.001548</td>
+      <td>2.250412</td>
+      <td>97148.152683</td>
+      <td>150.379710</td>
+      <td>485327.281146</td>
+      <td>7.020599e+06</td>
+      <td>72.266934</td>
+      <td>Brasil</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2000</td>
+      <td>10-14</td>
+      <td>0.000337</td>
+      <td>0.001684</td>
+      <td>2.633627</td>
+      <td>96997.772973</td>
+      <td>163.353610</td>
+      <td>484602.309253</td>
+      <td>6.535272e+06</td>
+      <td>67.375483</td>
+      <td>Brasil</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2000</td>
+      <td>15-19</td>
+      <td>0.000590</td>
+      <td>0.002948</td>
+      <td>2.662049</td>
+      <td>96834.419362</td>
+      <td>285.482396</td>
+      <td>483504.653053</td>
+      <td>6.050670e+06</td>
+      <td>62.484699</td>
+      <td>Brasil</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2000</td>
+      <td>20-24</td>
+      <td>0.000738</td>
+      <td>0.003684</td>
+      <td>2.593931</td>
+      <td>96548.936967</td>
+      <td>355.684265</td>
+      <td>481888.883943</td>
+      <td>5.567165e+06</td>
+      <td>57.661586</td>
+      <td>Brasil</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2000</td>
+      <td>25-29</td>
+      <td>0.000934</td>
+      <td>0.004658</td>
+      <td>2.612628</td>
+      <td>96193.252702</td>
+      <td>448.065653</td>
+      <td>479896.564096</td>
+      <td>5.085276e+06</td>
+      <td>52.865205</td>
+      <td>Brasil</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2000</td>
+      <td>30-34</td>
+      <td>0.001279</td>
+      <td>0.006377</td>
+      <td>2.634695</td>
+      <td>95745.187049</td>
+      <td>610.566862</td>
+      <td>477281.758292</td>
+      <td>4.605379e+06</td>
+      <td>48.100375</td>
+      <td>Brasil</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2000</td>
+      <td>35-39</td>
+      <td>0.001805</td>
+      <td>0.008988</td>
+      <td>2.651480</td>
+      <td>95134.620187</td>
+      <td>855.081803</td>
+      <td>473664.924060</td>
+      <td>4.128098e+06</td>
+      <td>43.392171</td>
+      <td>Brasil</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2000</td>
+      <td>40-44</td>
+      <td>0.002695</td>
+      <td>0.013391</td>
+      <td>2.659413</td>
+      <td>94279.538384</td>
+      <td>1262.501249</td>
+      <td>468442.697466</td>
+      <td>3.654433e+06</td>
+      <td>38.761674</td>
+      <td>Brasil</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2000</td>
+      <td>45-49</td>
+      <td>0.003986</td>
+      <td>0.019746</td>
+      <td>2.655377</td>
+      <td>93017.037135</td>
+      <td>1836.738397</td>
+      <td>460778.727106</td>
+      <td>3.185990e+06</td>
+      <td>34.251683</td>
+      <td>Brasil</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2000</td>
+      <td>50-54</td>
+      <td>0.005913</td>
+      <td>0.029159</td>
+      <td>2.651400</td>
+      <td>91180.298738</td>
+      <td>2658.705393</td>
+      <td>449657.256936</td>
+      <td>2.725211e+06</td>
+      <td>29.888160</td>
+      <td>Brasil</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2000</td>
+      <td>55-59</td>
+      <td>0.008747</td>
+      <td>0.042853</td>
+      <td>2.651218</td>
+      <td>88521.593344</td>
+      <td>3793.416692</td>
+      <td>433698.059199</td>
+      <td>2.275554e+06</td>
+      <td>25.706203</td>
+      <td>Brasil</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2000</td>
+      <td>60-64</td>
+      <td>0.013335</td>
+      <td>0.064644</td>
+      <td>2.641677</td>
+      <td>84728.176652</td>
+      <td>5477.176846</td>
+      <td>410723.929744</td>
+      <td>1.841856e+06</td>
+      <td>21.738412</td>
+      <td>Brasil</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2000</td>
+      <td>65-69</td>
+      <td>0.019729</td>
+      <td>0.094193</td>
+      <td>2.604893</td>
+      <td>79250.999806</td>
+      <td>7464.877922</td>
+      <td>378375.820451</td>
+      <td>1.431132e+06</td>
+      <td>18.058221</td>
+      <td>Brasil</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2000</td>
+      <td>70-74</td>
+      <td>0.026875</td>
+      <td>0.126282</td>
+      <td>2.615399</td>
+      <td>71786.121885</td>
+      <td>9065.324557</td>
+      <td>337313.428889</td>
+      <td>1.052756e+06</td>
+      <td>14.665178</td>
+      <td>Brasil</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2000</td>
+      <td>75-79</td>
+      <td>0.044914</td>
+      <td>0.202934</td>
+      <td>2.626327</td>
+      <td>62720.797328</td>
+      <td>12728.164105</td>
+      <td>283391.487375</td>
+      <td>7.154428e+05</td>
+      <td>11.406788</td>
+      <td>Brasil</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2000</td>
+      <td>80-84</td>
+      <td>0.077224</td>
+      <td>0.324757</td>
+      <td>2.553291</td>
+      <td>49992.633223</td>
+      <td>16235.481882</td>
+      <td>210239.672701</td>
+      <td>4.320513e+05</td>
+      <td>8.642300</td>
+      <td>Brasil</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2000</td>
+      <td>85-89</td>
+      <td>0.125559</td>
+      <td>0.474368</td>
+      <td>2.424014</td>
+      <td>33757.151341</td>
+      <td>16013.303061</td>
+      <td>127535.715950</td>
+      <td>2.218117e+05</td>
+      <td>6.570805</td>
+      <td>Brasil</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2000</td>
+      <td>90+</td>
+      <td>0.188212</td>
+      <td>1.000000</td>
+      <td>5.313162</td>
+      <td>17743.848281</td>
+      <td>17743.848281</td>
+      <td>94275.942040</td>
+      <td>9.427594e+04</td>
+      <td>5.313162</td>
+      <td>Brasil</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-58269b22-109c-45e5-ace5-068eaf3c68a3')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-58269b22-109c-45e5-ace5-068eaf3c68a3 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-58269b22-109c-45e5-ace5-068eaf3c68a3');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-aa0f30b5-9af0-45f9-bd6d-b1f29b243d10">
+  <button class="colab-df-quickchart" onclick="quickchart('df-aa0f30b5-9af0-45f9-bd6d-b1f29b243d10')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-aa0f30b5-9af0-45f9-bd6d-b1f29b243d10 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+</section>
+<section id="visualizacao-da-probabilidade-de-morte-qx">
+<h2>Visualização da Probabilidade de Morte (qx)<a class="headerlink" href="#visualizacao-da-probabilidade-de-morte-qx" title="Link to this heading">#</a></h2>
+<p>Vamos visualizar como a probabilidade de morte varia com a idade:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filtrar apenas o ano de 2023 para a tábua de mortalidade masculina</span>
+<span class="n">tabua_mas_2023</span> <span class="o">=</span> <span class="n">tabua_mas</span><span class="p">[</span><span class="n">tabua_mas</span><span class="p">[</span><span class="s1">&#39;Ano&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2023</span><span class="p">]</span>
+
+<span class="c1"># Filtrar apenas o Local Brasil</span>
+<span class="n">tabua_mas_2023_br</span> <span class="o">=</span> <span class="n">tabua_mas_2023</span><span class="p">[</span><span class="n">tabua_mas_2023</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Brasil&#39;</span><span class="p">]</span>
+
+<span class="c1"># Gerar o gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;nqx&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tabua_mas_2023_br</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Probabilidade de Morte (qx) por Idade - Homens - ano 2023&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probabilidade de Morte (log)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>  <span class="c1"># Escala logarítmica para melhor visualização</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">&quot;major&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/993fedfa2e27aa2bfc1b95152f27245750dfce0b522419f3e068e40ed9482592.png" src="_images/993fedfa2e27aa2bfc1b95152f27245750dfce0b522419f3e068e40ed9482592.png" />
+</div>
+</div>
+</section>
+<section id="comparacao-de-tabuas-de-mortalidade-por-sexo">
+<h2>Comparação de Tábuas de Mortalidade por Sexo<a class="headerlink" href="#comparacao-de-tabuas-de-mortalidade-por-sexo" title="Link to this heading">#</a></h2>
+<p>Na prática, as tábuas de mortalidade são diferentes para homens e mulheres. Vamos observar a diferença do comportamento da probabilidade de morte (qx):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filtrar apenas o ano de 2020 para ambas as tábuas</span>
+<span class="n">tabua_mas_2020</span> <span class="o">=</span> <span class="n">tabua_mas</span><span class="p">[</span><span class="n">tabua_mas</span><span class="p">[</span><span class="s1">&#39;Ano&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2020</span><span class="p">]</span>
+<span class="n">tabua_fem_2020</span> <span class="o">=</span> <span class="n">tabua_fem</span><span class="p">[</span><span class="n">tabua_fem</span><span class="p">[</span><span class="s1">&#39;Ano&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2020</span><span class="p">]</span>
+
+<span class="c1"># Filtrar apenas o Local Nordeste para asmbas as tábuas</span>
+<span class="n">tabua_mas_2020_ne</span> <span class="o">=</span> <span class="n">tabua_mas_2020</span><span class="p">[</span><span class="n">tabua_mas_2020</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Nordeste&#39;</span><span class="p">]</span>
+<span class="n">tabua_fem_2020_ne</span> <span class="o">=</span> <span class="n">tabua_fem_2020</span><span class="p">[</span><span class="n">tabua_fem_2020</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Nordeste&#39;</span><span class="p">]</span>
+
+<span class="c1"># Gerar um gráfico com as duas linhas de probabilidade de morte por grupo etário</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;nqx&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tabua_mas_2020_ne</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Homens&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;nqx&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tabua_fem_2020_ne</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mulheres&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Probabilidade de Morte (qx) por Idade - Homens vs. Mulheres - Nordeste - ano 2020&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probabilidade de Morte (qx)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>  <span class="c1"># Escala logarítmica para melhor visualização</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">&quot;major&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a9000b92f14e0d334a150a83f068a6ea4581f77aafe0ffac1cf8b1937c73d687.png" src="_images/a9000b92f14e0d334a150a83f068a6ea4581f77aafe0ffac1cf8b1937c73d687.png" />
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="evolucao-do-comportamento-da-probabilidade-de-morte">
+<h1>Evolução do Comportamento da Probabilidade de Morte<a class="headerlink" href="#evolucao-do-comportamento-da-probabilidade-de-morte" title="Link to this heading">#</a></h1>
+<p>Com dados históricos das tábuas de mortalidade, podemos observar a evolução do comportamento da probabilidade de morte (qx) com o passar dos anos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Função para gerar o gráfico</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_qx_evolution</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+    <span class="n">anos</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Ano&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">viridis</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">anos</span><span class="p">)))</span>
+
+    <span class="k">for</span> <span class="n">ano</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">anos</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>
+        <span class="n">dados_ano</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Ano&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">ano</span><span class="p">]</span>
+        <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;nqx&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">dados_ano</span><span class="p">,</span>
+                     <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;_nolegend_&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probabilidade de Morte (qx)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">&quot;major&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+
+    <span class="n">norm</span> <span class="o">=</span> <span class="n">mcolors</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">anos</span><span class="p">),</span> <span class="n">vmax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">anos</span><span class="p">))</span>
+    <span class="n">sm</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">ScalarMappable</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">)</span>
+    <span class="n">sm</span><span class="o">.</span><span class="n">set_array</span><span class="p">([])</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">rect</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>  <span class="c1"># Deixa espaço abaixo</span>
+
+    <span class="c1"># Barra de cores horizontal</span>
+    <span class="n">cbar_ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">])</span>  <span class="c1"># [left, bottom, width, height]</span>
+    <span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">sm</span><span class="p">,</span> <span class="n">cax</span><span class="o">=</span><span class="n">cbar_ax</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">)</span>
+    <span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;Ano&#39;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Filtrar apenas o Local Paraíba para ambas as tábuas</span>
+<span class="n">tabua_mas_pb</span> <span class="o">=</span> <span class="n">tabua_mas</span><span class="p">[</span><span class="n">tabua_mas</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Paraíba&#39;</span><span class="p">]</span>
+<span class="n">tabua_fem_pb</span> <span class="o">=</span> <span class="n">tabua_fem</span><span class="p">[</span><span class="n">tabua_fem</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Paraíba&#39;</span><span class="p">]</span>
+
+<span class="c1"># Gerar os gráficos</span>
+<span class="n">plot_qx_evolution</span><span class="p">(</span><span class="n">tabua_mas_pb</span><span class="p">,</span> <span class="s1">&#39;Evolução da Probabilidade de Morte (qx) ao Longo do Tempo - Homens - Paraíba&#39;</span><span class="p">)</span>
+<span class="n">plot_qx_evolution</span><span class="p">(</span><span class="n">tabua_fem_pb</span><span class="p">,</span> <span class="s1">&#39;Evolução da Probabilidade de Morte (qx) ao Longo do Tempo - Mulheres - Paraíba&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6656543c12d0c4621d00f57033d498c4f7b7561afe0e537f080d514575120d7a.png" src="_images/6656543c12d0c4621d00f57033d498c4f7b7561afe0e537f080d514575120d7a.png" />
+<img alt="_images/5b5aecb9f93edae9bf059e80cf1254671606de2bb40f61b55fa0cb31d2630c5d.png" src="_images/5b5aecb9f93edae9bf059e80cf1254671606de2bb40f61b55fa0cb31d2630c5d.png" />
+</div>
+</div>
+<section id="analise-de-expectativa-de-vida">
+<h2>Análise de Expectativa de Vida<a class="headerlink" href="#analise-de-expectativa-de-vida" title="Link to this heading">#</a></h2>
+<p>A expectativa de vida é uma medida estatística que indica o número médio de anos que uma pessoa viverá a partir de uma determinada idade. Vamos visualizar a expectativa de vida em diferentes idades:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filtrar apenas o Local Brasil para ambas as tábuas</span>
+<span class="n">tabua_mas_br</span> <span class="o">=</span> <span class="n">tabua_mas</span><span class="p">[</span><span class="n">tabua_mas</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Brasil&#39;</span><span class="p">]</span>
+<span class="n">tabua_fem_br</span> <span class="o">=</span> <span class="n">tabua_fem</span><span class="p">[</span><span class="n">tabua_fem</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Brasil&#39;</span><span class="p">]</span>
+
+<span class="c1"># Gráfico da Expectativa de Vida para os dois sexos no ano de 2023</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;ex&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tabua_mas_br</span><span class="p">[</span><span class="n">tabua_mas_br</span><span class="p">[</span><span class="s1">&#39;Ano&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2023</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Homens&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;ex&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tabua_fem_br</span><span class="p">[</span><span class="n">tabua_fem_br</span><span class="p">[</span><span class="s1">&#39;Ano&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2023</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mulheres&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Expectativa de Vida - Brasil - ano 2023&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Expectativa de Vida (ex)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">&quot;major&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/163c025cc56f7206cf8c4df1bd02917dec7db11445d3e8251271895fd496159b.png" src="_images/163c025cc56f7206cf8c4df1bd02917dec7db11445d3e8251271895fd496159b.png" />
+</div>
+</div>
+</section>
+<section id="evolucao-da-expectativa-de-vida-ao-longo-do-tempo">
+<h2>Evolução da Expectativa de Vida ao Longo do Tempo<a class="headerlink" href="#evolucao-da-expectativa-de-vida-ao-longo-do-tempo" title="Link to this heading">#</a></h2>
+<p>A expectativa de vida tem aumentado ao longo do tempo devido a melhorias na saúde pública, nutrição, medicina, entre outros fatores. Vamos visualizar essa evolução:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filtrar apenas o Local Brasil para ambas as tábuas</span>
+<span class="n">tabua_mas_br</span> <span class="o">=</span> <span class="n">tabua_mas</span><span class="p">[</span><span class="n">tabua_mas</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Brasil&#39;</span><span class="p">]</span>
+<span class="n">tabua_fem_br</span> <span class="o">=</span> <span class="n">tabua_fem</span><span class="p">[</span><span class="n">tabua_fem</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Brasil&#39;</span><span class="p">]</span>
+
+<span class="c1"># Filtrar apenas o Grupo Etário 0 para ambas as tábuas</span>
+<span class="n">tabua_mas_br_0</span> <span class="o">=</span> <span class="n">tabua_mas_br</span><span class="p">[</span><span class="n">tabua_mas_br</span><span class="p">[</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">]</span>
+<span class="n">tabua_fem_br_0</span> <span class="o">=</span> <span class="n">tabua_fem_br</span><span class="p">[</span><span class="n">tabua_fem_br</span><span class="p">[</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">]</span>
+
+<span class="c1"># Gráfico da Evolução da Expectativa de Vida ao Nascer para Homens e Mulheres</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Ano&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;ex&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tabua_mas_br_0</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Homens&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Ano&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;ex&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tabua_fem_br_0</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mulheres&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Evolução da Expectativa de Vida ao Nascer - Brasil&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Ano&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Expectativa de Vida (ex)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">&quot;major&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e368c92dcc977c6e63d3948449f9d2ef6638a0c3ac3c5bb54a11ca5cc141e605.png" src="_images/e368c92dcc977c6e63d3948449f9d2ef6638a0c3ac3c5bb54a11ca5cc141e605.png" />
+</div>
+</div>
+</section>
+<section id="comparacao-da-expectativa-de-vida-entre-regioes">
+<h2>Comparação da Expectativa de Vida entre Regiões<a class="headerlink" href="#comparacao-da-expectativa-de-vida-entre-regioes" title="Link to this heading">#</a></h2>
+<p>A expectativa de vida varia significativamente entre países, regiões e estados devido a diferenças socioeconômicas, sistemas de saúde, entre outros fatores.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filtrar as regiões para a tábua masculina</span>
+<span class="n">tabua_mas_reg</span> <span class="o">=</span> <span class="n">tabua_mas</span><span class="p">[</span><span class="n">tabua_mas</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;Brasil&#39;</span><span class="p">,</span> <span class="s1">&#39;Nordeste&#39;</span><span class="p">,</span> <span class="s1">&#39;Sudeste&#39;</span><span class="p">,</span> <span class="s1">&#39;Sul&#39;</span><span class="p">,</span> <span class="s1">&#39;Centro-Oeste&#39;</span><span class="p">])]</span>
+
+<span class="c1"># Isolar a tábua de cada região</span>
+<span class="n">tabua_mas_br</span> <span class="o">=</span> <span class="n">tabua_mas_reg</span><span class="p">[</span><span class="n">tabua_mas_reg</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Brasil&#39;</span><span class="p">]</span>
+<span class="n">tabua_mas_ne</span> <span class="o">=</span> <span class="n">tabua_mas_reg</span><span class="p">[</span><span class="n">tabua_mas_reg</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Nordeste&#39;</span><span class="p">]</span>
+<span class="n">tabua_mas_no</span> <span class="o">=</span> <span class="n">tabua_mas_reg</span><span class="p">[</span><span class="n">tabua_mas_reg</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Centro-Oeste&#39;</span><span class="p">]</span>
+<span class="n">tabua_mas_se</span> <span class="o">=</span> <span class="n">tabua_mas_reg</span><span class="p">[</span><span class="n">tabua_mas_reg</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Sudeste&#39;</span><span class="p">]</span>
+<span class="n">tabua_mas_su</span> <span class="o">=</span> <span class="n">tabua_mas_reg</span><span class="p">[</span><span class="n">tabua_mas_reg</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Sul&#39;</span><span class="p">]</span>
+
+<span class="c1"># Filtrar o Grupo Etário 0 para todas as tábuas</span>
+<span class="n">tabua_mas_br_0</span> <span class="o">=</span> <span class="n">tabua_mas_br</span><span class="p">[</span><span class="n">tabua_mas_br</span><span class="p">[</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">]</span>
+<span class="n">tabua_mas_ne_0</span> <span class="o">=</span> <span class="n">tabua_mas_ne</span><span class="p">[</span><span class="n">tabua_mas_ne</span><span class="p">[</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">]</span>
+<span class="n">tabua_mas_no_0</span> <span class="o">=</span> <span class="n">tabua_mas_no</span><span class="p">[</span><span class="n">tabua_mas_no</span><span class="p">[</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">]</span>
+<span class="n">tabua_mas_se_0</span> <span class="o">=</span> <span class="n">tabua_mas_se</span><span class="p">[</span><span class="n">tabua_mas_se</span><span class="p">[</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">]</span>
+<span class="n">tabua_mas_su_0</span> <span class="o">=</span> <span class="n">tabua_mas_su</span><span class="p">[</span><span class="n">tabua_mas_su</span><span class="p">[</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">]</span>
+
+<span class="c1"># Gráfico da Evolução da Expectativa de Vida ao Nascer de Homens por Região</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Ano&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;ex&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tabua_mas_br_0</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Brasil&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Ano&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;ex&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tabua_mas_ne_0</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Nordeste&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Ano&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;ex&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tabua_mas_no_0</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Centro-Oeste&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Ano&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;ex&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tabua_mas_se_0</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Sudeste&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Ano&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;ex&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tabua_mas_su_0</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Sul&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Evolução da Expectativa de Vida ao Nascer - Homens&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Ano&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Expectativa de Vida (ex)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">&quot;major&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ddc6213d7de811ac1448584e75ce8b57424b35ca85480f142f188570557aff91.png" src="_images/ddc6213d7de811ac1448584e75ce8b57424b35ca85480f142f188570557aff91.png" />
+</div>
+</div>
+</section>
+<section id="analise-de-mortalidade-infantil">
+<h2>Análise de Mortalidade Infantil<a class="headerlink" href="#analise-de-mortalidade-infantil" title="Link to this heading">#</a></h2>
+<p>A mortalidade infantil é um indicador importante da saúde pública e do desenvolvimento socioeconômico de um país.</p>
+</section>
+<section id="comparacao-da-mortalidade-infatil-entre-regioes">
+<h2>Comparação da Mortalidade Infatil entre Regiões<a class="headerlink" href="#comparacao-da-mortalidade-infatil-entre-regioes" title="Link to this heading">#</a></h2>
+<p>A mortalidade infantil varia significativamente entre diferentes regiões e países. Vamos visualizar essas diferenças:</p>
+</section>
+<section id="relacao-entre-mortalidade-infantil-e-outros-indicadores">
+<h2>Relação entre Mortalidade Infantil e Outros Indicadores<a class="headerlink" href="#relacao-entre-mortalidade-infantil-e-outros-indicadores" title="Link to this heading">#</a></h2>
+<p>A mortalidade infantil está frequentemente relacionada a outros indicadores socioeconômicos. Vamos visualizar essas relações:</p>
+</section>
+<section id="conclusao">
+<h2>Conclusão<a class="headerlink" href="#conclusao" title="Link to this heading">#</a></h2>
+<p>Neste capítulo, exploramos como o Seaborn pode ser usado para analisar e visualizar dados demográficos, com foco em tábuas de mortalidade, expectativa de vida e mortalidade infantil. Essas visualizações são fundamentais para compreender a dinâmica populacional e para o planejamento de políticas públicas.</p>
+<p>No próximo capítulo, apresentaremos exercícios práticos para consolidar os conhecimentos adquiridos ao longo do curso.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Análise de Dados Demográficos com Seaborn</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introducao-aos-dados-demograficos">Introdução aos Dados Demográficos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analise-de-tabuas-de-mortalidade">Análise de Tábuas de Mortalidade</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacao-da-probabilidade-de-morte-qx">Visualização da Probabilidade de Morte (qx)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacao-de-tabuas-de-mortalidade-por-sexo">Comparação de Tábuas de Mortalidade por Sexo</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#evolucao-do-comportamento-da-probabilidade-de-morte">Evolução do Comportamento da Probabilidade de Morte</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analise-de-expectativa-de-vida">Análise de Expectativa de Vida</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evolucao-da-expectativa-de-vida-ao-longo-do-tempo">Evolução da Expectativa de Vida ao Longo do Tempo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacao-da-expectativa-de-vida-entre-regioes">Comparação da Expectativa de Vida entre Regiões</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analise-de-mortalidade-infantil">Análise de Mortalidade Infantil</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacao-da-mortalidade-infatil-entre-regioes">Comparação da Mortalidade Infatil entre Regiões</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relacao-entre-mortalidade-infantil-e-outros-indicadores">Relação entre Mortalidade Infantil e Outros Indicadores</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusao">Conclusão</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
