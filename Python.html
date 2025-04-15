@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Python básico &#8212; My sample book</title>
+    <title>1. Python Básico &#8212; My sample book</title>
   
   
   
@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Python';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Pandas básico" href="Pandas.html" />
+    <link rel="next" title="2. Pandas básico" href="Pandas.html" />
     <link rel="prev" title="Bem-vindo(a) ao Curso de Visualização Gráfica com Seaborn no Google Colab!" href="Introducao.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -180,9 +180,10 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Python básico</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Pandas.html">Pandas básico</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Seaborn.html">Introdução ao Seaborn</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Python Básico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Pandas.html">2. Pandas básico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Seaborn.html">4. Introdução ao Seaborn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Datasets_Seaborn.html">5. Datasets do Seaborn</a></li>
 </ul>
 
     </div>
@@ -368,7 +369,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Python básico</h1>
+    <h1>1. Python Básico</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -378,13 +379,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#o-que-e-python">1. O que é Python?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#primeiros-passos">2. Primeiros Passos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-dados-principais">3. Tipos de Dados Principais</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operadores-basicos">4. Operadores Básicos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estruturas-de-controle">5. Estruturas de Controle</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcoes">6. Funções</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modulos-e-pacotes">7. Módulos e Pacotes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#o-que-e-python">1.1 O que é Python?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#primeiros-passos">1.2 Primeiros Passos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-dados-principais">1.3 Tipos de Dados Principais</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operadores-basicos">1.4 Operadores Básicos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estruturas-de-controle">1.5 Estruturas de Controle</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#condicionais">1.5.1 Condicionais</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lacos-de-repeticao">1.5.2 Laços de Repetição</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcoes">1.6 Funções</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modulos-e-pacotes">1.7 Módulos e Pacotes</a></li>
 </ul>
             </nav>
         </div>
@@ -398,14 +403,14 @@ document.write(`
                   
   <p><a href="https://colab.research.google.com/github/Sigerip/curso-data-viz/blob/main/Python.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
 <section class="tex2jax_ignore mathjax_ignore" id="python-basico">
-<h1>Python básico<a class="headerlink" href="#python-basico" title="Link to this heading">#</a></h1>
+<h1>1. Python Básico<a class="headerlink" href="#python-basico" title="Link to this heading">#</a></h1>
 <p>Neste modulo, abordaremos os conceitos básicos de Python, essenciais para o entendimento do Seaborn e da análise de dados em geral. Vamos explorar os principais tipos de dados, operadores, estruturas de controle e funções.</p>
 <section id="o-que-e-python">
-<h2>1. O que é Python?<a class="headerlink" href="#o-que-e-python" title="Link to this heading">#</a></h2>
+<h2>1.1 O que é Python?<a class="headerlink" href="#o-que-e-python" title="Link to this heading">#</a></h2>
 <p>Python é uma linguagem de programação de alto nível, interpretada, de tipagem dinâmica e sintaxe simples. É muito usada em desenvolvimento web, ciência de dados, automação, scripts e muito mais.</p>
 </section>
 <section id="primeiros-passos">
-<h2>2. Primeiros Passos<a class="headerlink" href="#primeiros-passos" title="Link to this heading">#</a></h2>
+<h2>1.2 Primeiros Passos<a class="headerlink" href="#primeiros-passos" title="Link to this heading">#</a></h2>
 <p>Usaremos o Google Colab para executar os códigos. Acesse Google Colab e crie um novo notebook.</p>
 <p>Iniciaremos com o print, uma função básica para exibir mensagens na tela. Por exemplo:</p>
 <div class="cell docutils container">
@@ -422,7 +427,7 @@ document.write(`
 </div>
 </section>
 <section id="tipos-de-dados-principais">
-<h2>3. Tipos de Dados Principais<a class="headerlink" href="#tipos-de-dados-principais" title="Link to this heading">#</a></h2>
+<h2>1.3 Tipos de Dados Principais<a class="headerlink" href="#tipos-de-dados-principais" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Números: <code class="docutils literal notranslate"><span class="pre">int</span></code> (inteiro), <code class="docutils literal notranslate"><span class="pre">float</span></code> (ponto flutuante/decimal). Exemplo:</p></li>
 </ul>
@@ -542,7 +547,7 @@ document.write(`
 </div>
 </section>
 <section id="operadores-basicos">
-<h2>4. Operadores Básicos<a class="headerlink" href="#operadores-basicos" title="Link to this heading">#</a></h2>
+<h2>1.4 Operadores Básicos<a class="headerlink" href="#operadores-basicos" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>Aritméticos:</strong> <code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">*</span></code>, <code class="docutils literal notranslate"><span class="pre">/</span></code>, <code class="docutils literal notranslate"><span class="pre">//</span></code> (divisão inteira), <code class="docutils literal notranslate"><span class="pre">%</span></code> (módulo/resto da divisão), <code class="docutils literal notranslate"><span class="pre">**</span></code> (potência).</p></li>
 <li><p><strong>Comparação:</strong> igual <code class="docutils literal notranslate"><span class="pre">==</span></code>, diferente <code class="docutils literal notranslate"><span class="pre">!=</span></code>, maior que<code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, menor que <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, maior ou igual<code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, menor ou igual <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code></p></li>
@@ -574,8 +579,9 @@ True
 </div>
 </section>
 <section id="estruturas-de-controle">
-<h2>5. Estruturas de Controle<a class="headerlink" href="#estruturas-de-controle" title="Link to this heading">#</a></h2>
-<p>5.1 Condicionais</p>
+<h2>1.5 Estruturas de Controle<a class="headerlink" href="#estruturas-de-controle" title="Link to this heading">#</a></h2>
+<section id="condicionais">
+<h3>1.5.1 Condicionais<a class="headerlink" href="#condicionais" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">idade</span> <span class="o">=</span> <span class="mi">18</span>
@@ -592,7 +598,9 @@ True
 </div>
 </div>
 </div>
-<p>5.2 Laços de Repetição</p>
+</section>
+<section id="lacos-de-repeticao">
+<h3>1.5.2 Laços de Repetição<a class="headerlink" href="#lacos-de-repeticao" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>for:</strong> permite iterar sobre uma sequência (lista, tupla, string).</p></li>
 </ul>
@@ -650,8 +658,9 @@ laranja
 </div>
 </div>
 </section>
+</section>
 <section id="funcoes">
-<h2>6. Funções<a class="headerlink" href="#funcoes" title="Link to this heading">#</a></h2>
+<h2>1.6 Funções<a class="headerlink" href="#funcoes" title="Link to this heading">#</a></h2>
 <p>Definição e chamada de funções:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -671,7 +680,7 @@ laranja
 </div>
 </section>
 <section id="modulos-e-pacotes">
-<h2>7. Módulos e Pacotes<a class="headerlink" href="#modulos-e-pacotes" title="Link to this heading">#</a></h2>
+<h2>1.7 Módulos e Pacotes<a class="headerlink" href="#modulos-e-pacotes" title="Link to this heading">#</a></h2>
 <p>Instalar pacotes, exemplo com o pacote <code class="docutils literal notranslate"><span class="pre">seaborn</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>No Google Colab, quando você quer instalar uma biblioteca, você usa o símbolo % (ou !) antes do comando.
 </pre></div>
@@ -690,16 +699,16 @@ Requirement already satisfied: matplotlib!=3.6.1,&gt;=3.4 in /home/codespace/.lo
 Requirement already satisfied: contourpy&gt;=1.0.1 in /home/codespace/.local/lib/python3.12/site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (1.3.1)
 Requirement already satisfied: cycler&gt;=0.10 in /home/codespace/.local/lib/python3.12/site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (0.12.1)
 Requirement already satisfied: fonttools&gt;=4.22.0 in /home/codespace/.local/lib/python3.12/site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (4.57.0)
-Requirement already satisfied: kiwisolver&gt;=1.3.1 in /home/codespace/.local/lib/python3.12/site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (1.4.8)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: kiwisolver&gt;=1.3.1 in /home/codespace/.local/lib/python3.12/site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (1.4.8)
 Requirement already satisfied: packaging&gt;=20.0 in /home/codespace/.local/lib/python3.12/site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (24.2)
 Requirement already satisfied: pillow&gt;=8 in /home/codespace/.local/lib/python3.12/site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (11.1.0)
 Requirement already satisfied: pyparsing&gt;=2.3.1 in /home/codespace/.local/lib/python3.12/site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (3.2.3)
 Requirement already satisfied: python-dateutil&gt;=2.7 in /home/codespace/.local/lib/python3.12/site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (2.9.0.post0)
 Requirement already satisfied: pytz&gt;=2020.1 in /home/codespace/.local/lib/python3.12/site-packages (from pandas&gt;=1.2-&gt;seaborn) (2025.1)
 Requirement already satisfied: tzdata&gt;=2022.7 in /home/codespace/.local/lib/python3.12/site-packages (from pandas&gt;=1.2-&gt;seaborn) (2025.1)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: six&gt;=1.5 in /home/codespace/.local/lib/python3.12/site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (1.17.0)
+Requirement already satisfied: six&gt;=1.5 in /home/codespace/.local/lib/python3.12/site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (1.17.0)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: you may need to restart the kernel to use updated packages.
@@ -762,7 +771,7 @@ Requirement already satisfied: tzdata&gt;=2022.7 in /home/codespace/.local/lib/p
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Pandas básico</p>
+        <p class="prev-next-title">2. Pandas básico</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -782,13 +791,17 @@ Requirement already satisfied: tzdata&gt;=2022.7 in /home/codespace/.local/lib/p
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#o-que-e-python">1. O que é Python?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#primeiros-passos">2. Primeiros Passos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-dados-principais">3. Tipos de Dados Principais</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operadores-basicos">4. Operadores Básicos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estruturas-de-controle">5. Estruturas de Controle</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcoes">6. Funções</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modulos-e-pacotes">7. Módulos e Pacotes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#o-que-e-python">1.1 O que é Python?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#primeiros-passos">1.2 Primeiros Passos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-dados-principais">1.3 Tipos de Dados Principais</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operadores-basicos">1.4 Operadores Básicos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estruturas-de-controle">1.5 Estruturas de Controle</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#condicionais">1.5.1 Condicionais</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lacos-de-repeticao">1.5.2 Laços de Repetição</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcoes">1.6 Funções</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modulos-e-pacotes">1.7 Módulos e Pacotes</a></li>
 </ul>
   </nav></div>
 

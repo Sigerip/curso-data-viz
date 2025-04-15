@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Introdução ao Seaborn &#8212; My sample book</title>
+    <title>4. Introdução ao Seaborn &#8212; My sample book</title>
   
   
   
@@ -60,7 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Seaborn';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Pandas básico" href="Pandas.html" />
+    <link rel="next" title="5. Datasets do Seaborn" href="Datasets_Seaborn.html" />
+    <link rel="prev" title="2. Pandas básico" href="Pandas.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -179,9 +180,10 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Python.html">Python básico</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Pandas.html">Pandas básico</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introdução ao Seaborn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Python.html">1. Python Básico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Pandas.html">2. Pandas básico</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Introdução ao Seaborn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Datasets_Seaborn.html">5. Datasets do Seaborn</a></li>
 </ul>
 
     </div>
@@ -367,7 +369,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Introdução ao Seaborn</h1>
+    <h1>4. Introdução ao Seaborn</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -377,18 +379,18 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacao-avancada-com-seaborn">Visualização Avançada com Seaborn</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estilos-e-temas-do-seaborn">Estilos e Temas do Seaborn</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-graficos-no-seaborn">Tipos de Gráficos no Seaborn</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-dsitribuicao">Gráficos de Dsitribuição</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-relacao">Gráficos de Relação</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-categoricos">Gráficos Categóricos</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-regressao">Gráficos de Regressão</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#facetgrid-multiplos-graficos-por-categoria">FacetGrid: Múltiplos Gráficos por Categoria</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#personalizacao-de-graficos-no-seaborn">Personalização de Gráficos no Seaborn</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusao">Conclusão</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacao-avancada-com-seaborn">4.1 Visualização Avançada com Seaborn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estilos-e-temas-do-seaborn">4.2 Estilos e Temas do Seaborn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-graficos-no-seaborn">4.3 Tipos de Gráficos no Seaborn</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-dsitribuicao">4.3.1 Gráficos de Dsitribuição</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-relacao">4.3.2 Gráficos de Relação</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-categoricos">4.3.3 Gráficos Categóricos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-regressao">4.3.4 Gráficos de Regressão</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#facetgrid-multiplos-graficos-por-categoria">4.3.5 FacetGrid: Múltiplos Gráficos por Categoria</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#personalizacao-de-graficos-no-seaborn">4.3.6 Personalização de Gráficos no Seaborn</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusao">4.4 Conclusão</a></li>
 </ul>
             </nav>
         </div>
@@ -402,9 +404,9 @@ document.write(`
                   
   <p><a href="https://colab.research.google.com/github/Sigerip/curso-data-viz/blob/main/Seaborn.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
 <section class="tex2jax_ignore mathjax_ignore" id="introducao-ao-seaborn">
-<h1>Introdução ao Seaborn<a class="headerlink" href="#introducao-ao-seaborn" title="Link to this heading">#</a></h1>
+<h1>4. Introdução ao Seaborn<a class="headerlink" href="#introducao-ao-seaborn" title="Link to this heading">#</a></h1>
 <section id="visualizacao-avancada-com-seaborn">
-<h2>Visualização Avançada com Seaborn<a class="headerlink" href="#visualizacao-avancada-com-seaborn" title="Link to this heading">#</a></h2>
+<h2>4.1 Visualização Avançada com Seaborn<a class="headerlink" href="#visualizacao-avancada-com-seaborn" title="Link to this heading">#</a></h2>
 <p>Seaborn é uma biblioteca de visualização de dados baseada no Matplotlib que foi desenvolvida por Michael Waskom. Ela foi projetada especificamente para visualização de dados estatísticos e oferece:</p>
 <ul class="simple">
 <li><p>Interface de alto nível para criar gráficos complexos com poucas linhas de código</p></li>
@@ -437,7 +439,7 @@ document.write(`
 </div>
 </section>
 <section id="estilos-e-temas-do-seaborn">
-<h2>Estilos e Temas do Seaborn<a class="headerlink" href="#estilos-e-temas-do-seaborn" title="Link to this heading">#</a></h2>
+<h2>4.2 Estilos e Temas do Seaborn<a class="headerlink" href="#estilos-e-temas-do-seaborn" title="Link to this heading">#</a></h2>
 <p>Uma das vantagens do Seaborn é a melhoria estética imediata que ele traz para as visualizações:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -504,16 +506,16 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/32db13363913ec59da92882da73814b2cc24a45b5dfd905ca29c9513800bcd3d.png" src="_images/32db13363913ec59da92882da73814b2cc24a45b5dfd905ca29c9513800bcd3d.png" />
+<img alt="_images/68f03ff1fa0cfc1dab6b0757a9aa00a79752e20814a1a5d5a1d4ddb04fd35d82.png" src="_images/68f03ff1fa0cfc1dab6b0757a9aa00a79752e20814a1a5d5a1d4ddb04fd35d82.png" />
 <img alt="_images/233cefbbba91a57cf0488d3adbb19339bdf5979934f843d68c703799e73b82ef.png" src="_images/233cefbbba91a57cf0488d3adbb19339bdf5979934f843d68c703799e73b82ef.png" />
 </div>
 </div>
 </section>
 <section id="tipos-de-graficos-no-seaborn">
-<h2>Tipos de Gráficos no Seaborn<a class="headerlink" href="#tipos-de-graficos-no-seaborn" title="Link to this heading">#</a></h2>
+<h2>4.3 Tipos de Gráficos no Seaborn<a class="headerlink" href="#tipos-de-graficos-no-seaborn" title="Link to this heading">#</a></h2>
 <p>Seaborn oferece uma variedade de funções para criar diferentes tipos de gráficos. Vamos explorar os principais:</p>
 <section id="graficos-de-dsitribuicao">
-<h3>Gráficos de Dsitribuição<a class="headerlink" href="#graficos-de-dsitribuicao" title="Link to this heading">#</a></h3>
+<h3>4.3.1 Gráficos de Dsitribuição<a class="headerlink" href="#graficos-de-dsitribuicao" title="Link to this heading">#</a></h3>
 <p>Histograma e KDE (Kernel Density Estimate)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -543,8 +545,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/bf5028073b4f0d335ea52d9e4f15fe4b322d260efd5d8c29df4dff700132b2ad.png" src="_images/bf5028073b4f0d335ea52d9e4f15fe4b322d260efd5d8c29df4dff700132b2ad.png" />
-<img alt="_images/e32fd3bfab84260c2ec22b1cf7ec782b06a9239a588f98c04227a46970f676a3.png" src="_images/e32fd3bfab84260c2ec22b1cf7ec782b06a9239a588f98c04227a46970f676a3.png" />
+<img alt="_images/4fd138bd1d42d86c58f77a599aedaf1d8325a8579e3c82cf60b697e266bd9531.png" src="_images/4fd138bd1d42d86c58f77a599aedaf1d8325a8579e3c82cf60b697e266bd9531.png" />
+<img alt="_images/dfee6a31c663cd4ab5ace6318d2833621d55630c9d82278b0940cc712959c239.png" src="_images/dfee6a31c663cd4ab5ace6318d2833621d55630c9d82278b0940cc712959c239.png" />
 </div>
 </div>
 <p>Gráfico de Distribuição Acumulada</p>
@@ -558,7 +560,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/90b0f438ec3994c635ba663b1e6b60faf795df63772e45630ea19b8c0cdc5c30.png" src="_images/90b0f438ec3994c635ba663b1e6b60faf795df63772e45630ea19b8c0cdc5c30.png" />
+<img alt="_images/61375a67e4e105c0ebbf07b0894c2d1200156af5a649577b434fb35e5ea07487.png" src="_images/61375a67e4e105c0ebbf07b0894c2d1200156af5a649577b434fb35e5ea07487.png" />
 </div>
 </div>
 <p>Boxplot e Violinplot</p>
@@ -598,7 +600,7 @@ document.write(`
 </div>
 </section>
 <section id="graficos-de-relacao">
-<h3>Gráficos de Relação<a class="headerlink" href="#graficos-de-relacao" title="Link to this heading">#</a></h3>
+<h3>4.3.2 Gráficos de Relação<a class="headerlink" href="#graficos-de-relacao" title="Link to this heading">#</a></h3>
 <p>Scatterplot</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -625,7 +627,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/46840024d1b662faa2739cae80e0edbf5fe4fa404879a47194259544e0217a8d.png" src="_images/46840024d1b662faa2739cae80e0edbf5fe4fa404879a47194259544e0217a8d.png" />
-<img alt="_images/96f8d14f3ce575a681798f2f15dd3a41c4c2ff9aaaad3120b7144bc2c06e26ef.png" src="_images/96f8d14f3ce575a681798f2f15dd3a41c4c2ff9aaaad3120b7144bc2c06e26ef.png" />
+<img alt="_images/99b9a2dfee69d425ee1729110ef01a58ae498daedef4f593797154154bb61042.png" src="_images/99b9a2dfee69d425ee1729110ef01a58ae498daedef4f593797154154bb61042.png" />
 </div>
 </div>
 <p>Pairplot</p>
@@ -665,7 +667,7 @@ document.write(`
 </div>
 </section>
 <section id="graficos-categoricos">
-<h3>Gráficos Categóricos<a class="headerlink" href="#graficos-categoricos" title="Link to this heading">#</a></h3>
+<h3>4.3.3 Gráficos Categóricos<a class="headerlink" href="#graficos-categoricos" title="Link to this heading">#</a></h3>
 <p>Barplot</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -683,7 +685,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7a26a0d279edb6dd96303a4941f96f5d799f09221ed5b22a836a00befe6c001d.png" src="_images/7a26a0d279edb6dd96303a4941f96f5d799f09221ed5b22a836a00befe6c001d.png" />
+<img alt="_images/49d573b624f3420ae0c34534249d55ce4f02028da709a2a18e3970ed658a4896.png" src="_images/49d573b624f3420ae0c34534249d55ce4f02028da709a2a18e3970ed658a4896.png" />
 </div>
 </div>
 <p>Countplot</p>
@@ -716,12 +718,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/01fb55e497745db57d875c603492201eb619174686e2cd18946e161268f2f2d1.png" src="_images/01fb55e497745db57d875c603492201eb619174686e2cd18946e161268f2f2d1.png" />
+<img alt="_images/17c05e30cab5ba42a95a4901532acab2ac28521c7af4b64c36c8c158b394ea73.png" src="_images/17c05e30cab5ba42a95a4901532acab2ac28521c7af4b64c36c8c158b394ea73.png" />
 </div>
 </div>
 </section>
 <section id="graficos-de-regressao">
-<h3>Gráficos de Regressão<a class="headerlink" href="#graficos-de-regressao" title="Link to this heading">#</a></h3>
+<h3>4.3.4 Gráficos de Regressão<a class="headerlink" href="#graficos-de-regressao" title="Link to this heading">#</a></h3>
 <p>Regplot e Lmplot</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -762,7 +764,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/f2cc2e2c79dfa3f3e9724de37da942c8cc66d17d4722e96575c5439763d3667e.png" src="_images/f2cc2e2c79dfa3f3e9724de37da942c8cc66d17d4722e96575c5439763d3667e.png" />
+<img alt="_images/9e402b409530474502c17e674c6e1afff995ba82b78bf1c7e173a425948fe1cc.png" src="_images/9e402b409530474502c17e674c6e1afff995ba82b78bf1c7e173a425948fe1cc.png" />
 </div>
 </div>
 <p>Residplot</p>
@@ -781,7 +783,7 @@ document.write(`
 </div>
 </section>
 <section id="facetgrid-multiplos-graficos-por-categoria">
-<h3>FacetGrid: Múltiplos Gráficos por Categoria<a class="headerlink" href="#facetgrid-multiplos-graficos-por-categoria" title="Link to this heading">#</a></h3>
+<h3>4.3.5 FacetGrid: Múltiplos Gráficos por Categoria<a class="headerlink" href="#facetgrid-multiplos-graficos-por-categoria" title="Link to this heading">#</a></h3>
 <p>FacetGrid permite criar múltiplos gráficos separados por categorias:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -806,7 +808,7 @@ document.write(`
 </div>
 </section>
 <section id="personalizacao-de-graficos-no-seaborn">
-<h3>Personalização de Gráficos no Seaborn<a class="headerlink" href="#personalizacao-de-graficos-no-seaborn" title="Link to this heading">#</a></h3>
+<h3>4.3.6 Personalização de Gráficos no Seaborn<a class="headerlink" href="#personalizacao-de-graficos-no-seaborn" title="Link to this heading">#</a></h3>
 <p>Seaborn permite personalizar gráficos de várias maneiras:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -833,15 +835,15 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/939f9e01199bb92a71c33b122e34febda1c95de1d3b86f67d24c5d583b36b643.png" src="_images/939f9e01199bb92a71c33b122e34febda1c95de1d3b86f67d24c5d583b36b643.png" />
+<img alt="_images/17cb29173d53c010fb9187e9b82c45c23f1a84503d93606d06f789a51f9bf179.png" src="_images/17cb29173d53c010fb9187e9b82c45c23f1a84503d93606d06f789a51f9bf179.png" />
 </div>
 </div>
+</section>
 </section>
 <section id="conclusao">
-<h3>Conclusão<a class="headerlink" href="#conclusao" title="Link to this heading">#</a></h3>
+<h2>4.4 Conclusão<a class="headerlink" href="#conclusao" title="Link to this heading">#</a></h2>
 <p>Seaborn é uma poderosa biblioteca de visualização que simplifica a criação de gráficos estatísticos atraentes. Ela se baseia no Matplotlib, mas oferece uma interface mais amigável e resultados visualmente mais agradáveis por padrão.</p>
 <p>Nos próximos capítulos, exploraremos os conjuntos de dados embutidos no Seaborn e como aplicar diferentes tipos de gráficos para análise de dados demográficos.</p>
-</section>
 </section>
 </section>
 
@@ -881,8 +883,17 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Pandas básico</p>
+        <p class="prev-next-title">2. Pandas básico</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="Datasets_Seaborn.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">5. Datasets do Seaborn</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -900,18 +911,18 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacao-avancada-com-seaborn">Visualização Avançada com Seaborn</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estilos-e-temas-do-seaborn">Estilos e Temas do Seaborn</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-graficos-no-seaborn">Tipos de Gráficos no Seaborn</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-dsitribuicao">Gráficos de Dsitribuição</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-relacao">Gráficos de Relação</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-categoricos">Gráficos Categóricos</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-regressao">Gráficos de Regressão</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#facetgrid-multiplos-graficos-por-categoria">FacetGrid: Múltiplos Gráficos por Categoria</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#personalizacao-de-graficos-no-seaborn">Personalização de Gráficos no Seaborn</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusao">Conclusão</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacao-avancada-com-seaborn">4.1 Visualização Avançada com Seaborn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estilos-e-temas-do-seaborn">4.2 Estilos e Temas do Seaborn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-graficos-no-seaborn">4.3 Tipos de Gráficos no Seaborn</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-dsitribuicao">4.3.1 Gráficos de Dsitribuição</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-relacao">4.3.2 Gráficos de Relação</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-categoricos">4.3.3 Gráficos Categóricos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-regressao">4.3.4 Gráficos de Regressão</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#facetgrid-multiplos-graficos-por-categoria">4.3.5 FacetGrid: Múltiplos Gráficos por Categoria</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#personalizacao-de-graficos-no-seaborn">4.3.6 Personalização de Gráficos no Seaborn</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusao">4.4 Conclusão</a></li>
 </ul>
   </nav></div>
 
