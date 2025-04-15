@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Bem vindo ao mini-curso de viusalização gráfica com Seaborn &#8212; My sample book</title>
+    <title>Bem-vindo(a) ao Curso de Visualização Gráfica com Seaborn no Google Colab! &#8212; My sample book</title>
   
   
   
@@ -60,6 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="1. Python Básico" href="Python.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -142,7 +143,7 @@
     
   
 
-<a class="navbar-brand logo" href="Introducao.html">
+<a class="navbar-brand logo" href="#">
   
   
   
@@ -173,16 +174,18 @@
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="Introducao.html">
+            <li class="toctree-l1 current active">
+                <a class="reference internal" href="#">
                     Bem-vindo(a) ao Curso de Visualização Gráfica com Seaborn no Google Colab!
                 </a>
             </li>
         </ul>
         <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Python.html">Python básico</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Pandas.html">Pandas básico</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Seaborn.html">Introdução ao Seaborn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Python.html">1. Python Básico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Pandas.html">2. Pandas básico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Matplotlib.html">3. Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Seaborn.html">4. Introdução ao Seaborn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Datasets_Seaborn.html">5. Datasets do Seaborn</a></li>
 </ul>
 
     </div>
@@ -237,7 +240,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+      <li><a href="https://github.com/Sigerip/curso-data-viz/tree/main" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -254,7 +257,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/Sigerip/curso-data-viz/tree/main/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -284,7 +287,7 @@
       
       
       
-      <li><a href="_sources/intro.md" target="_blank"
+      <li><a href="_sources/intro.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -294,7 +297,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -355,7 +358,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -366,11 +371,26 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Bem vindo ao mini-curso de viusalização gráfica com Seaborn</h1>
+    <h1>Bem-vindo(a) ao Curso de Visualização Gráfica com Seaborn no Google Colab!</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-1-python-basico">Módulo 1: Python Básico 🐍</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-2-pandas-basico">Módulo 2: Pandas Básico 🐼</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-3-introducao-ao-seaborn">Módulo 3: Introdução ao Seaborn 📊</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#para-quem-e-este-curso">Para quem é este curso?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ao-concluir-este-curso-voce-sera-capaz-de">Ao concluir este curso, você será capaz de:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#para-aproveitar-ao-maximo-o-curso">Para aproveitar ao máximo o curso:</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -380,35 +400,85 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="bem-vindo-ao-mini-curso-de-viusalizacao-grafica-com-seaborn">
-<h1>Bem vindo ao mini-curso de viusalização gráfica com Seaborn<a class="headerlink" href="#bem-vindo-ao-mini-curso-de-viusalizacao-grafica-com-seaborn" title="Link to this heading">#</a></h1>
-<p>Plataforma: <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>
-Público-Alvo: Iniciantes e pessoas com experiência em Python que querem dominar visualização de dados.</p>
-<p>Aqui você aprenderá conceitos básicos de visualização gráfica com a biblioteca Seaborn, uma biblioteca Python baseada no Matplotlib.
-Seaborn é uma biblioteca de visualização de dados baseada no Matplotlib, que fornece uma interface de alto nível para criar gráficos estatísticos atraentes e informativos. Ela é especialmente útil para explorar e entender dados complexos, permitindo a criação de gráficos como gráficos de dispersão, gráficos de linha, histogramas, boxplots e muito mais.
-Se você ainda não tem o Seaborn instalado, você pode instalar com o seguinte comando:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>seaborn
-</pre></div>
+  <p><a href="https://colab.research.google.com/github/Sigerip/curso-data-viz/blob/main/Introducao.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+<section class="tex2jax_ignore mathjax_ignore" id="bem-vindo-a-ao-curso-de-visualizacao-grafica-com-seaborn-no-google-colab">
+<h1>Bem-vindo(a) ao Curso de Visualização Gráfica com Seaborn no Google Colab!<a class="headerlink" href="#bem-vindo-a-ao-curso-de-visualizacao-grafica-com-seaborn-no-google-colab" title="Link to this heading">#</a></h1>
+<p>Esse curso foi estruturado para guiá-lo desde os fundamentos até a criação de visualizações avançadas com Seaborn. Para garantir uma base sólida, nosso aprendizado será dividido em três módulos principais:</p>
+<section id="modulo-1-python-basico">
+<h2>Módulo 1: Python Básico 🐍<a class="headerlink" href="#modulo-1-python-basico" title="Link to this heading">#</a></h2>
+<p>Este módulo é dedicado a fornecer ou revisar os conhecimentos essenciais da linguagem Python que serão fundamentais para trabalhar com dados e visualizações. Mesmo que você já tenha alguma familiaridade com Python, esta seção trás os principais conceitos chave. Abordaremos:</p>
+<ul class="simple">
+<li><p>Tipos de Dados Fundamentais: Inteiros, floats, strings, booleanos.</p></li>
+<li><p>Estruturas de Dados Essenciais: Listas, tuplas, dicionários.</p></li>
+<li><p>Operadores: Aritméticos, de comparação, lógicos.</p></li>
+<li><p>Estruturas de Controle de Fluxo: Condicionais (if/else), loops (for/while).</p></li>
+<li><p>Funções: Definição e chamada de funções, argumentos, retorno de valores.</p></li>
+<li><p>Módulos e Bibliotecas: Introdução ao conceito e como importar módulos.</p></li>
+</ul>
+</section>
+<section id="modulo-2-pandas-basico">
+<h2>Módulo 2: Pandas Básico 🐼<a class="headerlink" href="#modulo-2-pandas-basico" title="Link to this heading">#</a></h2>
+<p>O Pandas é a biblioteca padrão em Python para manipulação e análise de dados tabulares. Neste módulo, você aprenderá as funcionalidades cruciais para preparar e explorar seus dados antes de visualizá-los com Seaborn. Exploraremos:</p>
+<ul class="simple">
+<li><p>Series e DataFrames: As estruturas de dados principais do Pandas.</p></li>
+<li><p>Criação de DataFrames: A partir de diferentes fontes (listas, dicionários, arquivos CSV, etc.).</p></li>
+<li><p>Leitura e Escrita de dados: Como importar e exportar dados em diversos formatos.</p></li>
+<li><p>Inspeção de Dados: Métodos para visualizar e entender seus dados (<code class="docutils literal notranslate"><span class="pre">head()</span></code>, <code class="docutils literal notranslate"><span class="pre">tail()</span></code>, <code class="docutils literal notranslate"><span class="pre">info()</span></code>, <code class="docutils literal notranslate"><span class="pre">describe()</span></code>).</p></li>
+<li><p>Seleção e filtragem de Dados: Aplicando condições para selecionar subconjuntos de dados.</p></li>
+<li><p>Operaçoes e tratamento de dados: Aplicando funções e operações em colunas e linhas.</p></li>
+<li><p>Agrupamento de Dados (GroupBy): Agregando dados para obter resumos e insights.</p></li>
+<li><p>Junção e Concatenação de DataFrames: Combinando dados de diferentes fontes.</p></li>
+<li><p>Tratamento de Valores Ausentes: Identificação e manipulação de valores nulos.</p></li>
+<li><p>Estatistica Descritiva: Cálculo de estatísticas básicas (média, mediana, desvio padrão, etc.) para entender seus dados.</p></li>
+</ul>
+</section>
+<section id="modulo-3-introducao-ao-seaborn">
+<h2>Módulo 3: Introdução ao Seaborn 📊<a class="headerlink" href="#modulo-3-introducao-ao-seaborn" title="Link to this heading">#</a></h2>
+<p>Este é o coração do nosso curso! Aqui, você aprenderá a utilizar a biblioteca Seaborn para criar visualizações estatísticas informativas e esteticamente agradáveis. Cobriremos uma ampla gama de tipos de gráficos e técnicas de personalização:</p>
+<ul class="simple">
+<li><p>Introdução ao Seaborn: Sua relação com Matplotlib e seus principais recursos.</p></li>
+<li><p>Estilos e Temas: Como aplicar estilos predefinidos para melhorar a estética dos gráficos.</p></li>
+<li><p>Tipos de gráficos:
+** Gráficos de distribuição (histogramas, KDE plots, box plots, violin plots)
+** Graficos de relação (line plots)
+** Gráficos de categoricos (bar plots, count plots)
+** Graficos de regressão (regression plots)
+** Facet grids: Criando múltiplos gráficos em uma grade para comparar diferentes subconjuntos de dados.</p></li>
+</ul>
+</section>
+<section id="para-quem-e-este-curso">
+<h2>Para quem é este curso?<a class="headerlink" href="#para-quem-e-este-curso" title="Link to this heading">#</a></h2>
+<p>Este curso é ideal para você se:</p>
+<p>Está começando na área de análise de dados e quer aprender a visualizar informações de forma eficaz.
+Já possui conhecimentos básicos de Python e Pandas e deseja aprimorar suas habilidades de visualização.
+É um estudante, pesquisador ou profissional que precisa apresentar dados de forma clara e impactante.
+Quer aprender a utilizar uma das bibliotecas de visualização mais populares e poderosas em Python.
+O que esperar ao final do curso?</p>
+<section id="ao-concluir-este-curso-voce-sera-capaz-de">
+<h3>Ao concluir este curso, você será capaz de:<a class="headerlink" href="#ao-concluir-este-curso-voce-sera-capaz-de" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Compreender os princípios fundamentais da visualização de dados.</p></li>
+<li><p>Utilizar o Python e o Pandas para preparar e manipular dados para visualização.</p></li>
+<li><p>Criar uma ampla variedade de gráficos informativos e atraentes com a biblioteca Seaborn.</p></li>
+<li><p>Personalizar seus gráficos para comunicar seus insights de forma clara e eficaz.</p></li>
+<li><p>Aplicar as técnicas aprendidas para analisar seus próprios conjuntos de dados e extrair informações valiosas.</p></li>
+<li><p>Como aproveitar ao máximo este curso no Google Colab:</p></li>
+</ul>
+<p>Este curso será ministrado utilizando o Google Colab, um ambiente de desenvolvimento Python gratuito que roda diretamente no seu navegador. Isso significa que você não precisará instalar nada em seu computador!</p>
+</section>
+<section id="para-aproveitar-ao-maximo-o-curso">
+<h3>Para aproveitar ao máximo o curso:<a class="headerlink" href="#para-aproveitar-ao-maximo-o-curso" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Siga a ordem dos módulos: Recomendamos que você comece pelo Módulo 1 (Python Básico) para garantir uma base sólida antes de avançar para os módulos seguintes.</p></li>
+<li><p>Execute os códigos: Não apenas leia o código, mas execute cada célula no 3. Colab para ver os resultados e entender como cada função e comando funciona.</p></li>
+<li><p>Experimente e modifique: Sinta-se à vontade para alterar os parâmetros dos gráficos, testar diferentes tipos de visualizações e explorar seus próprios dados. A prática leva à perfeição!</p></li>
+<li><p>Faça perguntas: Se você tiver alguma dúvida, não hesite em perguntar nos fóruns de discussão ou canais de comunicação do curso. Estamos aqui para ajudar!</p></li>
+<li><p>Aplique o que aprendeu: Tente aplicar as técnicas de visualização em seus próprios projetos e conjuntos de dados. Isso ajudará a consolidar seu aprendizado.</p></li>
+</ol>
+</section>
+</section>
+<div class="toctree-wrapper compound">
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Se você estiver usando o Google Colab, o Seaborn já vem instalado por padrão.</p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Se você estiver usando o Jupyter Notebook, você pode instalar o Seaborn com o seguinte comando:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>seaborn
-</pre></div>
-</div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<p>This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out <a class="reference external" href="https://jupyterbook.org">the Jupyter Book documentation</a> for more information.</p>
-<p>Check out the content pages bundled with this sample book to see more.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -441,12 +511,43 @@ It does not go in-depth into any particular topic - check out <a class="referenc
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="right-next"
+       href="Python.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">1. Python Básico</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-1-python-basico">Módulo 1: Python Básico 🐍</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-2-pandas-basico">Módulo 2: Pandas Básico 🐼</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-3-introducao-ao-seaborn">Módulo 3: Introdução ao Seaborn 📊</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#para-quem-e-este-curso">Para quem é este curso?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ao-concluir-este-curso-voce-sera-capaz-de">Ao concluir este curso, você será capaz de:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#para-aproveitar-ao-maximo-o-curso">Para aproveitar ao máximo o curso:</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
