@@ -57,6 +57,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -384,12 +386,14 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-1-python-basico">Módulo 1: Python Básico 🐍</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-2-pandas-basico">Módulo 2: Pandas Básico 🐼</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-3-introducao-ao-seaborn">Módulo 3: Introdução ao Seaborn 📊</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#para-quem-e-este-curso">Para quem é este curso?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ao-concluir-este-curso-voce-sera-capaz-de">Ao concluir este curso, você será capaz de:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#para-aproveitar-ao-maximo-o-curso">Para aproveitar ao máximo o curso:</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-3-matplotlib-basico">Módulo 3: Matplotlib Básico 📊</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-4-introducao-ao-seaborn">Módulo 4: Introdução ao Seaborn 📊</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-5-datasets-do-seaborn">Módulo 5: Datasets do Seaborn 📊</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-6-analise-de-dados-demograficos">Módulo 6: Análise de Dados Demográficos 📊</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#para-quem-e-este-curso">Para quem é este curso?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#o-que-esperar-ao-final-do-curso">O que esperar ao final do curso?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-aproveitar-ao-maximo-este-curso-no-google-colab">Como aproveitar ao máximo este curso no Google Colab:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#para-aproveitar-ao-maximo-o-curso">Para aproveitar ao máximo o curso:</a></li>
 </ul>
             </nav>
         </div>
@@ -401,10 +405,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <p><a href="https://colab.research.google.com/github/Sigerip/curso-data-viz/blob/main/Introducao.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+  <p><a href="https://colab.research.google.com/github/Sigerip/curso-data-viz/blob/main/intro1.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
 <section class="tex2jax_ignore mathjax_ignore" id="bem-vindo-a-ao-curso-de-visualizacao-grafica-com-seaborn-no-google-colab">
 <h1>Bem-vindo(a) ao Curso de Visualização Gráfica com Seaborn no Google Colab!<a class="headerlink" href="#bem-vindo-a-ao-curso-de-visualizacao-grafica-com-seaborn-no-google-colab" title="Link to this heading">#</a></h1>
-<p>Esse curso foi estruturado para guiá-lo desde os fundamentos até a criação de visualizações avançadas com Seaborn. Para garantir uma base sólida, nosso aprendizado será dividido em três módulos principais:</p>
+<p>Este curso foi estruturado para guiá-lo desde os fundamentos até a criação de visualizações avançadas com Seaborn. Para garantir uma base sólida, nosso aprendizado será dividido em seis módulos principais:</p>
 <section id="modulo-1-python-basico">
 <h2>Módulo 1: Python Básico 🐍<a class="headerlink" href="#modulo-1-python-basico" title="Link to this heading">#</a></h2>
 <p>Este módulo é dedicado a fornecer ou revisar os conhecimentos essenciais da linguagem Python que serão fundamentais para trabalhar com dados e visualizações. Mesmo que você já tenha alguma familiaridade com Python, esta seção trás os principais conceitos chave. Abordaremos:</p>
@@ -424,7 +428,7 @@ document.write(`
 <li><p>Series e DataFrames: As estruturas de dados principais do Pandas.</p></li>
 <li><p>Criação de DataFrames: A partir de diferentes fontes (listas, dicionários, arquivos CSV, etc.).</p></li>
 <li><p>Leitura e Escrita de dados: Como importar e exportar dados em diversos formatos.</p></li>
-<li><p>Inspeção de Dados: Métodos para visualizar e entender seus dados (<code class="docutils literal notranslate"><span class="pre">head()</span></code>, <code class="docutils literal notranslate"><span class="pre">tail()</span></code>, <code class="docutils literal notranslate"><span class="pre">info()</span></code>, <code class="docutils literal notranslate"><span class="pre">describe()</span></code>).</p></li>
+<li><p>Inspeção de Dados: Métodos para visualizar e entender seus dados (head(), tail(), info(), describe()).</p></li>
 <li><p>Seleção e filtragem de Dados: Aplicando condições para selecionar subconjuntos de dados.</p></li>
 <li><p>Operaçoes e tratamento de dados: Aplicando funções e operações em colunas e linhas.</p></li>
 <li><p>Agrupamento de Dados (GroupBy): Agregando dados para obter resumos e insights.</p></li>
@@ -433,50 +437,92 @@ document.write(`
 <li><p>Estatistica Descritiva: Cálculo de estatísticas básicas (média, mediana, desvio padrão, etc.) para entender seus dados.</p></li>
 </ul>
 </section>
-<section id="modulo-3-introducao-ao-seaborn">
-<h2>Módulo 3: Introdução ao Seaborn 📊<a class="headerlink" href="#modulo-3-introducao-ao-seaborn" title="Link to this heading">#</a></h2>
+<section id="modulo-3-matplotlib-basico">
+<h2>Módulo 3: Matplotlib Básico 📊<a class="headerlink" href="#modulo-3-matplotlib-basico" title="Link to this heading">#</a></h2>
+<p>O Matplotlib é a biblioteca fundamental para a criação de gráficos em Python e serve como base para o Seaborn. Neste módulo, você aprenderá os conceitos essenciais do Matplotlib que permitirão entender e personalizar ainda mais suas visualizações com Seaborn. Abordaremos:</p>
+<ul class="simple">
+<li><p>Anatomia de um gráfico Matplotlib.</p></li>
+<li><p>Tipos básicos de gráficos.</p></li>
+</ul>
+</section>
+<section id="modulo-4-introducao-ao-seaborn">
+<h2>Módulo 4: Introdução ao Seaborn 📊<a class="headerlink" href="#modulo-4-introducao-ao-seaborn" title="Link to this heading">#</a></h2>
 <p>Este é o coração do nosso curso! Aqui, você aprenderá a utilizar a biblioteca Seaborn para criar visualizações estatísticas informativas e esteticamente agradáveis. Cobriremos uma ampla gama de tipos de gráficos e técnicas de personalização:</p>
 <ul class="simple">
-<li><p>Introdução ao Seaborn: Sua relação com Matplotlib e seus principais recursos.</p></li>
-<li><p>Estilos e Temas: Como aplicar estilos predefinidos para melhorar a estética dos gráficos.</p></li>
-<li><p>Tipos de gráficos:
-** Gráficos de distribuição (histogramas, KDE plots, box plots, violin plots)
-** Graficos de relação (line plots)
-** Gráficos de categoricos (bar plots, count plots)
-** Graficos de regressão (regression plots)
-** Facet grids: Criando múltiplos gráficos em uma grade para comparar diferentes subconjuntos de dados.</p></li>
+<li><p>Visualização avançada com Seaborn.</p></li>
+<li><p>Estilos e temas do Seaborn.</p></li>
+<li><p>Tipos de gráficos:</p></li>
+</ul>
+</section>
+<section id="modulo-5-datasets-do-seaborn">
+<h2>Módulo 5: Datasets do Seaborn 📊<a class="headerlink" href="#modulo-5-datasets-do-seaborn" title="Link to this heading">#</a></h2>
+<p>O Seaborn vem com alguns datasets embutidos que são muito úteis para aprender e praticar a criação de diferentes tipos de visualizações. Neste módulo, vamos explorar esses datasets e aprender como carregá-los e utilizá-los para experimentar com os gráficos do Seaborn. Abordaremos:</p>
+<ul class="simple">
+<li><p>Iris.</p></li>
+<li><p>Titanic.</p></li>
+<li><p>Tips.</p></li>
+<li><p>Flights.</p></li>
+<li><p>Planets.</p></li>
+<li><p>Diamonds.</p></li>
+<li><p>Car Crashes.</p></li>
+<li><p>Peguins.</p></li>
+</ul>
+</section>
+<section id="modulo-6-analise-de-dados-demograficos">
+<h2>Módulo 6: Análise de Dados Demográficos 📊<a class="headerlink" href="#modulo-6-analise-de-dados-demograficos" title="Link to this heading">#</a></h2>
+<p>Neste módulo, aplicaremos os conhecimentos adquiridos nos módulos anteriores para realizar uma análise de dados demográficos utilizando o Seaborn.</p>
+<ul class="simple">
+<li><p>Introdução aos dados demográficos;</p></li>
+<li><p>Análise de tábuas de mortalidade;</p></li>
+<li><p>Visualização da probabilidade de morte <span class="math notranslate nohighlight">\( (q_x) \)</span>;</p></li>
+<li><p>Comparação de tábuas de mortalidade por sexo;</p></li>
+<li><p>Evolução do comportamento da probabilidade de morte;</p></li>
+<li><p>Análise de expectativa de vida;</p></li>
+<li><p>Evolução da expectativa de vida ao longo do tempo;</p></li>
+<li><p>Comparação da expectativa de vida entre regiões;</p></li>
+<li><p>Análise de mortalidade infantil;</p></li>
+<li><p>Comparação da mortalidade infantil entre regiões;</p></li>
+<li><p>Evolução das taxas de mortalidade;</p></li>
+<li><p>Pirâmides etárias.</p></li>
 </ul>
 </section>
 <section id="para-quem-e-este-curso">
 <h2>Para quem é este curso?<a class="headerlink" href="#para-quem-e-este-curso" title="Link to this heading">#</a></h2>
 <p>Este curso é ideal para você se:</p>
-<p>Está começando na área de análise de dados e quer aprender a visualizar informações de forma eficaz.
-Já possui conhecimentos básicos de Python e Pandas e deseja aprimorar suas habilidades de visualização.
-É um estudante, pesquisador ou profissional que precisa apresentar dados de forma clara e impactante.
-Quer aprender a utilizar uma das bibliotecas de visualização mais populares e poderosas em Python.
-O que esperar ao final do curso?</p>
-<section id="ao-concluir-este-curso-voce-sera-capaz-de">
-<h3>Ao concluir este curso, você será capaz de:<a class="headerlink" href="#ao-concluir-este-curso-voce-sera-capaz-de" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Está começando na área de análise de dados e quer aprender a visualizar informações de forma eficaz.</p></li>
+<li><p>Já possui conhecimentos básicos de Python e Pandas e deseja aprimorar suas habilidades de visualização.</p></li>
+<li><p>É um estudante, pesquisador ou profissional que precisa apresentar dados de forma clara e impactante.</p></li>
+<li><p>Quer aprender a utilizar uma das bibliotecas de visualização mais populares e poderosas em Python.</p></li>
+</ul>
+</section>
+<section id="o-que-esperar-ao-final-do-curso">
+<h2>O que esperar ao final do curso?<a class="headerlink" href="#o-que-esperar-ao-final-do-curso" title="Link to this heading">#</a></h2>
+<p>Ao concluir este curso, você será capaz de:</p>
 <ul class="simple">
 <li><p>Compreender os princípios fundamentais da visualização de dados.</p></li>
 <li><p>Utilizar o Python e o Pandas para preparar e manipular dados para visualização.</p></li>
+<li><p>Entender a relação entre Matplotlib e Seaborn e como ambos contribuem para a visualização de dados.</p></li>
 <li><p>Criar uma ampla variedade de gráficos informativos e atraentes com a biblioteca Seaborn.</p></li>
 <li><p>Personalizar seus gráficos para comunicar seus insights de forma clara e eficaz.</p></li>
+<li><p>Utilizar os datasets embutidos do Seaborn para praticar e experimentar com diferentes tipos de gráficos.</p></li>
+<li><p>Aplicar as técnicas aprendidas para analisar dados demográficos e outros tipos de conjuntos de dados.</p></li>
 <li><p>Aplicar as técnicas aprendidas para analisar seus próprios conjuntos de dados e extrair informações valiosas.</p></li>
-<li><p>Como aproveitar ao máximo este curso no Google Colab:</p></li>
 </ul>
+</section>
+<section id="como-aproveitar-ao-maximo-este-curso-no-google-colab">
+<h2>Como aproveitar ao máximo este curso no Google Colab:<a class="headerlink" href="#como-aproveitar-ao-maximo-este-curso-no-google-colab" title="Link to this heading">#</a></h2>
 <p>Este curso será ministrado utilizando o Google Colab, um ambiente de desenvolvimento Python gratuito que roda diretamente no seu navegador. Isso significa que você não precisará instalar nada em seu computador!</p>
 </section>
 <section id="para-aproveitar-ao-maximo-o-curso">
-<h3>Para aproveitar ao máximo o curso:<a class="headerlink" href="#para-aproveitar-ao-maximo-o-curso" title="Link to this heading">#</a></h3>
+<h2>Para aproveitar ao máximo o curso:<a class="headerlink" href="#para-aproveitar-ao-maximo-o-curso" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Siga a ordem dos módulos: Recomendamos que você comece pelo Módulo 1 (Python Básico) para garantir uma base sólida antes de avançar para os módulos seguintes.</p></li>
-<li><p>Execute os códigos: Não apenas leia o código, mas execute cada célula no 3. Colab para ver os resultados e entender como cada função e comando funciona.</p></li>
+<li><p>Execute os códigos: Não apenas leia o código, mas execute cada célula no Colab para ver os resultados e entender como cada função e comando funciona.</p></li>
 <li><p>Experimente e modifique: Sinta-se à vontade para alterar os parâmetros dos gráficos, testar diferentes tipos de visualizações e explorar seus próprios dados. A prática leva à perfeição!</p></li>
 <li><p>Faça perguntas: Se você tiver alguma dúvida, não hesite em perguntar nos fóruns de discussão ou canais de comunicação do curso. Estamos aqui para ajudar!</p></li>
 <li><p>Aplique o que aprendeu: Tente aplicar as técnicas de visualização em seus próprios projetos e conjuntos de dados. Isso ajudará a consolidar seu aprendizado.</p></li>
 </ol>
-</section>
 </section>
 <div class="toctree-wrapper compound">
 </div>
@@ -539,12 +585,14 @@ O que esperar ao final do curso?</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-1-python-basico">Módulo 1: Python Básico 🐍</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-2-pandas-basico">Módulo 2: Pandas Básico 🐼</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-3-introducao-ao-seaborn">Módulo 3: Introdução ao Seaborn 📊</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#para-quem-e-este-curso">Para quem é este curso?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ao-concluir-este-curso-voce-sera-capaz-de">Ao concluir este curso, você será capaz de:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#para-aproveitar-ao-maximo-o-curso">Para aproveitar ao máximo o curso:</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-3-matplotlib-basico">Módulo 3: Matplotlib Básico 📊</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-4-introducao-ao-seaborn">Módulo 4: Introdução ao Seaborn 📊</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-5-datasets-do-seaborn">Módulo 5: Datasets do Seaborn 📊</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-6-analise-de-dados-demograficos">Módulo 6: Análise de Dados Demográficos 📊</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#para-quem-e-este-curso">Para quem é este curso?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#o-que-esperar-ao-final-do-curso">O que esperar ao final do curso?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-aproveitar-ao-maximo-este-curso-no-google-colab">Como aproveitar ao máximo este curso no Google Colab:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#para-aproveitar-ao-maximo-o-curso">Para aproveitar ao máximo o curso:</a></li>
 </ul>
   </nav></div>
 

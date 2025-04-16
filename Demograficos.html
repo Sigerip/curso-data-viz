@@ -57,6 +57,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Demograficos';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -382,7 +384,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introducao-aos-dados-demograficos">6.1 Introdução aos Dados Demográficos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analise-de-tabuas-de-mortalidade">6.2 Análise de Tábuas de Mortalidade</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacao-da-probabilidade-de-morte-qx">6.3 Visualização da Probabilidade de Morte (qx)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacao-da-probabilidade-de-morte-q-x">6.3 Visualização da Probabilidade de Morte <span class="math notranslate nohighlight">\((q_x)\)</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacao-de-tabuas-de-mortalidade-por-sexo">6.4 Comparação de Tábuas de Mortalidade por Sexo</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evolucao-do-comportamento-da-probabilidade-de-morte">6.5 Evolução do Comportamento da Probabilidade de Morte</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analise-de-expectativa-de-vida">6.6 Análise de Expectativa de Vida</a></li>
@@ -418,6 +420,7 @@ document.write(`
 <li><p><strong>Tábuas de Mortalidade</strong>: Tabelas que mostram a probabilidade de morte em diferentes idades</p></li>
 <li><p><strong>Expectativa de Vida</strong>: Estimativa do número médio de anos que uma pessoa viverá</p></li>
 <li><p><strong>Mortalidade Infantil</strong>: Taxa de mortes de crianças menores de um ano</p></li>
+<li><p><strong>População</strong>: Pirâmides para compreender a estrutura etária da população</p></li>
 </ol>
 <p>Vamos começar importando as bibliotecas necessárias e configurando o ambiente:</p>
 <div class="cell docutils container">
@@ -440,7 +443,7 @@ document.write(`
 <p>As tábuas de mortalidade são ferramentas fundamentais em demografia e atuária. Elas mostram a probabilidade de morte em cada idade e são usadas para calcular a expectativa de vida e para precificar seguros de vida e planos de previdência.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Careegar Tábuas do Github em formato Parquet</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Carregar Tábuas do Github em formato Parquet</span>
 <span class="n">tabua_mas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/Sigerip/curso-data-viz/main/tabua_homens.parquet&quot;</span><span class="p">)</span>
 <span class="n">tabua_fem</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/Sigerip/curso-data-viz/main/tabua_mulheres.parquet&quot;</span><span class="p">)</span>
 
@@ -454,7 +457,7 @@ document.write(`
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
 <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Careegar Tábuas do Github em formato Parquet</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Carregar Tábuas do Github em formato Parquet</span>
 <span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">tabua_mas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/Sigerip/curso-data-viz/main/tabua_homens.parquet&quot;</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">tabua_fem</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/Sigerip/curso-data-viz/main/tabua_mulheres.parquet&quot;</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># Visualizar primeiras linhas da tábua masculina</span>
@@ -514,7 +517,7 @@ document.write(`
 </pre></div>
 </div>
 <div class="output text_html">
-  <div id="df-5224afdc-b7fc-494d-a8b4-885ceeee227d" class="colab-df-container">
+  <div id="df-55388198-40e2-4d71-be28-4c52bb238bec" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -833,7 +836,7 @@ document.write(`
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-5224afdc-b7fc-494d-a8b4-885ceeee227d')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-55388198-40e2-4d71-be28-4c52bb238bec')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -885,12 +888,12 @@ document.write(`
 
     <script>
       const buttonEl =
-        document.querySelector('#df-5224afdc-b7fc-494d-a8b4-885ceeee227d button.colab-df-convert');
+        document.querySelector('#df-55388198-40e2-4d71-be28-4c52bb238bec button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-5224afdc-b7fc-494d-a8b4-885ceeee227d');
+        const element = document.querySelector('#df-55388198-40e2-4d71-be28-4c52bb238bec');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -910,8 +913,8 @@ document.write(`
   </div>
 
 
-<div id="df-ae35ef08-be0d-40b2-86c3-8b8fe54c6a74">
-  <button class="colab-df-quickchart" onclick="quickchart('df-ae35ef08-be0d-40b2-86c3-8b8fe54c6a74')"
+<div id="df-ee0002b8-46b9-487e-9144-ba851e74550b">
+  <button class="colab-df-quickchart" onclick="quickchart('df-ee0002b8-46b9-487e-9144-ba851e74550b')"
             title="Suggest charts"
             style="display:none;">
 
@@ -1030,7 +1033,7 @@ document.write(`
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-ae35ef08-be0d-40b2-86c3-8b8fe54c6a74 button');
+        document.querySelector('#df-ee0002b8-46b9-487e-9144-ba851e74550b button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
@@ -1042,8 +1045,8 @@ document.write(`
 </div></div>
 </div>
 </section>
-<section id="visualizacao-da-probabilidade-de-morte-qx">
-<h2>6.3 Visualização da Probabilidade de Morte (qx)<a class="headerlink" href="#visualizacao-da-probabilidade-de-morte-qx" title="Link to this heading">#</a></h2>
+<section id="visualizacao-da-probabilidade-de-morte-q-x">
+<h2>6.3 Visualização da Probabilidade de Morte <span class="math notranslate nohighlight">\((q_x)\)</span><a class="headerlink" href="#visualizacao-da-probabilidade-de-morte-q-x" title="Link to this heading">#</a></h2>
 <p>Vamos visualizar como a probabilidade de morte varia com a idade:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1072,7 +1075,7 @@ document.write(`
 </section>
 <section id="comparacao-de-tabuas-de-mortalidade-por-sexo">
 <h2>6.4 Comparação de Tábuas de Mortalidade por Sexo<a class="headerlink" href="#comparacao-de-tabuas-de-mortalidade-por-sexo" title="Link to this heading">#</a></h2>
-<p>Na prática, as tábuas de mortalidade são diferentes para homens e mulheres. Vamos observar a diferença do comportamento da probabilidade de morte (qx):</p>
+<p>Na prática, as tábuas de mortalidade são diferentes para homens e mulheres. Vamos observar a diferença do comportamento da taxa de mortalidade (mx):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filtrar apenas o ano de 2020 para ambas as tábuas</span>
@@ -1083,13 +1086,13 @@ document.write(`
 <span class="n">tabua_mas_2020_ne</span> <span class="o">=</span> <span class="n">tabua_mas_2020</span><span class="p">[</span><span class="n">tabua_mas_2020</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Nordeste&#39;</span><span class="p">]</span>
 <span class="n">tabua_fem_2020_ne</span> <span class="o">=</span> <span class="n">tabua_fem_2020</span><span class="p">[</span><span class="n">tabua_fem_2020</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Nordeste&#39;</span><span class="p">]</span>
 
-<span class="c1"># Gerar um gráfico com as duas linhas de probabilidade de morte por grupo etário</span>
+<span class="c1"># Gerar um gráfico com as duas linhas de taxa de mortalidade por grupo etário</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;nqx&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tabua_mas_2020_ne</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Homens&#39;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;nqx&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tabua_fem_2020_ne</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mulheres&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Probabilidade de Morte (qx) por Idade - Homens vs. Mulheres - Nordeste - ano 2020&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;nMx&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tabua_mas_2020_ne</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Homens&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;nMx&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tabua_fem_2020_ne</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mulheres&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Taxa de Mortalidade (mx) por Grupo Etário - Homens vs. Mulheres - Nordeste - ano 2020&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probabilidade de Morte (qx)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Taxa de Mortalidade (mx)&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>  <span class="c1"># Escala logarítmica para melhor visualização</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">&quot;major&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -1098,7 +1101,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a9000b92f14e0d334a150a83f068a6ea4581f77aafe0ffac1cf8b1937c73d687.png" src="_images/a9000b92f14e0d334a150a83f068a6ea4581f77aafe0ffac1cf8b1937c73d687.png" />
+<img alt="_images/069653a5b31721ab8a4e8fa6a20e75e2019d3511b5797237421b80c0539590cd.png" src="_images/069653a5b31721ab8a4e8fa6a20e75e2019d3511b5797237421b80c0539590cd.png" />
 </div>
 </div>
 </section>
@@ -1216,27 +1219,30 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filtrar as regiões para a tábua masculina</span>
-<span class="n">tabua_mas_reg</span> <span class="o">=</span> <span class="n">tabua_mas</span><span class="p">[</span><span class="n">tabua_mas</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;Brasil&#39;</span><span class="p">,</span> <span class="s1">&#39;Nordeste&#39;</span><span class="p">,</span> <span class="s1">&#39;Sudeste&#39;</span><span class="p">,</span> <span class="s1">&#39;Sul&#39;</span><span class="p">,</span> <span class="s1">&#39;Centro-Oeste&#39;</span><span class="p">])]</span>
+<span class="n">tabua_mas_reg</span> <span class="o">=</span> <span class="n">tabua_mas</span><span class="p">[</span><span class="n">tabua_mas</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;Brasil&#39;</span><span class="p">,</span> <span class="s1">&#39;Nordeste&#39;</span><span class="p">,</span> <span class="s1">&#39;Sudeste&#39;</span><span class="p">,</span> <span class="s1">&#39;Sul&#39;</span><span class="p">,</span> <span class="s1">&#39;Centro-Oeste&#39;</span><span class="p">,</span> <span class="s1">&#39;Norte&#39;</span><span class="p">])]</span>
 
 <span class="c1"># Isolar a tábua de cada região</span>
 <span class="n">tabua_mas_br</span> <span class="o">=</span> <span class="n">tabua_mas_reg</span><span class="p">[</span><span class="n">tabua_mas_reg</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Brasil&#39;</span><span class="p">]</span>
+<span class="n">tabua_mas_no</span> <span class="o">=</span> <span class="n">tabua_mas_reg</span><span class="p">[</span><span class="n">tabua_mas_reg</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Norte&#39;</span><span class="p">]</span>
 <span class="n">tabua_mas_ne</span> <span class="o">=</span> <span class="n">tabua_mas_reg</span><span class="p">[</span><span class="n">tabua_mas_reg</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Nordeste&#39;</span><span class="p">]</span>
-<span class="n">tabua_mas_no</span> <span class="o">=</span> <span class="n">tabua_mas_reg</span><span class="p">[</span><span class="n">tabua_mas_reg</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Centro-Oeste&#39;</span><span class="p">]</span>
+<span class="n">tabua_mas_co</span> <span class="o">=</span> <span class="n">tabua_mas_reg</span><span class="p">[</span><span class="n">tabua_mas_reg</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Centro-Oeste&#39;</span><span class="p">]</span>
 <span class="n">tabua_mas_se</span> <span class="o">=</span> <span class="n">tabua_mas_reg</span><span class="p">[</span><span class="n">tabua_mas_reg</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Sudeste&#39;</span><span class="p">]</span>
 <span class="n">tabua_mas_su</span> <span class="o">=</span> <span class="n">tabua_mas_reg</span><span class="p">[</span><span class="n">tabua_mas_reg</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Sul&#39;</span><span class="p">]</span>
 
 <span class="c1"># Filtrar o Grupo Etário 0 para todas as tábuas</span>
 <span class="n">tabua_mas_br_0</span> <span class="o">=</span> <span class="n">tabua_mas_br</span><span class="p">[</span><span class="n">tabua_mas_br</span><span class="p">[</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">]</span>
-<span class="n">tabua_mas_ne_0</span> <span class="o">=</span> <span class="n">tabua_mas_ne</span><span class="p">[</span><span class="n">tabua_mas_ne</span><span class="p">[</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">]</span>
 <span class="n">tabua_mas_no_0</span> <span class="o">=</span> <span class="n">tabua_mas_no</span><span class="p">[</span><span class="n">tabua_mas_no</span><span class="p">[</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">]</span>
+<span class="n">tabua_mas_ne_0</span> <span class="o">=</span> <span class="n">tabua_mas_ne</span><span class="p">[</span><span class="n">tabua_mas_ne</span><span class="p">[</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">]</span>
+<span class="n">tabua_mas_co_0</span> <span class="o">=</span> <span class="n">tabua_mas_co</span><span class="p">[</span><span class="n">tabua_mas_co</span><span class="p">[</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">]</span>
 <span class="n">tabua_mas_se_0</span> <span class="o">=</span> <span class="n">tabua_mas_se</span><span class="p">[</span><span class="n">tabua_mas_se</span><span class="p">[</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">]</span>
 <span class="n">tabua_mas_su_0</span> <span class="o">=</span> <span class="n">tabua_mas_su</span><span class="p">[</span><span class="n">tabua_mas_su</span><span class="p">[</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">]</span>
 
 <span class="c1"># Gráfico da Evolução da Expectativa de Vida ao Nascer de Homens por Região</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Ano&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;ex&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tabua_mas_br_0</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Brasil&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Ano&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;ex&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tabua_mas_no_0</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Norte&#39;</span><span class="p">)</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Ano&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;ex&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tabua_mas_ne_0</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Nordeste&#39;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Ano&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;ex&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tabua_mas_no_0</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Centro-Oeste&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Ano&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;ex&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tabua_mas_co_0</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Centro-Oeste&#39;</span><span class="p">)</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Ano&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;ex&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tabua_mas_se_0</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Sudeste&#39;</span><span class="p">)</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Ano&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;ex&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tabua_mas_su_0</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Sul&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Evolução da Expectativa de Vida ao Nascer - Homens&#39;</span><span class="p">)</span>
@@ -1249,7 +1255,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ddc6213d7de811ac1448584e75ce8b57424b35ca85480f142f188570557aff91.png" src="_images/ddc6213d7de811ac1448584e75ce8b57424b35ca85480f142f188570557aff91.png" />
+<img alt="_images/2867dc7a7bcf9b67d064491a7c9904c87cc576e32e98f75667b2841b88293f74.png" src="_images/2867dc7a7bcf9b67d064491a7c9904c87cc576e32e98f75667b2841b88293f74.png" />
 </div>
 </div>
 </section>
@@ -1264,7 +1270,7 @@ document.write(`
 
 <span class="c1"># Visualizar primeiras linhas do banco de dados municipal</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mortalidade Infantil - Municípios&quot;</span><span class="p">)</span>
-<span class="n">mort_inf_mun</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">mort_inf_mun</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1273,7 +1279,7 @@ document.write(`
 </pre></div>
 </div>
 <div class="output text_html">
-  <div id="df-058e952d-7959-4b3f-9436-63f7137bf988" class="colab-df-container">
+  <div id="df-43003c1e-c1b7-4ec4-93ee-baa2fcc8a399" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1380,93 +1386,13 @@ document.write(`
       <td>1999</td>
       <td>274.13</td>
     </tr>
-    <tr>
-      <th>10</th>
-      <td>Município Ignorado -RO</td>
-      <td>1100000</td>
-      <td>110000</td>
-      <td>2000</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>Município Ignorado -RO</td>
-      <td>1100000</td>
-      <td>110000</td>
-      <td>2001</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>Município Ignorado -RO</td>
-      <td>1100000</td>
-      <td>110000</td>
-      <td>2002</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>Município Ignorado -RO</td>
-      <td>1100000</td>
-      <td>110000</td>
-      <td>2003</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>Município Ignorado -RO</td>
-      <td>1100000</td>
-      <td>110000</td>
-      <td>2004</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>Município Ignorado -RO</td>
-      <td>1100000</td>
-      <td>110000</td>
-      <td>2005</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>Município Ignorado -RO</td>
-      <td>1100000</td>
-      <td>110000</td>
-      <td>2006</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>Município Ignorado -RO</td>
-      <td>1100000</td>
-      <td>110000</td>
-      <td>2007</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>Município Ignorado -RO</td>
-      <td>1100000</td>
-      <td>110000</td>
-      <td>2008</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>Município Ignorado -RO</td>
-      <td>1100000</td>
-      <td>110000</td>
-      <td>2009</td>
-      <td>NaN</td>
-    </tr>
   </tbody>
 </table>
 </div>
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-058e952d-7959-4b3f-9436-63f7137bf988')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-43003c1e-c1b7-4ec4-93ee-baa2fcc8a399')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -1518,12 +1444,12 @@ document.write(`
 
     <script>
       const buttonEl =
-        document.querySelector('#df-058e952d-7959-4b3f-9436-63f7137bf988 button.colab-df-convert');
+        document.querySelector('#df-43003c1e-c1b7-4ec4-93ee-baa2fcc8a399 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-058e952d-7959-4b3f-9436-63f7137bf988');
+        const element = document.querySelector('#df-43003c1e-c1b7-4ec4-93ee-baa2fcc8a399');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -1543,8 +1469,8 @@ document.write(`
   </div>
 
 
-<div id="df-42644e8c-e0ec-4287-a7f9-12f05c6ff3b7">
-  <button class="colab-df-quickchart" onclick="quickchart('df-42644e8c-e0ec-4287-a7f9-12f05c6ff3b7')"
+<div id="df-0b8e2bc4-dbcb-4ae5-846f-ac50e8bcf0b6">
+  <button class="colab-df-quickchart" onclick="quickchart('df-0b8e2bc4-dbcb-4ae5-846f-ac50e8bcf0b6')"
             title="Suggest charts"
             style="display:none;">
 
@@ -1663,7 +1589,7 @@ document.write(`
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-42644e8c-e0ec-4287-a7f9-12f05c6ff3b7 button');
+        document.querySelector('#df-0b8e2bc4-dbcb-4ae5-846f-ac50e8bcf0b6 button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
@@ -1678,7 +1604,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visalizar as primeiras linhas do banco de dados regiões</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mortalidade Infantil - Regiões&quot;</span><span class="p">)</span>
-<span class="n">mort_inf_reg</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">mort_inf_reg</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1687,7 +1613,7 @@ document.write(`
 </pre></div>
 </div>
 <div class="output text_html">
-  <div id="df-b0c25875-3e05-439e-b435-de20da2460ef" class="colab-df-container">
+  <div id="df-d1a8fcf6-7d36-4a41-90e4-b41b251bd05c" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1794,93 +1720,13 @@ document.write(`
       <td>1999</td>
       <td>27.70</td>
     </tr>
-    <tr>
-      <th>10</th>
-      <td>Brasil</td>
-      <td>0</td>
-      <td>0</td>
-      <td>2000</td>
-      <td>26.10</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>Brasil</td>
-      <td>0</td>
-      <td>0</td>
-      <td>2001</td>
-      <td>24.90</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>Brasil</td>
-      <td>0</td>
-      <td>0</td>
-      <td>2002</td>
-      <td>24.90</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>Brasil</td>
-      <td>0</td>
-      <td>0</td>
-      <td>2003</td>
-      <td>23.40</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>Brasil</td>
-      <td>0</td>
-      <td>0</td>
-      <td>2004</td>
-      <td>21.50</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>Brasil</td>
-      <td>0</td>
-      <td>0</td>
-      <td>2005</td>
-      <td>20.40</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>Brasil</td>
-      <td>0</td>
-      <td>0</td>
-      <td>2006</td>
-      <td>19.60</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>Brasil</td>
-      <td>0</td>
-      <td>0</td>
-      <td>2007</td>
-      <td>18.60</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>Brasil</td>
-      <td>0</td>
-      <td>0</td>
-      <td>2008</td>
-      <td>17.70</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>Brasil</td>
-      <td>0</td>
-      <td>0</td>
-      <td>2009</td>
-      <td>16.80</td>
-    </tr>
   </tbody>
 </table>
 </div>
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-b0c25875-3e05-439e-b435-de20da2460ef')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-d1a8fcf6-7d36-4a41-90e4-b41b251bd05c')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -1932,12 +1778,12 @@ document.write(`
 
     <script>
       const buttonEl =
-        document.querySelector('#df-b0c25875-3e05-439e-b435-de20da2460ef button.colab-df-convert');
+        document.querySelector('#df-d1a8fcf6-7d36-4a41-90e4-b41b251bd05c button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-b0c25875-3e05-439e-b435-de20da2460ef');
+        const element = document.querySelector('#df-d1a8fcf6-7d36-4a41-90e4-b41b251bd05c');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -1957,8 +1803,8 @@ document.write(`
   </div>
 
 
-<div id="df-bcbea919-2f90-45d0-bddf-c2fbe63f08f0">
-  <button class="colab-df-quickchart" onclick="quickchart('df-bcbea919-2f90-45d0-bddf-c2fbe63f08f0')"
+<div id="df-d8b413a0-cdbf-40f7-ac70-d1bbf06a304f">
+  <button class="colab-df-quickchart" onclick="quickchart('df-d8b413a0-cdbf-40f7-ac70-d1bbf06a304f')"
             title="Suggest charts"
             style="display:none;">
 
@@ -2077,7 +1923,7 @@ document.write(`
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-bcbea919-2f90-45d0-bddf-c2fbe63f08f0 button');
+        document.querySelector('#df-d8b413a0-cdbf-40f7-ac70-d1bbf06a304f button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
@@ -2109,7 +1955,7 @@ document.write(`
 
 <span class="c1"># Gráfico em barras da Taxa de Mortalidade Infantil do ano de 2010 ordenada e escala de cores</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Localidade&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Taxa&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">mort_inf_br_ne_2010</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Taxa&#39;</span><span class="p">),</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Localidade&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Taxa&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">mort_inf_br_ne_2010</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Taxa&#39;</span><span class="p">),</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;Localidade&#39;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Taxa de Mortalidade Infantil - Brasil e Nordeste - ano 2010&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Localidade&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Taxa de Mortalidade Infantil&#39;</span><span class="p">)</span>
@@ -2119,14 +1965,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-37-1fb14b6668ff&gt;:16: FutureWarning: 
-
-Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
-
-  sns.barplot(x=&#39;Localidade&#39;, y=&#39;Taxa&#39;, data=mort_inf_br_ne_2010.sort_values(by=&#39;Taxa&#39;), palette=&quot;viridis&quot;)
-</pre></div>
-</div>
-<img alt="_images/db17b9739612a8ae31f8d279d9f882a53df67b500d825a40a818b0664630450c.png" src="_images/db17b9739612a8ae31f8d279d9f882a53df67b500d825a40a818b0664630450c.png" />
+<img alt="_images/a5add56629e9165c19a1a3d8d81cc93c20b300875bac79fa1686d82b73f6c77e.png" src="_images/a5add56629e9165c19a1a3d8d81cc93c20b300875bac79fa1686d82b73f6c77e.png" />
 </div>
 </div>
 </section>
@@ -2173,7 +2012,7 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-564c55d6-c223-4f13-acc0-1ebaa8808c57" class="colab-df-container">
+  <div id="df-ee21b95a-0a4e-459e-9bcc-3747b9824504" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -2378,7 +2217,7 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-564c55d6-c223-4f13-acc0-1ebaa8808c57')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-ee21b95a-0a4e-459e-9bcc-3747b9824504')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -2430,12 +2269,12 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
 
     <script>
       const buttonEl =
-        document.querySelector('#df-564c55d6-c223-4f13-acc0-1ebaa8808c57 button.colab-df-convert');
+        document.querySelector('#df-ee21b95a-0a4e-459e-9bcc-3747b9824504 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-564c55d6-c223-4f13-acc0-1ebaa8808c57');
+        const element = document.querySelector('#df-ee21b95a-0a4e-459e-9bcc-3747b9824504');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -2455,8 +2294,8 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
   </div>
 
 
-<div id="df-d750eb7d-3960-4aa3-a69d-0dbe7c129c0c">
-  <button class="colab-df-quickchart" onclick="quickchart('df-d750eb7d-3960-4aa3-a69d-0dbe7c129c0c')"
+<div id="df-1fd030e3-e2e1-46ca-900e-60f8ce59885b">
+  <button class="colab-df-quickchart" onclick="quickchart('df-1fd030e3-e2e1-46ca-900e-60f8ce59885b')"
             title="Suggest charts"
             style="display:none;">
 
@@ -2575,7 +2414,7 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-d750eb7d-3960-4aa3-a69d-0dbe7c129c0c button');
+        document.querySelector('#df-1fd030e3-e2e1-46ca-900e-60f8ce59885b button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
@@ -2589,7 +2428,7 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filtrar apenas o Local Brasil e o ano de 2023</span>
-<span class="n">pop_bra_2023</span> <span class="o">=</span> <span class="n">pop_bra</span><span class="p">[(</span><span class="n">pop_bra</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Brasil&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">pop_bra</span><span class="p">[</span><span class="s1">&#39;Ano&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2023</span><span class="p">)]</span>
+<span class="n">pop_bra_2023</span> <span class="o">=</span> <span class="n">pop_bra</span><span class="p">[(</span><span class="n">pop_bra</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Brasil&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">pop_bra</span><span class="p">[</span><span class="s1">&#39;Ano&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2023</span><span class="p">)]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
 <span class="c1"># Calcular as proporções dos grupos etários de cada sexo</span>
 <span class="n">populacao_total</span> <span class="o">=</span> <span class="n">pop_bra_2023</span><span class="p">[</span><span class="s1">&#39;Ambos&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -2622,7 +2461,7 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
            <span class="p">[</span><span class="s1">&#39;5%&#39;</span><span class="p">,</span> <span class="s1">&#39;4%&#39;</span><span class="p">,</span> <span class="s1">&#39;3%&#39;</span><span class="p">,</span> <span class="s1">&#39;2%&#39;</span><span class="p">,</span> <span class="s1">&#39;1%&#39;</span><span class="p">,</span> <span class="s1">&#39;0%&#39;</span><span class="p">,</span> <span class="s1">&#39;1%&#39;</span><span class="p">,</span> <span class="s1">&#39;2%&#39;</span><span class="p">,</span> <span class="s1">&#39;3%&#39;</span><span class="p">,</span> <span class="s1">&#39;4%&#39;</span><span class="p">,</span> <span class="s1">&#39;5%&#39;</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -2630,21 +2469,7 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-49-a06db4baf932&gt;:6: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  pop_bra_2023[&#39;Homens_%&#39;] = (pop_bra_2023[&#39;Homens&#39;] / populacao_total) * 100
-&lt;ipython-input-49-a06db4baf932&gt;:7: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  pop_bra_2023[&#39;Mulheres_%&#39;] = (pop_bra_2023[&#39;Mulheres&#39;] / populacao_total) * 100
-</pre></div>
-</div>
-<img alt="_images/bea07c35903e7cc5fec0b1862b881c5ea47221a96a460ddf6782241babac13a3.png" src="_images/bea07c35903e7cc5fec0b1862b881c5ea47221a96a460ddf6782241babac13a3.png" />
+<img alt="_images/974b0a5d7cf56b7c382abbe83f18459180dd7b288aece710c5ea5bf76e240d56.png" src="_images/974b0a5d7cf56b7c382abbe83f18459180dd7b288aece710c5ea5bf76e240d56.png" />
 </div>
 </div>
 <section id="piramides-etarias-comparadas">
@@ -2652,14 +2477,14 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <p>As pirâmides etárias comparativas permitem visualizar mudanças demográficas entre diferentes períodos ou regiões, facilitando a análise de transições populacionais, como o envelhecimento ou a queda na natalidade, evidenciadas nos gráficos a seguir.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filtrar Local Sul, Nordeste e Norte</span>
-<span class="n">pop_br_ne_pb</span> <span class="o">=</span> <span class="n">pop_bra</span><span class="p">[(</span><span class="n">pop_bra</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;Sul&#39;</span><span class="p">,</span> <span class="s1">&#39;Nordeste&#39;</span><span class="p">,</span> <span class="s1">&#39;Norte&#39;</span><span class="p">]))]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filtrar Local Sul, Nordeste, Norte, Centro-Oeste e Sudeste</span>
+<span class="n">pop_br_ne_pb</span> <span class="o">=</span> <span class="n">pop_bra</span><span class="p">[(</span><span class="n">pop_bra</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;Sul&#39;</span><span class="p">,</span> <span class="s1">&#39;Nordeste&#39;</span><span class="p">,</span> <span class="s1">&#39;Norte&#39;</span><span class="p">,</span> <span class="s1">&#39;Centro-Oeste&#39;</span><span class="p">,</span> <span class="s1">&#39;Sudeste&#39;</span><span class="p">]))]</span>
 
 <span class="c1"># Filtrar o ano de 2000</span>
 <span class="n">pop_br_ne_pb</span> <span class="o">=</span> <span class="n">pop_br_ne_pb</span><span class="p">[</span><span class="n">pop_br_ne_pb</span><span class="p">[</span><span class="s1">&#39;Ano&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2000</span><span class="p">]</span>
 
 <span class="c1"># Calcular proporções em relação à população total de cada local</span>
-<span class="k">for</span> <span class="n">local</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Sul&#39;</span><span class="p">,</span> <span class="s1">&#39;Nordeste&#39;</span><span class="p">,</span> <span class="s1">&#39;Norte&#39;</span><span class="p">]:</span>
+<span class="k">for</span> <span class="n">local</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Sul&#39;</span><span class="p">,</span> <span class="s1">&#39;Nordeste&#39;</span><span class="p">,</span> <span class="s1">&#39;Norte&#39;</span><span class="p">,</span> <span class="s1">&#39;Centro-Oeste&#39;</span><span class="p">,</span> <span class="s1">&#39;Sudeste&#39;</span><span class="p">]:</span>
     <span class="n">df_local</span> <span class="o">=</span> <span class="n">pop_br_ne_pb</span><span class="p">[</span><span class="n">pop_br_ne_pb</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">local</span><span class="p">]</span>
     <span class="n">total_local</span> <span class="o">=</span> <span class="n">df_local</span><span class="p">[</span><span class="s1">&#39;Ambos&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
     <span class="n">pop_br_ne_pb</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pop_br_ne_pb</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">local</span><span class="p">,</span> <span class="s1">&#39;Homens_%&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_local</span><span class="p">[</span><span class="s1">&#39;Homens&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">total_local</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
@@ -2673,11 +2498,13 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <span class="n">cores</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;Sul&#39;</span><span class="p">:</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span>
     <span class="s1">&#39;Nordeste&#39;</span><span class="p">:</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;Norte&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span>
+    <span class="s1">&#39;Norte&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Centro-Oeste&#39;</span><span class="p">:</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Sudeste&#39;</span><span class="p">:</span> <span class="s1">&#39;purple&#39;</span>
 <span class="p">}</span>
 
 <span class="c1"># Plotar linhas para Homens (valores negativos)</span>
-<span class="k">for</span> <span class="n">local</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Sul&#39;</span><span class="p">,</span> <span class="s1">&#39;Nordeste&#39;</span><span class="p">,</span> <span class="s1">&#39;Norte&#39;</span><span class="p">]:</span>
+<span class="k">for</span> <span class="n">local</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Sul&#39;</span><span class="p">,</span> <span class="s1">&#39;Nordeste&#39;</span><span class="p">,</span> <span class="s1">&#39;Norte&#39;</span><span class="p">,</span> <span class="s1">&#39;Centro-Oeste&#39;</span><span class="p">,</span> <span class="s1">&#39;Sudeste&#39;</span><span class="p">]:</span>
     <span class="n">df_plot</span> <span class="o">=</span> <span class="n">pop_br_ne_pb</span><span class="p">[</span><span class="n">pop_br_ne_pb</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">local</span><span class="p">]</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
         <span class="o">-</span><span class="n">df_plot</span><span class="p">[</span><span class="s1">&#39;Homens_%&#39;</span><span class="p">],</span>
@@ -2688,7 +2515,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
             <span class="p">)</span>
 
 <span class="c1"># Plotar linhas para Mulheres (valores positivos)</span>
-<span class="k">for</span> <span class="n">local</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Sul&#39;</span><span class="p">,</span> <span class="s1">&#39;Nordeste&#39;</span><span class="p">,</span> <span class="s1">&#39;Norte&#39;</span><span class="p">]:</span>
+<span class="k">for</span> <span class="n">local</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Sul&#39;</span><span class="p">,</span> <span class="s1">&#39;Nordeste&#39;</span><span class="p">,</span> <span class="s1">&#39;Norte&#39;</span><span class="p">,</span> <span class="s1">&#39;Centro-Oeste&#39;</span><span class="p">,</span> <span class="s1">&#39;Sudeste&#39;</span><span class="p">]:</span>
     <span class="n">df_plot</span> <span class="o">=</span> <span class="n">pop_br_ne_pb</span><span class="p">[</span><span class="n">pop_br_ne_pb</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">local</span><span class="p">]</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
         <span class="n">df_plot</span><span class="p">[</span><span class="s1">&#39;Mulheres_%&#39;</span><span class="p">],</span>
@@ -2712,7 +2539,105 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/f614c6f9d71b33003735f0e7af9071c25c05ac928fd6afebfd5928d22b333015.png" src="_images/f614c6f9d71b33003735f0e7af9071c25c05ac928fd6afebfd5928d22b333015.png" />
+<img alt="_images/97cbcf25b5e8ae533e157ba7d389d21e04a3777a2fc0322855843d4e1fe692a4.png" src="_images/97cbcf25b5e8ae533e157ba7d389d21e04a3777a2fc0322855843d4e1fe692a4.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Lista de locais únicos</span>
+<span class="n">locais</span> <span class="o">=</span> <span class="n">pop_bra</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+
+<span class="c1"># Configurações gerais - estilo mais moderno</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">25</span><span class="p">))</span>
+
+<span class="c1"># Cores mais suaves e agradáveis</span>
+<span class="n">cor_homens</span> <span class="o">=</span> <span class="s1">&#39;#3498db&#39;</span>  <span class="c1"># Azul mais vibrante</span>
+<span class="n">cor_mulheres</span> <span class="o">=</span> <span class="s1">&#39;#e74c3c&#39;</span>  <span class="c1"># Vermelho mais vibrante</span>
+
+<span class="c1"># Criando uma legenda única fora dos subplots</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.lines</span><span class="w"> </span><span class="kn">import</span> <span class="n">Line2D</span>
+<span class="n">legend_elements</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">cor_homens</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Homens&#39;</span><span class="p">),</span>
+    <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">cor_mulheres</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mulheres&#39;</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="c1"># Loop através dos locais para criar as pirâmides</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">local</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">locais</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">locais</span><span class="p">)</span> <span class="o">//</span> <span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+    <span class="c1"># Filtrar dados para o local e ano 2023</span>
+    <span class="n">dados_local</span> <span class="o">=</span> <span class="n">pop_bra</span><span class="p">[(</span><span class="n">pop_bra</span><span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">local</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">pop_bra</span><span class="p">[</span><span class="s1">&#39;Ano&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2023</span><span class="p">)]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="c1"># Calcular proporções (usando .loc para evitar o warning)</span>
+    <span class="n">populacao_total</span> <span class="o">=</span> <span class="n">dados_local</span><span class="p">[</span><span class="s1">&#39;Ambos&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">dados_local</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;Homens_%&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">dados_local</span><span class="p">[</span><span class="s1">&#39;Homens&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">populacao_total</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+    <span class="n">dados_local</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;Mulheres_%&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">dados_local</span><span class="p">[</span><span class="s1">&#39;Mulheres&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">populacao_total</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+    <span class="c1"># Barras para homens (lado esquerdo, negativo)</span>
+    <span class="n">barras_homens</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span>
+        <span class="n">dados_local</span><span class="p">[</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">],</span>
+        <span class="o">-</span><span class="n">dados_local</span><span class="p">[</span><span class="s1">&#39;Homens_%&#39;</span><span class="p">],</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">cor_homens</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+        <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Barras para mulheres (lado direito, positivo)</span>
+    <span class="n">barras_mulheres</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span>
+        <span class="n">dados_local</span><span class="p">[</span><span class="s1">&#39;Grupo Etário&#39;</span><span class="p">],</span>
+        <span class="n">dados_local</span><span class="p">[</span><span class="s1">&#39;Mulheres_%&#39;</span><span class="p">],</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">cor_mulheres</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+        <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Ajustes estéticos</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">local</span><span class="si">}</span><span class="s1"> (2023)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Remover rótulos de eixos individuais para deixar mais limpo</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Formatar os ticks do eixo x</span>
+    <span class="n">max_val</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">dados_local</span><span class="p">[[</span><span class="s1">&#39;Homens_%&#39;</span><span class="p">,</span> <span class="s1">&#39;Mulheres_%&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">x_ticks</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="n">max_val</span><span class="p">,</span> <span class="o">-</span><span class="n">max_val</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">max_val</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_val</span><span class="p">]</span>
+    <span class="n">x_labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%&#39;</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_ticks</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">x_ticks</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">x_labels</span><span class="p">)</span>
+
+    <span class="c1"># Adicionar linha central</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+    <span class="c1"># Remover linhas de borda</span>
+    <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="n">spine</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># Remover legendas individuais</span>
+    <span class="k">if</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_legend</span><span class="p">():</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">get_legend</span><span class="p">()</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
+
+    <span class="c1"># Mostrar rótulos do eixo y apenas nos gráficos da primeira coluna (i % 5 == 1)</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([])</span>
+
+<span class="c1"># Adicionando título geral e legenda única</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Pirâmides Etárias por Localidade - Brasil 2023&#39;</span><span class="p">,</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.98</span><span class="p">)</span>
+
+<span class="c1"># Adicionar legenda única na parte superior</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">legend_elements</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">,</span>
+           <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.96</span><span class="p">),</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>  <span class="c1"># Ajustar espaço para título e legenda</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/70ca0e21d05ad3928cdb8f718c41315a9de9dc839406e808e38b8eb185b3e88f.png" src="_images/70ca0e21d05ad3928cdb8f718c41315a9de9dc839406e808e38b8eb185b3e88f.png" />
 </div>
 </div>
 </section>
@@ -2780,7 +2705,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introducao-aos-dados-demograficos">6.1 Introdução aos Dados Demográficos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analise-de-tabuas-de-mortalidade">6.2 Análise de Tábuas de Mortalidade</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacao-da-probabilidade-de-morte-qx">6.3 Visualização da Probabilidade de Morte (qx)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacao-da-probabilidade-de-morte-q-x">6.3 Visualização da Probabilidade de Morte <span class="math notranslate nohighlight">\((q_x)\)</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacao-de-tabuas-de-mortalidade-por-sexo">6.4 Comparação de Tábuas de Mortalidade por Sexo</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evolucao-do-comportamento-da-probabilidade-de-morte">6.5 Evolução do Comportamento da Probabilidade de Morte</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analise-de-expectativa-de-vida">6.6 Análise de Expectativa de Vida</a></li>
