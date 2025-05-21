@@ -22,7 +22,7 @@ nbclient.exceptions.CellExecutionError: An error occurred while executing the fo
 tabua_mas = pd.read_parquet("https://raw.githubusercontent.com/Sigerip/curso-data-viz/main/tabua_homens.parquet")
 tabua_fem = pd.read_parquet("https://raw.githubusercontent.com/Sigerip/curso-data-viz/main/tabua_mulheres.parquet")
 
-# Visualizar primeiras linhas da tábua masculina
+# Visualizar as 20 primeiras linhas da tábua masculina
 print("Tábuas de Mortalidade - Homens")
 tabua_mas.head(20)
 ------------------
@@ -34,7 +34,7 @@ tabua_mas.head(20)
 [32m      1[39m [38;5;66;03m# Carregar Tábuas do Github em formato Parquet[39;00m
 [32m----> [39m[32m2[39m tabua_mas = [43mpd[49m[43m.[49m[43mread_parquet[49m[43m([49m[33;43m"[39;49m[33;43mhttps://raw.githubusercontent.com/Sigerip/curso-data-viz/main/tabua_homens.parquet[39;49m[33;43m"[39;49m[43m)[49m
 [32m      3[39m tabua_fem = pd.read_parquet([33m"[39m[33mhttps://raw.githubusercontent.com/Sigerip/curso-data-viz/main/tabua_mulheres.parquet[39m[33m"[39m)
-[32m      5[39m [38;5;66;03m# Visualizar primeiras linhas da tábua masculina[39;00m
+[32m      5[39m [38;5;66;03m# Visualizar as 20 primeiras linhas da tábua masculina[39;00m
 
 [36mFile [39m[32m~/.local/lib/python3.12/site-packages/pandas/io/parquet.py:651[39m, in [36mread_parquet[39m[34m(path, engine, columns, storage_options, use_nullable_dtypes, dtype_backend, filesystem, filters, **kwargs)[39m
 [32m    498[39m [38;5;129m@doc[39m(storage_options=_shared_docs[[33m"[39m[33mstorage_options[39m[33m"[39m])

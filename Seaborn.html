@@ -185,7 +185,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Matplotlib.html">3. Matplotlib</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Introdução ao Seaborn</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Datasets_Seaborn.html">5. Datasets do Seaborn</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Demograficos.html">6. Análise de Dados Demográficos com Seaborn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Demograficos.html">6. Visualização de Dados Demográficos com Seaborn</a></li>
 </ul>
 
     </div>
@@ -381,13 +381,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacao-avancada-com-seaborn">4.1 Visualização Avançada com Seaborn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacao-com-seaborn">4.1 Visualização com Seaborn</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estilos-e-temas-do-seaborn">4.2 Estilos e Temas do Seaborn</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-graficos-no-seaborn">4.3 Tipos de Gráficos no Seaborn</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-dsitribuicao">4.3.1 Gráficos de Dsitribuição</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-distribuicao">4.3.1 Gráficos de Distribuição</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-relacao">4.3.2 Gráficos de Relação</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-categoricos">4.3.3 Gráficos Categóricos</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-regressao">4.3.4 Gráficos de Regressão</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-matriz">4.3.5 Gráficos de Matriz</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#facetgrid-multiplos-graficos-por-categoria">4.3.5 FacetGrid: Múltiplos Gráficos por Categoria</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#personalizacao-de-graficos-no-seaborn">4.3.6 Personalização de Gráficos no Seaborn</a></li>
 </ul>
@@ -407,8 +408,8 @@ document.write(`
   <p><a href="https://colab.research.google.com/github/Sigerip/curso-data-viz/blob/main/Seaborn.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
 <section class="tex2jax_ignore mathjax_ignore" id="introducao-ao-seaborn">
 <h1>4. Introdução ao Seaborn<a class="headerlink" href="#introducao-ao-seaborn" title="Link to this heading">#</a></h1>
-<section id="visualizacao-avancada-com-seaborn">
-<h2>4.1 Visualização Avançada com Seaborn<a class="headerlink" href="#visualizacao-avancada-com-seaborn" title="Link to this heading">#</a></h2>
+<section id="visualizacao-com-seaborn">
+<h2>4.1 Visualização com Seaborn<a class="headerlink" href="#visualizacao-com-seaborn" title="Link to this heading">#</a></h2>
 <p>Seaborn é uma biblioteca de visualização de dados baseada no Matplotlib que foi desenvolvida por Michael Waskom. Ela foi projetada especificamente para visualização de dados estatísticos e oferece:</p>
 <ul class="simple">
 <li><p>Interface de alto nível para criar gráficos complexos com poucas linhas de código</p></li>
@@ -425,9 +426,6 @@ document.write(`
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
 
-<span class="c1"># Configurar o estilo</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
-
 <span class="c1"># Verificar a versão do Seaborn</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Versão do Seaborn: </span><span class="si">{</span><span class="n">sns</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
@@ -442,13 +440,18 @@ document.write(`
 </section>
 <section id="estilos-e-temas-do-seaborn">
 <h2>4.2 Estilos e Temas do Seaborn<a class="headerlink" href="#estilos-e-temas-do-seaborn" title="Link to this heading">#</a></h2>
-<p>Uma das vantagens do Seaborn é a melhoria estética imediata que ele traz para as visualizações:</p>
+<p>Uma das vantagens do Seaborn é a melhoria estética imediata que ele traz para as visualizações.</p>
+<p>Estilos de Plot:</p>
+<ul class="simple">
+<li><p><strong>darkgrid</strong>: Grade escura com fundo branco</p></li>
+<li><p><strong>whitegrid</strong>: Grade clara com fundo branco</p></li>
+<li><p><strong>dark</strong>: Fundo escuro sem grade</p></li>
+<li><p><strong>white</strong>: Fundo branco sem grade</p></li>
+<li><p><strong>ticks</strong>: Apenas com marcadores de eixo</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configuração geral</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>  <span class="c1"># Estilo base e tamanho da fonte</span>
-
-<span class="c1"># Demonstração dos estilos do Seaborn</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Demonstração dos estilos do Seaborn</span>
 <span class="n">styles</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;darkgrid&#39;</span><span class="p">,</span> <span class="s1">&#39;whitegrid&#39;</span><span class="p">,</span> <span class="s1">&#39;dark&#39;</span><span class="p">,</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="s1">&#39;ticks&#39;</span><span class="p">]</span>
 
 <span class="c1"># Cria figura com proporções</span>
@@ -473,9 +476,112 @@ document.write(`
         <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;sen(x)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>  <span class="c1"># Aumenta o espaçamento entre subplots</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1"># Exibe o gráfico</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e756da82e92f0f10a3be0cd783c5b0e0dd6e15b1ec9c4d6b31ad0f1d8dfdfda1.png" src="_images/e756da82e92f0f10a3be0cd783c5b0e0dd6e15b1ec9c4d6b31ad0f1d8dfdfda1.png" />
+</div>
+</div>
+<p>Contextos de Escala</p>
+<p>Estes contextos controlam o tamanho dos elementos do gráfico:</p>
+<ul class="simple">
+<li><p><strong>paper</strong>: Menor escala, ideal para documentos acadêmicos</p></li>
+<li><p><strong>notebook</strong>: Tamanho médio, bom para notebooks Jupyter</p></li>
+<li><p><strong>talk</strong>: Escala maior, ótimo para apresentações</p></li>
+<li><p><strong>poster</strong>: Maior escala, ideal para pôsteres</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Demonstração dos contextos do Seaborn</span>
+<span class="n">contexts</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;paper&#39;</span><span class="p">,</span> <span class="s1">&#39;notebook&#39;</span><span class="p">,</span> <span class="s1">&#39;talk&#39;</span><span class="p">,</span> <span class="s1">&#39;poster&#39;</span><span class="p">]</span>
 
-<span class="c1"># Paletas de cores</span>
+<span class="c1"># Cria figura com proporções</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">context</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">contexts</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">sns</span><span class="o">.</span><span class="n">plotting_context</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>  <span class="c1"># Aplica o contexto ANTES de criar o subplot</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">contexts</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1"># Adiciona ruído para visualização</span>
+
+        <span class="c1"># Plot com elementos estilizados</span>
+        <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+        <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+
+        <span class="c1"># Títulos e labels</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Contexto: </span><span class="si">{</span><span class="n">context</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">contexts</span><span class="p">):</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;sen(x)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>  <span class="c1"># Aumenta o espaçamento entre subplots</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1"># Exibe o gráfico</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/212be45fd081dd995fd932984e8cfaa595dbd72c17fcd82ddfaab7a98fc221a4.png" src="_images/212be45fd081dd995fd932984e8cfaa595dbd72c17fcd82ddfaab7a98fc221a4.png" />
+</div>
+</div>
+<p>Cores Padrão</p>
+<p>O Seaborn vem com uma paleta padrão de 10 cores:</p>
+<ul class="simple">
+<li><p><strong>Azul</strong> (#1f77b4)</p></li>
+<li><p><strong>Laranja</strong> (#ff7f0e)</p></li>
+<li><p><strong>Verde</strong> (#2ca02c)</p></li>
+<li><p><strong>Vermelho</strong> (#d62728)</p></li>
+<li><p><strong>Roxo</strong> (#9467bd)</p></li>
+<li><p><strong>Marrom</strong> (#8c564b)</p></li>
+<li><p><strong>Rosa</strong> (#e377c2)</p></li>
+<li><p><strong>Cinza</strong> (#7f7f7f)</p></li>
+<li><p><strong>Verde-amarelado</strong> (#bcbd22)</p></li>
+<li><p><strong>Azul claro</strong> (#17becf)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Lista de cores e nomes</span>
+<span class="n">cores</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;Azul&quot;</span><span class="p">,</span> <span class="s2">&quot;#1f77b4&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Laranja&quot;</span><span class="p">,</span> <span class="s2">&quot;#ff7f0e&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Verde&quot;</span><span class="p">,</span> <span class="s2">&quot;#2ca02c&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Vermelho&quot;</span><span class="p">,</span> <span class="s2">&quot;#d62728&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Roxo&quot;</span><span class="p">,</span> <span class="s2">&quot;#9467bd&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Marrom&quot;</span><span class="p">,</span> <span class="s2">&quot;#8c564b&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Rosa&quot;</span><span class="p">,</span> <span class="s2">&quot;#e377c2&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Cinza&quot;</span><span class="p">,</span> <span class="s2">&quot;#7f7f7f&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Verde-amarelado&quot;</span><span class="p">,</span> <span class="s2">&quot;#bcbd22&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Azul claro&quot;</span><span class="p">,</span> <span class="s2">&quot;#17becf&quot;</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Desenha um retângulo colorido para cada cor</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">nome</span><span class="p">,</span> <span class="n">cor</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cores</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">cor</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">nome</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">cor</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span> <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="mi">7</span> <span class="k">else</span> <span class="s1">&#39;white&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cores</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Paleta de Cores Padrão do Seaborn&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/dcd072c9622002247e406a4073e0cf16b7bf7809464beb3a8ec79ad9c54cb97c.png" src="_images/dcd072c9622002247e406a4073e0cf16b7bf7809464beb3a8ec79ad9c54cb97c.png" />
+</div>
+</div>
+<p>Além disso, o Seaborn também oferece várias outras paletas de cores predefinidas e a possibilidade de criar paletas personalizadas usando <code class="docutils literal notranslate"><span class="pre">sns.color_palette()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Paletas de cores</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">paletas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;deep&#39;</span><span class="p">,</span> <span class="s1">&#39;muted&#39;</span><span class="p">,</span> <span class="s1">&#39;pastel&#39;</span><span class="p">,</span> <span class="s1">&#39;bright&#39;</span><span class="p">,</span> <span class="s1">&#39;dark&#39;</span><span class="p">,</span> <span class="s1">&#39;colorblind&#39;</span><span class="p">]</span>
 
@@ -508,102 +614,104 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/58a0ddac2a6d097e8c447fca422b0ccfb833052683b5cfab72d95c7ce2c6560d.png" src="_images/58a0ddac2a6d097e8c447fca422b0ccfb833052683b5cfab72d95c7ce2c6560d.png" />
-<img alt="_images/233cefbbba91a57cf0488d3adbb19339bdf5979934f843d68c703799e73b82ef.png" src="_images/233cefbbba91a57cf0488d3adbb19339bdf5979934f843d68c703799e73b82ef.png" />
+<img alt="_images/3afa4a93bdf44d398797932ca03418cb2ba3596e7e0f7d3cf9ce2a94d7dc8c62.png" src="_images/3afa4a93bdf44d398797932ca03418cb2ba3596e7e0f7d3cf9ce2a94d7dc8c62.png" />
 </div>
 </div>
 </section>
 <section id="tipos-de-graficos-no-seaborn">
 <h2>4.3 Tipos de Gráficos no Seaborn<a class="headerlink" href="#tipos-de-graficos-no-seaborn" title="Link to this heading">#</a></h2>
 <p>Seaborn oferece uma variedade de funções para criar diferentes tipos de gráficos. Vamos explorar os principais:</p>
-<section id="graficos-de-dsitribuicao">
-<h3>4.3.1 Gráficos de Dsitribuição<a class="headerlink" href="#graficos-de-dsitribuicao" title="Link to this heading">#</a></h3>
-<p>Histograma e KDE (Kernel Density Estimate)</p>
+<section id="graficos-de-distribuicao">
+<h3>4.3.1 Gráficos de Distribuição<a class="headerlink" href="#graficos-de-distribuicao" title="Link to this heading">#</a></h3>
+<p>Esses gráficos são usados para visualizar a distribuição de uma única variável ou a relação entre várias variáveis.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sns.histplot()</span></code>: Cria histogramas, que mostram a frequência de ocorrência de diferentes valores em um conjunto de dados.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sns.kdeplot()</span></code>: Cria gráficos de densidade kernel (KDE), que estimam a função de densidade de probabilidade de uma variável contínua.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sns.displot()</span></code>: Uma função mais geral que combina histogramas e KDEs, permitindo criar gráficos de distribuição mais complexos.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sns.rugplot()</span></code>: Adiciona pequenas linhas (rugs) ao longo do eixo x para mostrar a localização exata de cada observação.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sns.ecdfplot()</span></code>: Cria um gráfico ECDF (Empirical Cumulative Distribution Function) que mostra a proporção de observações em um conjunto de dados que são menores ou iguais a um determinado valor. Ele é usado para visualizar a distribuição cumulativa de uma única variável.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Gerar dados</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Gerar dados aleatórios com distribuição normal</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
 
-<span class="c1"># Histograma</span>
+<span class="c1"># Figura 1: Histogramas (com e sem KDE)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 
+<span class="c1"># Subplot 1: Histograma simples</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>  <span class="c1"># kde=False remove a linha de densidade</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Histograma&#39;</span><span class="p">)</span>
 
+<span class="c1"># Subplot 2: Histograma com KDE</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>  <span class="c1"># kde=True adiciona a linha de densidade</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Histograma com KDE&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-<span class="c1"># Apenas KDE</span>
+<span class="c1"># Figura 2: Apenas KDE</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># fill=True preenche a área sob a curva</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Kernel Density Estimate (KDE)&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/b2a2d70d75eaf8c5f525096bac08f81f669f4c1a689f7b06d45e9c094eb96f2a.png" src="_images/b2a2d70d75eaf8c5f525096bac08f81f669f4c1a689f7b06d45e9c094eb96f2a.png" />
-<img alt="_images/2cc455b64b7d215fe5ff8cbfbfcd029be4c9a97578bf82bff71cd91a70597114.png" src="_images/2cc455b64b7d215fe5ff8cbfbfcd029be4c9a97578bf82bff71cd91a70597114.png" />
-</div>
-</div>
-<p>Gráfico de Distribuição Acumulada</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">ecdfplot</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Função de Distribuição Acumulada&#39;</span><span class="p">)</span>
+
+<span class="c1"># Figura 3: Displot (função mais flexível para distribuições)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">displot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hist&quot;</span><span class="p">,</span>  <span class="c1"># pode ser &quot;kde&quot;, &quot;ecdf&quot; ou &quot;hist&quot;</span>
+    <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>     <span class="c1"># adiciona linha KDE ao histograma</span>
+    <span class="n">rug</span><span class="o">=</span><span class="kc">True</span>      <span class="c1"># adiciona rugplot</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Displot (Histograma + KDE + Rug)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Figura 4: Rugplot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">rugplot</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># adiciona marcas no eixo x para cada observação</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Rugplot&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Figura 5: ECDF (Empirical Cumulative Distribution Function)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">ecdfplot</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># mostra a distribuição cumulativa</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;ECDF (Empirical Cumulative Distribution Function)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Figura 6: Combinação de diferentes visualizações</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="c1"># Plotar KDE</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;KDE&#39;</span><span class="p">)</span>
+<span class="c1"># Adicionar rugplot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">rugplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Rugplot&#39;</span><span class="p">)</span>
+<span class="c1"># Adicionar ECDF (eixo y secundário)</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">ecdfplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;ECDF&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Combinação de KDE + Rugplot + ECDF&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/858e24aa48e80edb4465768812582813195c4281416d1bcd9c8194cd6f4cdbea.png" src="_images/858e24aa48e80edb4465768812582813195c4281416d1bcd9c8194cd6f4cdbea.png" />
-</div>
-</div>
-<p>Boxplot e Violinplot</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Gerar dados</span>
-<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
-    <span class="s1">&#39;grupo&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">],</span> <span class="mi">250</span><span class="p">),</span>
-    <span class="s1">&#39;valores&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">250</span><span class="p">),</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">250</span><span class="p">),</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">250</span><span class="p">),</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">250</span><span class="p">)</span>
-    <span class="p">])</span>
-<span class="p">})</span>
-
-<span class="c1"># Boxplot</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;grupo&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;valores&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Boxplot&#39;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;grupo&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;valores&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Violinplot&#39;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/f3c6743595a4fd36e0811a859b2939f4e46f02b6ecfb493571b55b410ebfd7b0.png" src="_images/f3c6743595a4fd36e0811a859b2939f4e46f02b6ecfb493571b55b410ebfd7b0.png" />
+<img alt="_images/a3c9fe4328f95b10bc355480e8d73f7c03420e5a19a5b39569b0689dacc1e031.png" src="_images/a3c9fe4328f95b10bc355480e8d73f7c03420e5a19a5b39569b0689dacc1e031.png" />
+<img alt="_images/327236ce38b0cc9a97d2363d1e132e35f10ab95fe4ee77f722230f781f22ef56.png" src="_images/327236ce38b0cc9a97d2363d1e132e35f10ab95fe4ee77f722230f781f22ef56.png" />
+<img alt="_images/7e8a1eba94482248145fdf5f869ea675ec36cb3c6948f2b60a0d4342e46baf1f.png" src="_images/7e8a1eba94482248145fdf5f869ea675ec36cb3c6948f2b60a0d4342e46baf1f.png" />
+<img alt="_images/1f5a942d7a866e43fb2de52f801b2d63ba3dab2fe16d67a1549395988a39a18d.png" src="_images/1f5a942d7a866e43fb2de52f801b2d63ba3dab2fe16d67a1549395988a39a18d.png" />
+<img alt="_images/7cec60a7dd9b64406320552246145233582774f8c597e8badebc365e394de1bc.png" src="_images/7cec60a7dd9b64406320552246145233582774f8c597e8badebc365e394de1bc.png" />
+<img alt="_images/c65860d032edd2698d8f71c11b3aaf2002e1efb2a8d47c127484959b77b2344f.png" src="_images/c65860d032edd2698d8f71c11b3aaf2002e1efb2a8d47c127484959b77b2344f.png" />
 </div>
 </div>
 </section>
 <section id="graficos-de-relacao">
 <h3>4.3.2 Gráficos de Relação<a class="headerlink" href="#graficos-de-relacao" title="Link to this heading">#</a></h3>
-<p>Scatterplot</p>
+<p>Esses gráficos são usados para visualizar a relação entre duas ou mais variáveis.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sns.scatterplot()</span></code>: Cria gráficos de dispersão, que mostram a relação entre duas variáveis como pontos em um plano cartesiano.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sns.lineplot()</span></code>: Cria gráficos de linha, que mostram a relação entre duas variáveis como uma linha conectando os pontos de dados.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sns.relplot()</span></code>: Uma função mais geral que combina gráficos de dispersão e linha, permitindo criar gráficos de relação mais complexos.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Gerar dados</span>
@@ -628,8 +736,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/46840024d1b662faa2739cae80e0edbf5fe4fa404879a47194259544e0217a8d.png" src="_images/46840024d1b662faa2739cae80e0edbf5fe4fa404879a47194259544e0217a8d.png" />
-<img alt="_images/4149fa3c0076ed9a42cefa1a5e759d7470a1fe035c94e649c02d09d144c9558b.png" src="_images/4149fa3c0076ed9a42cefa1a5e759d7470a1fe035c94e649c02d09d144c9558b.png" />
+<img alt="_images/7765faf63eb538034ba95066f3bde901bd1677bf1781bf2e6da4c62fba3d5375.png" src="_images/7765faf63eb538034ba95066f3bde901bd1677bf1781bf2e6da4c62fba3d5375.png" />
+<img alt="_images/07b1af81e1883f763adb5392b7863502c17cdfc62c6b3491694fe9609603c951.png" src="_images/07b1af81e1883f763adb5392b7863502c17cdfc62c6b3491694fe9609603c951.png" />
 </div>
 </div>
 <p>Pairplot</p>
@@ -646,7 +754,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/bd8ec5b6206a0423833134c29d4c87cc0b4501090bd14762585be75ee280aa4d.png" src="_images/bd8ec5b6206a0423833134c29d4c87cc0b4501090bd14762585be75ee280aa4d.png" />
+<img alt="_images/f2f73063f75fea57a016364adb62d588599d1928a8b059eef7765f2ef68d3fd4.png" src="_images/f2f73063f75fea57a016364adb62d588599d1928a8b059eef7765f2ef68d3fd4.png" />
 </div>
 </div>
 <p>Heatmap</p>
@@ -664,50 +772,369 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/2e7b8dd5dfdf125107b35cdec4b967368e0b6a67590150c00d6e47fa26006570.png" src="_images/2e7b8dd5dfdf125107b35cdec4b967368e0b6a67590150c00d6e47fa26006570.png" />
+<img alt="_images/9cd05429e7d46cc381018c0f7cdfcca64f89ed1697a0faf21a949e717f094685.png" src="_images/9cd05429e7d46cc381018c0f7cdfcca64f89ed1697a0faf21a949e717f094685.png" />
 </div>
 </div>
 </section>
 <section id="graficos-categoricos">
 <h3>4.3.3 Gráficos Categóricos<a class="headerlink" href="#graficos-categoricos" title="Link to this heading">#</a></h3>
-<p>Barplot</p>
+<p>Esses gráficos são usados para visualizar a relação entre uma variável categórica e uma ou mais variáveis numéricas.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sns.barplot()</span></code>: Cria gráficos de barras, que mostram a média de uma variável numérica para cada categoria.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sns.countplot()</span></code>: Cria gráficos de contagem, que mostram o número de ocorrências de cada categoria.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sns.boxplot()</span></code>: Cria diagramas de caixa, que mostram a distribuição de uma variável numérica para cada categoria, incluindo a mediana, os quartis e os outliers.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sns.violinplot()</span></code>: Cria gráficos de violino, que combinam diagramas de caixa e KDEs para mostrar a distribuição de uma variável numérica para cada categoria.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sns.stripplot()</span></code>: Cria gráficos de dispersão, que mostram a distribuição de uma variável numérica para cada categoria, com os pontos de dados espalhados ao longo do eixo x.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sns.swarmplot()</span></code>: Similar ao stripplot(), mas com os pontos de dados ajustados para evitar sobreposição.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sns.catplot()</span></code>: Uma função mais geral que combina todos os gráficos categóricos, permitindo criar gráficos mais complexos.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sns.pointplot()</span></code>: Cria um gráfico para mostrar a relação entre uma variável categórica e uma variável numérica. Ele exibe a média da variável numérica para cada categoria, com intervalos de confiança ao redor dessas médias. Ele é especialmente útil para comparar a média de uma variável entre diferentes categorias.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dados de exemplo</span>
 <span class="n">titanic</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;titanic&#39;</span><span class="p">)</span>
 
-<span class="c1"># Barplot</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;survived&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">titanic</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Taxa de Sobrevivência por Classe - Titanic&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Taxa de Sobrevivência&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Classe&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">titanic</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/0cd2a4970728013ffbad3280d7856b02cec49c49d63133acc428a90e7531293d.png" src="_images/0cd2a4970728013ffbad3280d7856b02cec49c49d63133acc428a90e7531293d.png" />
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>survived</th>
+      <th>pclass</th>
+      <th>sex</th>
+      <th>age</th>
+      <th>sibsp</th>
+      <th>parch</th>
+      <th>fare</th>
+      <th>embarked</th>
+      <th>class</th>
+      <th>who</th>
+      <th>adult_male</th>
+      <th>deck</th>
+      <th>embark_town</th>
+      <th>alive</th>
+      <th>alone</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>3</td>
+      <td>male</td>
+      <td>22.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>7.2500</td>
+      <td>S</td>
+      <td>Third</td>
+      <td>man</td>
+      <td>True</td>
+      <td>NaN</td>
+      <td>Southampton</td>
+      <td>no</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>1</td>
+      <td>female</td>
+      <td>38.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>71.2833</td>
+      <td>C</td>
+      <td>First</td>
+      <td>woman</td>
+      <td>False</td>
+      <td>C</td>
+      <td>Cherbourg</td>
+      <td>yes</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>3</td>
+      <td>female</td>
+      <td>26.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>7.9250</td>
+      <td>S</td>
+      <td>Third</td>
+      <td>woman</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>Southampton</td>
+      <td>yes</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>1</td>
+      <td>female</td>
+      <td>35.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>53.1000</td>
+      <td>S</td>
+      <td>First</td>
+      <td>woman</td>
+      <td>False</td>
+      <td>C</td>
+      <td>Southampton</td>
+      <td>yes</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>3</td>
+      <td>male</td>
+      <td>35.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>8.0500</td>
+      <td>S</td>
+      <td>Third</td>
+      <td>man</td>
+      <td>True</td>
+      <td>NaN</td>
+      <td>Southampton</td>
+      <td>no</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>886</th>
+      <td>0</td>
+      <td>2</td>
+      <td>male</td>
+      <td>27.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>13.0000</td>
+      <td>S</td>
+      <td>Second</td>
+      <td>man</td>
+      <td>True</td>
+      <td>NaN</td>
+      <td>Southampton</td>
+      <td>no</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>887</th>
+      <td>1</td>
+      <td>1</td>
+      <td>female</td>
+      <td>19.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>30.0000</td>
+      <td>S</td>
+      <td>First</td>
+      <td>woman</td>
+      <td>False</td>
+      <td>B</td>
+      <td>Southampton</td>
+      <td>yes</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>888</th>
+      <td>0</td>
+      <td>3</td>
+      <td>female</td>
+      <td>NaN</td>
+      <td>1</td>
+      <td>2</td>
+      <td>23.4500</td>
+      <td>S</td>
+      <td>Third</td>
+      <td>woman</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>Southampton</td>
+      <td>no</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>889</th>
+      <td>1</td>
+      <td>1</td>
+      <td>male</td>
+      <td>26.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>30.0000</td>
+      <td>C</td>
+      <td>First</td>
+      <td>man</td>
+      <td>True</td>
+      <td>C</td>
+      <td>Cherbourg</td>
+      <td>yes</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>890</th>
+      <td>0</td>
+      <td>3</td>
+      <td>male</td>
+      <td>32.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>7.7500</td>
+      <td>Q</td>
+      <td>Third</td>
+      <td>man</td>
+      <td>True</td>
+      <td>NaN</td>
+      <td>Queenstown</td>
+      <td>no</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+<p>891 rows × 15 columns</p>
+</div></div></div>
 </div>
-</div>
-<p>Countplot</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;survived&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">titanic</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Contagem de Passageiros por Classe e Sobrevivência - Titanic&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Classe&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Contagem&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Sobreviveu&#39;</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Não&#39;</span><span class="p">,</span> <span class="s1">&#39;Sim&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Barplot: Sobrevivência média por gênero</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;survived&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">titanic</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Sobrevivência Média por Gênero&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/47a1b6d5ac313666f3d43837cbc4bf1cd2b5d4c498b90fd3e76e6d836c2d8773.png" src="_images/47a1b6d5ac313666f3d43837cbc4bf1cd2b5d4c498b90fd3e76e6d836c2d8773.png" />
+<img alt="_images/2b09f7d910a56519e4ac03f9830e868c3fad989949d2337da4950a4f69711f2b.png" src="_images/2b09f7d910a56519e4ac03f9830e868c3fad989949d2337da4950a4f69711f2b.png" />
 </div>
 </div>
-<p>Pointplot</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 2. Countplot: Contagem de passageiros por classe</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">titanic</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Contagem de Passageiros por Classe&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1fe8ccfa7e44c436ffb49032a8fa66ebbc8596a9acd2971575d423a42c44c04b.png" src="_images/1fe8ccfa7e44c436ffb49032a8fa66ebbc8596a9acd2971575d423a42c44c04b.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 3. Boxplot: Distribuição da idade por classe</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">titanic</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distribuição da Idade por Classe&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/90815ed3f577f2af63e03ca871d2bea6c7dd90263cf4bf7b6ffa4cd1179c2f16.png" src="_images/90815ed3f577f2af63e03ca871d2bea6c7dd90263cf4bf7b6ffa4cd1179c2f16.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 4. Violinplot: Distribuição da idade por gênero</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">titanic</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distribuição da Idade por Gênero&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1fce1221c8cc967578252815caba4952a5a99748be63bf46eb1766e9cfedeabe.png" src="_images/1fce1221c8cc967578252815caba4952a5a99748be63bf46eb1766e9cfedeabe.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 5. Stripplot: Distribuição da tarifa por classe</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">stripplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;fare&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">titanic</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distribuição da Tarifa por Classe&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3821feaedf58f691901fc551bce43435bba5398fa25ac46c190ce232c70a5644.png" src="_images/3821feaedf58f691901fc551bce43435bba5398fa25ac46c190ce232c70a5644.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 6. Swarmplot: Distribuição da idade por sobrevivência</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">swarmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;survived&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">titanic</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distribuição da Idade por Sobrevivência&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1700d768b72b3862f9cfc2397dedaa204f953d7d0c44704324d74dffaaefba85.png" src="_images/1700d768b72b3862f9cfc2397dedaa204f953d7d0c44704324d74dffaaefba85.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 7. Catplot: Combinação de gênero e sobrevivência por classe</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;survived&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">titanic</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Gênero e Sobrevivência por Classe&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.05</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b60717d85107aeae8353da78d0c9032f1c5d4357647c2b70bea1263a6651bc54.png" src="_images/b60717d85107aeae8353da78d0c9032f1c5d4357647c2b70bea1263a6651bc54.png" />
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
@@ -720,19 +1147,174 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/d6e70202fa670702283156ad7d8532580578ceaf6407637ee02ce73f16df573b.png" src="_images/d6e70202fa670702283156ad7d8532580578ceaf6407637ee02ce73f16df573b.png" />
+<img alt="_images/a26d1ae498a79c787a5b1291dc4e9188f19db8946de0bbe18fbaccd5e4386d9a.png" src="_images/a26d1ae498a79c787a5b1291dc4e9188f19db8946de0bbe18fbaccd5e4386d9a.png" />
 </div>
 </div>
 </section>
 <section id="graficos-de-regressao">
 <h3>4.3.4 Gráficos de Regressão<a class="headerlink" href="#graficos-de-regressao" title="Link to this heading">#</a></h3>
-<p>Regplot e Lmplot</p>
+<p>Os gráficos de regressão no Seaborn são usados para visualizar a relação entre variáveis, com foco em ajustar e exibir modelos de regressão. Eles são úteis para entender como uma variável dependente muda em relação a uma ou mais variáveis independentes.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sns.regplot()</span></code>: Cria um gráfico de dispersão com uma linha de regressão ajustada aos dados. Ele mostra a relação entre duas variáveis, juntamente com um intervalo de confiança para a linha de regressão.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sns.lmplot()</span></code>: Combina <code class="docutils literal notranslate"><span class="pre">regplot()</span></code> com a capacidade de adicionar mais variáveis categóricas através dos parâmetros <code class="docutils literal notranslate"><span class="pre">hue</span></code>, <code class="docutils literal notranslate"><span class="pre">col</span></code> e <code class="docutils literal notranslate"><span class="pre">row</span></code>. Isso permite visualizar a relação entre duas variáveis para diferentes subgrupos de dados.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sns.residplot()</span></code>: Plota os resíduos (erros) de um modelo de regressão em relação aos valores da variável preditora (independente).</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dados de exemplo</span>
 <span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;tips&#39;</span><span class="p">)</span>
 
-<span class="c1"># Regplot</span>
+<span class="n">tips</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>total_bill</th>
+      <th>tip</th>
+      <th>sex</th>
+      <th>smoker</th>
+      <th>day</th>
+      <th>time</th>
+      <th>size</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>16.99</td>
+      <td>1.01</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>10.34</td>
+      <td>1.66</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>21.01</td>
+      <td>3.50</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>23.68</td>
+      <td>3.31</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>24.59</td>
+      <td>3.61</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>239</th>
+      <td>29.03</td>
+      <td>5.92</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>240</th>
+      <td>27.18</td>
+      <td>2.00</td>
+      <td>Female</td>
+      <td>Yes</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>241</th>
+      <td>22.67</td>
+      <td>2.00</td>
+      <td>Male</td>
+      <td>Yes</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>242</th>
+      <td>17.82</td>
+      <td>1.75</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>243</th>
+      <td>18.78</td>
+      <td>3.00</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Thur</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+<p>244 rows × 7 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Regplot</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -766,13 +1348,13 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/cd481b5ab3269faba4190a003ea8e63d4992cb13672a2a89e11b74fe92a4191c.png" src="_images/cd481b5ab3269faba4190a003ea8e63d4992cb13672a2a89e11b74fe92a4191c.png" />
+<img alt="_images/250ac5552ca494403024b2c43bc9c553ac8d54ee4496c85b444f8a891a1b3a9f.png" src="_images/250ac5552ca494403024b2c43bc9c553ac8d54ee4496c85b444f8a891a1b3a9f.png" />
 </div>
 </div>
-<p>Residplot</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Resíduos do modelo</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">residplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;total_bill&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;tip&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Gráfico de Resíduos: Gorjeta vs. Conta Total&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -780,9 +1362,192 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a5f601255a72ac28091ce55524e9cc40822da694bcf8708a83b5320c2289124c.png" src="_images/a5f601255a72ac28091ce55524e9cc40822da694bcf8708a83b5320c2289124c.png" />
+<img alt="_images/d9120b986753c87ecb0467a3907a45a3ff394e3373126e928c2584d2a7da1e35.png" src="_images/d9120b986753c87ecb0467a3907a45a3ff394e3373126e928c2584d2a7da1e35.png" />
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://waf.cs.illinois.edu/discovery/berkeley.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Year</th>
+      <th>Major</th>
+      <th>Gender</th>
+      <th>Admission</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1973</td>
+      <td>C</td>
+      <td>F</td>
+      <td>Rejected</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1973</td>
+      <td>B</td>
+      <td>M</td>
+      <td>Accepted</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1973</td>
+      <td>Other</td>
+      <td>F</td>
+      <td>Accepted</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1973</td>
+      <td>Other</td>
+      <td>M</td>
+      <td>Accepted</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1973</td>
+      <td>Other</td>
+      <td>M</td>
+      <td>Rejected</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>12758</th>
+      <td>1973</td>
+      <td>Other</td>
+      <td>M</td>
+      <td>Accepted</td>
+    </tr>
+    <tr>
+      <th>12759</th>
+      <td>1973</td>
+      <td>D</td>
+      <td>M</td>
+      <td>Accepted</td>
+    </tr>
+    <tr>
+      <th>12760</th>
+      <td>1973</td>
+      <td>Other</td>
+      <td>F</td>
+      <td>Rejected</td>
+    </tr>
+    <tr>
+      <th>12761</th>
+      <td>1973</td>
+      <td>Other</td>
+      <td>M</td>
+      <td>Rejected</td>
+    </tr>
+    <tr>
+      <th>12762</th>
+      <td>1973</td>
+      <td>Other</td>
+      <td>M</td>
+      <td>Accepted</td>
+    </tr>
+  </tbody>
+</table>
+<p>12763 rows × 4 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Criar variáveis dummy para gênero e admissão para poder usar no regplot</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Gender_num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Gender&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;F&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Admission_num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Admission&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Accepted&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="c1"># Configurar o estilo do plot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Plot geral (mostrando o viés aparente contra mulheres)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Gender_num&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Admission_num&#39;</span><span class="p">,</span>
+            <span class="n">x_jitter</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">y_jitter</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+            <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mf">0.1</span><span class="p">},</span>
+            <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Taxa de Admissão Geral por Gênero&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Gênero (0=M, 1=F)&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Admitido (0=Não, 1=Sim)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot por departamento (mostrando a realidade por departamento)</span>
+<span class="c1"># Vamos usar o departamento A como exemplo</span>
+<span class="n">dept_A</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Major&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;A&#39;</span><span class="p">]</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">dept_A</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Gender_num&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Admission_num&#39;</span><span class="p">,</span>
+            <span class="n">x_jitter</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">y_jitter</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+            <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mf">0.1</span><span class="p">},</span>
+            <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Taxa de Admissão por Gênero (Departamento A)&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Gênero (0=M, 1=F)&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Admitido (0=Não, 1=Sim)&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Vamos imprimir também as taxas de admissão para melhor entendimento</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Taxas de Admissão Gerais:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Gender&#39;</span><span class="p">)[</span><span class="s1">&#39;Admission&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">unstack</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Taxas de Admissão no Departamento A:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dept_A</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Gender&#39;</span><span class="p">)[</span><span class="s1">&#39;Admission&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">unstack</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/35bfb5e32c605ffe5d4496345ef2076176f92570eeb978aa2fa5aa2ffa314f0e.png" src="_images/35bfb5e32c605ffe5d4496345ef2076176f92570eeb978aa2fa5aa2ffa314f0e.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Taxas de Admissão Gerais:
+Admission  Accepted  Rejected
+Gender                       
+F          0.345753  0.654247
+M          0.442786  0.557214
+
+Taxas de Admissão no Departamento A:
+Admission  Accepted  Rejected
+Gender                       
+F          0.824074  0.175926
+M          0.724956  0.275044
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="graficos-de-matriz">
+<h3>4.3.5 Gráficos de Matriz<a class="headerlink" href="#graficos-de-matriz" title="Link to this heading">#</a></h3>
+<p>Esses gráficos são usados para visualizar a relação entre várias variáveis em uma matriz.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sns.heatmap()</span></code>: Cria mapas de calor, que mostram a relação entre duas variáveis como cores em uma matriz.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sns.clustermap()</span></code>: Cria mapas de calor com as linhas e colunas agrupadas com base na similaridade.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sns.pairplot()</span></code>: Cria uma matriz de gráficos de dispersão, mostrando a relação entre todos os pares de variáveis em um conjunto de dados.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sns.JointGrid()</span></code>: Cria um gráfico de dispersão com histogramas marginais, mostrando a distribuição de cada variável individualmente e a relação entre elas.</p></li>
+</ul>
 </section>
 <section id="facetgrid-multiplos-graficos-por-categoria">
 <h3>4.3.5 FacetGrid: Múltiplos Gráficos por Categoria<a class="headerlink" href="#facetgrid-multiplos-graficos-por-categoria" title="Link to this heading">#</a></h3>
@@ -804,8 +1569,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/519aaeb59ff20108552dc5337ef594e00d4b8fa113e2920f049c6c358d9e9f3c.png" src="_images/519aaeb59ff20108552dc5337ef594e00d4b8fa113e2920f049c6c358d9e9f3c.png" />
-<img alt="_images/d0c4bdb5e3bc58593b4419becc7e670a9b593c4d0aaad974d3dcadc0f8d35dda.png" src="_images/d0c4bdb5e3bc58593b4419becc7e670a9b593c4d0aaad974d3dcadc0f8d35dda.png" />
+<img alt="_images/7100d2d23548e320858bddd8892216f2d19138a7f021a086ff39eae85a537287.png" src="_images/7100d2d23548e320858bddd8892216f2d19138a7f021a086ff39eae85a537287.png" />
+<img alt="_images/8298438821ad50ceae093451cf0559a88bc61e5fc8805bab55c0a86267307c0b.png" src="_images/8298438821ad50ceae093451cf0559a88bc61e5fc8805bab55c0a86267307c0b.png" />
 </div>
 </div>
 </section>
@@ -837,7 +1602,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b35019f7f761d1802c75142e6f24a4242387c2ead4eb87892f8422565758bccf.png" src="_images/b35019f7f761d1802c75142e6f24a4242387c2ead4eb87892f8422565758bccf.png" />
+<img alt="_images/a0898d4b28daf766ea04703675b2be2266f5e1ff1d78f099f103ea03a5c7b0a1.png" src="_images/a0898d4b28daf766ea04703675b2be2266f5e1ff1d78f099f103ea03a5c7b0a1.png" />
 </div>
 </div>
 </section>
@@ -913,13 +1678,14 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacao-avancada-com-seaborn">4.1 Visualização Avançada com Seaborn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacao-com-seaborn">4.1 Visualização com Seaborn</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estilos-e-temas-do-seaborn">4.2 Estilos e Temas do Seaborn</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-graficos-no-seaborn">4.3 Tipos de Gráficos no Seaborn</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-dsitribuicao">4.3.1 Gráficos de Dsitribuição</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-distribuicao">4.3.1 Gráficos de Distribuição</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-relacao">4.3.2 Gráficos de Relação</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-categoricos">4.3.3 Gráficos Categóricos</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-regressao">4.3.4 Gráficos de Regressão</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-matriz">4.3.5 Gráficos de Matriz</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#facetgrid-multiplos-graficos-por-categoria">4.3.5 FacetGrid: Múltiplos Gráficos por Categoria</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#personalizacao-de-graficos-no-seaborn">4.3.6 Personalização de Gráficos no Seaborn</a></li>
 </ul>

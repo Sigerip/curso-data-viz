@@ -185,7 +185,7 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Matplotlib</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Seaborn.html">4. Introdução ao Seaborn</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Datasets_Seaborn.html">5. Datasets do Seaborn</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Demograficos.html">6. Análise de Dados Demográficos com Seaborn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Demograficos.html">6. Visualização de Dados Demográficos com Seaborn</a></li>
 </ul>
 
     </div>
@@ -388,9 +388,10 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-barras">3.2.3 Gráfico de Barras</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histograma">3.2.4 Histograma</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-pizza">3.2.5 Gráfico de Pizza</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subplots-multiplos-graficos">3.2.6 Subplots: Múltiplos Gráficos</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#personalizacao-de-graficos">3.2.7 Personalização de Gráficos</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#salvando-graficos">3.2.8 Salvando Gráficos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot">3.2.6 Boxplot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subplots-multiplos-graficos">3.2.7 Subplots: Múltiplos Gráficos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#personalizacao-de-graficos">3.2.8 Personalização de Gráficos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#salvando-graficos">3.2.9 Salvando Gráficos</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusao">3.3 Conclusão</a></li>
@@ -409,9 +410,9 @@ document.write(`
 <section class="tex2jax_ignore mathjax_ignore" id="matplotlib">
 <h1>3. Matplotlib<a class="headerlink" href="#matplotlib" title="Link to this heading">#</a></h1>
 <p>MATPLOLIB é uma biblioteca de software para criação de gráficos e visualizações de dados em geral, feita para e da linguagem de programação Python e sua extensão de matemática NumPy.</p>
+<p>SciPy, biblioteca voltada para computação científica e técnica, oferece uma vasta coleção de algoritmos matemáticos e funções para diversas áreas, como álgebra linear, otimização, integração numérica, estatística e processamento de sinais, utiliza o Matplotlib para criar visualizações gráficas dos dados e resultados.</p>
 <p>Originalmente criada pelo biólogo e neurocientista americano John D. Hunter, a biblioteca hoje possui uma comunidade ativa atuando em seu desenvolvimento e é distibuída sob uma licença BSD. O programador Michael Droetboom foi nomeado o líder do projeto um pouco antes da morte do criador John Hunter em agosto de 2012, e logo o cientista Thomas Caswell se juntou a ele.</p>
 <p>Oferece uma interface de programação orientada a objetos para incluir gráficos em aplicações usando toolkits de interface gráfica, como Tkinter, WxPython, Qt ou GTK.</p>
-<p>SciPy faz uso do Matplotlib.</p>
 <p>Matplotlib 2.0.x suporta Python nas versões 2.7 até 3.6. O suporte ao Python 3 começou com o Matplotlib 1.2, e o Matplotlib 1.4 foi o último a suportar o Python 2.6. O projeto se comprometeu a não dar mais suporte ao Python 2 a partir de 2020, assinando o Python 3 statement.</p>
 <section id="anatomia-de-um-grafico-matplotlib">
 <h2>3.1 Anatomia de um Gráfico Matplotlib<a class="headerlink" href="#anatomia-de-um-grafico-matplotlib" title="Link to this heading">#</a></h2>
@@ -428,25 +429,33 @@ document.write(`
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-
-<span class="c1"># Criar uma figura e um conjunto de eixos</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>No código abaixo, ax é um objeto que representa os eixos do gráfico (axes em inglês) e funciona como uma “tela de pintura” onde todos os elementos do gráfico são desenhados. Quando usamos plt.subplots(), ele retorna dois objetos: fig (a figura completa, como se fosse a moldura) e ax (a área onde efetivamente desenhamos o gráfico). O ax é particularmente importante porque é através dele que controlamos praticamente tudo no gráfico.</p>
+<p>Esta abordagem usando ax é considerada mais “orientada a objetos” e oferece maior controle sobre os elementos individuais do gráfico, sendo especialmente útil quando precisamos criar gráficos mais complexos ou múltiplos subplots na mesma figura.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Criar uma figura, um conjunto de eixos e define o tamanho do gráfico em polegadas (largura x altura)</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 
 <span class="c1"># Gerar dados</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="c1"># cria um array com 100 números, distribuídos uniformemente entre 0 e 10 (inclusive)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># calcula o seno de cada valor de x</span>
 
-<span class="c1"># Plotar dados</span>
+<span class="c1"># Plotar dados, desenhar a linha do gráfico e define a legenda</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;sen(x)&#39;</span><span class="p">)</span>
 
 <span class="c1"># Adicionar elementos ao gráfico</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Função Seno&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;sen(x)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Função Seno&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span> <span class="c1"># define o título</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span> <span class="c1"># define o rótulo do eixo x e o tamanho da fonte</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;sen(x)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span> <span class="c1"># define o rótulo do eixo y e o tamanho da fonte</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span> <span class="c1"># adiciona a legenda e o tamanho da fonte</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># adiciona a grade</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1"># exibe o gráfico no ambiente de saída</span>
 </pre></div>
 </div>
 </div>
@@ -457,30 +466,34 @@ document.write(`
 </section>
 <section id="tipos-basicos-de-graficos">
 <h2>3.2 Tipos Básicos de Gráficos<a class="headerlink" href="#tipos-basicos-de-graficos" title="Link to this heading">#</a></h2>
-<p>Matplotlib suporta uma grande variedade de tipos de gráficos. Vamos explorar os mais comuns:</p>
+<p>Matplotlib suporta uma grande variedade de tipos de gráficos, e entre os mais comuns estão: gráficos de linha, gráficos de dispersão (scatter plots), gráficos de barras, histogramas, gráficos de pizza (pie charts) e box plots. Vamos explorar os mais comuns:</p>
 <section id="grafico-de-linhas">
 <h3>3.2.1 Gráfico de Linhas<a class="headerlink" href="#grafico-de-linhas" title="Link to this heading">#</a></h3>
+<p>Um gráfico de linhas é uma representação visual de dados que exibe informações como uma série de pontos de dados conectados por segmentos de linha reta. Ele é frequentemente usado para mostrar tendências ao longo do tempo ou para comparar diferentes conjuntos de dados em um intervalo contínuo. Cada ponto no gráfico corresponde a um valor de dado, e a linha que os conecta ajuda a visualizar a progressão ou relação entre esses valores, tornando-o uma ferramenta eficaz para identificar padrões e mudanças em dados sequenciais.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dados</span>
+<span class="c1"># Cria 100 pontos igualmente espaçados de 0 até 2π (um ciclo completo das funções trigonométricas)</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">y1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">y2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># calcula o seno para cada valor de x</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># calcula o cosseno para cada valor de x</span>
 
 <span class="c1"># Criar gráfico</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span> <span class="c1"># define o tamanho da figura em polegadas</span>
+<span class="c1"># Para o seno: define o rótulo da legenda, a linha da cor azul e a espessura da linha</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;sen(x)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Para o cosseno: define o rótulo da legenda, a linha da cor vermelha, a espessura da linha e estilo tracejado</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;cos(x)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
 
 <span class="c1"># Personalizar gráfico</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Funções Seno e Cosseno&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Funções Seno e Cosseno&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span> <span class="c1"># define o título e o tamanho da fonte</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span> <span class="c1"># define o rótulo do eixo x e o tamanho da fonte</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span> <span class="c1"># define o rótulo do eixo y e o tamanho da fonte</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span> <span class="c1"># adiciona a legenda e define o tamanho da fonte</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># adiciona a grade</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span> <span class="c1"># define os limites do eixo y</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1"># exibe o gráfico</span>
 </pre></div>
 </div>
 </div>
@@ -488,20 +501,24 @@ document.write(`
 <img alt="_images/9605d2de5c30b283c91fd6bda0ac0f474002ee1d1001f94edff6972ffd84c76f.png" src="_images/9605d2de5c30b283c91fd6bda0ac0f474002ee1d1001f94edff6972ffd84c76f.png" />
 </div>
 </div>
+<p>Este script cria um gráfico de linhas que exibe, no mesmo plano cartesiano, as funções seno e cosseno ao longo de um ciclo completo, permitindo visualizar e comparar o comportamento dessas duas funções trigonométricas. As curvas são diferenciadas por cores e estilos de linha, com legendas, rótulos nos eixos, título e grade, tornando a análise das variações e relações entre seno e cosseno mais clara e intuitiva.</p>
 </section>
 <section id="grafico-de-dispersao-scatter">
 <h3>3.2.2 Gráfico de Dispersão (Scatter)<a class="headerlink" href="#grafico-de-dispersao-scatter" title="Link to this heading">#</a></h3>
+<p>Um gráfico de dispersão, também conhecido como scatter plot, é uma representação visual de dados que exibe a relação entre duas variáveis numéricas. Cada ponto no gráfico representa um par de valores, com a posição do ponto determinada pelos valores das variáveis nos eixos horizontal (x) e vertical (y). Gráficos de dispersão são utilizados para identificar padrões, tendências, agrupamentos ou correlações entre as variáveis, permitindo analisar se existe uma relação positiva, negativa ou nenhuma relação aparente entre os dados. Eles são especialmente úteis para visualizar a distribuição de dados e identificar outliers.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dados</span>
-<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
-<span class="n">colors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
-<span class="n">sizes</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># semente para garantir reprodutibilidade</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="c1"># cria um array com 50 números aleatórios entre 0 e 1 para o eixo x</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="c1"># cria um array com 50 números aleatórios entre 0 e 1 para o eixo y</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="c1"># um array com 50 números aleatórios entre 0 e 1, que serão usados para definir as cores de cada ponto no gráfico</span>
+<span class="n">sizes</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="c1"># cria um array com 50 números aleatórios entre 0 e 1, multiplica cada número por 1000, e usa esses valores para definir o tamanho de cada ponto no gráfico</span>
 
 <span class="c1"># Criar gráfico</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="c1"># Criar o gráfico de dispersão, definindo o conjunto de dados, as cores e os tamanhos de cada ponto e a transparência</span>
+<span class="c1"># cmap especifica uma paleta de cores, no caso &#39;viridis&#39;, que varia suavemente do roxo ao amarelo</span>
 <span class="n">scatter</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">sizes</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
 
 <span class="c1"># Personalizar gráfico</span>
@@ -511,20 +528,22 @@ document.write(`
 <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># Adicionar barra de cores</span>
-<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">scatter</span><span class="p">)</span>
-<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;Valores de Cor&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">scatter</span><span class="p">)</span> <span class="c1"># adiciona uma barra de cores ao gráfico</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;Valores de Cor&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span> <span class="c1"># define o rótulo da barra de cores</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4747073e2c19d7d221c4f7a960c91a2e7fc984e136eeba52c7edeead6c388d9d.png" src="_images/4747073e2c19d7d221c4f7a960c91a2e7fc984e136eeba52c7edeead6c388d9d.png" />
+<img alt="_images/0f05fef503d978755134bf55a2bd384410833eb6935c3c8bdad3b3c985c3f2d9.png" src="_images/0f05fef503d978755134bf55a2bd384410833eb6935c3c8bdad3b3c985c3f2d9.png" />
 </div>
 </div>
+<p>O script cria um gráfico de dispersão onde a posição de cada ponto é determinada por valores aleatórios em x e y, a cor de cada ponto é determinada por um valor aleatório mapeado pelo colormap viridis, e o tamanho de cada ponto também é determinado por um valor aleatório. A barra de cores (cbar) é adicionada para ajudar a interpretar a relação entre os valores numéricos e as cores no gráfico.</p>
 </section>
 <section id="grafico-de-barras">
 <h3>3.2.3 Gráfico de Barras<a class="headerlink" href="#grafico-de-barras" title="Link to this heading">#</a></h3>
+<p>Um gráfico de barras é uma representação visual de dados categóricos, onde cada categoria é representada por uma barra retangular. O comprimento ou altura de cada barra é proporcional ao valor que ela representa, permitindo uma comparação fácil e rápida entre diferentes categorias. Os gráficos de barras são frequentemente usados para exibir e comparar quantidades, frequências ou outras medidas estatísticas.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dados</span>
@@ -533,39 +552,43 @@ document.write(`
 
 <span class="c1"># Criar gráfico</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="c1"># Criar o gráfico de barras, definindo o conjunto de dados, a cor do preenchimento das barras e a cor da borda das barras</span>
 <span class="n">bars</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">categorias</span><span class="p">,</span> <span class="n">valores</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;skyblue&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;navy&#39;</span><span class="p">)</span>
 
 <span class="c1"># Personalizar gráfico</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Gráfico de Barras&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Categorias&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Valores&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span> <span class="c1"># adiciona a grade apenas de linhas horizontais, com estilo tracejado e transparência</span>
 
 <span class="c1"># Adicionar valores acima das barras</span>
-<span class="k">for</span> <span class="n">bar</span> <span class="ow">in</span> <span class="n">bars</span><span class="p">:</span>
-    <span class="n">height</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">bar</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span><span class="o">/</span><span class="mf">2.</span><span class="p">,</span> <span class="n">height</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
-            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">height</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">bar</span> <span class="ow">in</span> <span class="n">bars</span><span class="p">:</span> <span class="c1"># loop que perrcorre cada barra</span>
+    <span class="n">height</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span> <span class="c1"># obtém a altura da barra</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">bar</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span><span class="o">/</span><span class="mf">2.</span><span class="p">,</span> <span class="n">height</span> <span class="o">+</span> <span class="mf">0.4</span><span class="p">,</span> <span class="c1"># calcula a posição X do texto, centralizando-o e o posiciona um pouco acima da altura da barra</span>
+            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">height</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span> <span class="c1"># define o texto a ser exibido, alinha horzontal e vertical e o tamanho da fonte</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a71943f9bc7f91efd09cebab4ff63a2f05e5f57e7f19b84851e022a95dbfa1e1.png" src="_images/a71943f9bc7f91efd09cebab4ff63a2f05e5f57e7f19b84851e022a95dbfa1e1.png" />
+<img alt="_images/6822a737114023063c53eefe5a5ce172f12266cd193de7a060a4129cd091cfa1.png" src="_images/6822a737114023063c53eefe5a5ce172f12266cd193de7a060a4129cd091cfa1.png" />
 </div>
 </div>
+<p>Este script gera um gráfico de barras que representa os valores associados a diferentes categorias, exibindo cada categoria no eixo horizontal e seu respectivo valor no eixo vertical, com os valores numéricos mostrados acima de cada barra para facilitar a leitura e comparação direta entre as categorias.</p>
 </section>
 <section id="histograma">
 <h3>3.2.4 Histograma<a class="headerlink" href="#histograma" title="Link to this heading">#</a></h3>
+<p>Um histograma é uma representação gráfica da distribuição de frequência de dados numéricos contínuos. Ele divide os dados em intervalos (bins) e exibe a frequência (ou contagem) de valores que caem em cada intervalo como barras adjacentes. A área de cada barra é proporcional à frequência dos valores no intervalo correspondente, permitindo visualizar a forma da distribuição, identificar tendências centrais, dispersão e a presença de outliers nos dados.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dados</span>
-<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Distribuição normal</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># Define uma semente para reprodutibilidade</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Gera 1000 números aleatórios com distribuição normal</span>
 
 <span class="c1"># Criar gráfico</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="c1"># Plotar um histograma com 30 intervalos, definindo a cor das barras, das bordas e a transparência</span>
 <span class="n">n</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;skyblue&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
 
 <span class="c1"># Personalizar gráfico</span>
@@ -575,23 +598,24 @@ document.write(`
 <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
 
 <span class="c1"># Adicionar linha de densidade</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">bins</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">bins</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Distribuição Normal&#39;</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="c1"># Cria 100 pontos entre -4 e 4</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">bins</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">bins</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># calcula a função de denidade de probabilidade normal e ajuste a escala da curva para corresponder ao histograma</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Distribuição Normal&#39;</span><span class="p">)</span> <span class="c1"># plota a curva, definindo a cor e a espessura da linha e adiciona uma legenda</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1"># exibe o gráfico</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e41f9ba555a4b46614d003086eaf84b7cab01dea1d0d7d9dfeab79e5c53404df.png" src="_images/e41f9ba555a4b46614d003086eaf84b7cab01dea1d0d7d9dfeab79e5c53404df.png" />
+<img alt="_images/7d9617298565602245e180623c0a06831dcdfb77724270297614685301c451cd.png" src="_images/7d9617298565602245e180623c0a06831dcdfb77724270297614685301c451cd.png" />
 </div>
 </div>
+<p>Este script cria um histograma que mostra a distribuição dos dados gerados aleatoriamente, sobreposto por uma curva de densidade normal teórica, permitindo comparar visualmente se os dados seguem uma distribuição normal.</p>
 </section>
 <section id="grafico-de-pizza">
 <h3>3.2.5 Gráfico de Pizza<a class="headerlink" href="#grafico-de-pizza" title="Link to this heading">#</a></h3>
+<p>Um gráfico de pizza, também conhecido como gráfico de setores, é uma representação visual de dados em formato circular, onde cada fatia do círculo corresponde a uma categoria e seu tamanho é proporcional à quantidade ou porcentagem que essa categoria representa em relação ao total. Esse tipo de gráfico é especialmente útil para mostrar a participação relativa de cada parte em um todo, facilitando a comparação visual entre as proporções das diferentes categorias.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dados</span>
@@ -600,16 +624,17 @@ document.write(`
 
 <span class="c1"># Criar gráfico</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="c1"># Criar o gráfico de pizza, definindo o conjunto de dados, rótulas para cada fatia e formata os valores percentuais em uma casa decimal</span>
 <span class="n">wedges</span><span class="p">,</span> <span class="n">texts</span><span class="p">,</span> <span class="n">autotexts</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">valores</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">categorias</span><span class="p">,</span> <span class="n">autopct</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%1.1f%%</span><span class="s1">&#39;</span><span class="p">,</span>
-                                  <span class="n">startangle</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">shadow</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                  <span class="n">wedgeprops</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;edgecolor&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">})</span>
+                                  <span class="n">startangle</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">shadow</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="c1"># inicia a primeira fatia a partir do ângulode 90 graus e adiciona uma sombra ao gráfico</span>
+                                  <span class="n">wedgeprops</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;edgecolor&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">})</span> <span class="c1"># define a cor da borda de cada fatia</span>
 
 <span class="c1"># Personalizar gráfico</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Gráfico de Pizza&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">autotexts</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Gráfico de Pizza&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span> <span class="c1"># define o título e o tamanho da fonte</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">autotexts</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span> <span class="c1"># define o tamanho da fonte e o estilo como negrito para os textos percentuais</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>  <span class="c1"># Garante que o gráfico seja circular</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1"># exibe o gráfico</span>
 </pre></div>
 </div>
 </div>
@@ -617,9 +642,46 @@ document.write(`
 <img alt="_images/f138163716a0226441f5d84f7d31f35c05837a27e046080ab5e6028187ddb366.png" src="_images/f138163716a0226441f5d84f7d31f35c05837a27e046080ab5e6028187ddb366.png" />
 </div>
 </div>
+<p>O código cria um gráfico de pizza com fatias proporcionais aos valores fornecidos, rótulos para cada fatia, valores percentuais formatados, uma sombra para dar profundidade, bordas pretas nas fatias e garante que o gráfico seja circular. O título e o estilo dos textos percentuais também são personalizados.</p>
+</section>
+<section id="boxplot">
+<h3>3.2.6 Boxplot<a class="headerlink" href="#boxplot" title="Link to this heading">#</a></h3>
+<p>Um boxplot, também conhecido como diagrama de caixa, é uma representação gráfica que resume visualmente a distribuição de um conjunto de dados através de quartis. Ele exibe a mediana, quartis (Q1 e Q3), valores mínimos e máximos, além de identificar possíveis valores atípicos (outliers). Esta visualização é particularmente útil para analisar a dispersão, simetria e presença de valores discrepantes em um conjunto de dados.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Gerar dados aleatórios para demonstração</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>  <span class="c1"># Define uma semente para reprodutibilidade</span>
+<span class="n">dados</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>  <span class="c1"># Gera 200 pontos com distribuição normal</span>
+
+<span class="c1"># Criar figura e eixos</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>  <span class="c1"># Define o tamanho da figura</span>
+
+<span class="c1"># Criar o boxplot com personalização</span>
+<span class="n">bp</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">dados</span><span class="p">,</span>  <span class="c1"># Dados a serem plotados</span>
+                <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># Permite preenchimento das caixas</span>
+                <span class="n">medianprops</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="s1">&#39;linewidth&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>  <span class="c1"># Estilo da linha da mediana</span>
+                <span class="n">flierprops</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;marker&#39;</span><span class="p">:</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="s1">&#39;markerfacecolor&#39;</span><span class="p">:</span> <span class="s1">&#39;gray&#39;</span><span class="p">},</span>  <span class="c1"># Estilo dos outliers</span>
+                <span class="n">boxprops</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;facecolor&#39;</span><span class="p">:</span> <span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">},</span>  <span class="c1"># Cor da caixa e borda</span>
+                <span class="n">whiskerprops</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">},</span>  <span class="c1"># Cor dos whiskers</span>
+                <span class="n">capprops</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">})</span>  <span class="c1"># Cor das linhas horizontais dos whiskers</span>
+
+<span class="c1"># Personalizar o gráfico</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Boxplot&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>  <span class="c1"># Adiciona título</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Valores&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>  <span class="c1"># Rótulo do eixo Y</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>  <span class="c1"># Adiciona grade horizontal</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>  <span class="c1"># Exibe o gráfico</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/58608fcf3b047f53473570ff8b524ab96b975ef4dc822de75396c41f939ca59d.png" src="_images/58608fcf3b047f53473570ff8b524ab96b975ef4dc822de75396c41f939ca59d.png" />
+</div>
+</div>
+<p>Este script gera um boxplot que representa visualmente a distribuição dos dados através de uma caixa central que contém o intervalo interquartil (IQR), uma linha horizontal destacada indicando a mediana, whiskers que se estendem até os valores mínimos e máximos não discrepantes, e pontos individuais que representam os outliers. O gráfico utiliza um esquema de cores com preenchimento azul claro para a caixa e elementos em preto para melhor contraste e visualização.</p>
 </section>
 <section id="subplots-multiplos-graficos">
-<h3>3.2.6 Subplots: Múltiplos Gráficos<a class="headerlink" href="#subplots-multiplos-graficos" title="Link to this heading">#</a></h3>
+<h3>3.2.7 Subplots: Múltiplos Gráficos<a class="headerlink" href="#subplots-multiplos-graficos" title="Link to this heading">#</a></h3>
 <p>Matplotlib permite criar múltiplos gráficos em uma única figura:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -630,34 +692,38 @@ document.write(`
 <span class="n">y3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">y4</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
 
-<span class="c1"># Criar figura com subplots</span>
+<span class="c1"># Criar figura com subplots, com uma matriz 2 x 2, duas linhas e duas colunas</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 
 <span class="c1"># Gráfico 1: Seno</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">)</span> <span class="c1"># Subplot superior esquerdo</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Função Seno&#39;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># Gráfico 2: Cosseno</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span> <span class="c1"># Subplot superior direito</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Função Cosseno&#39;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># Gráfico 3: Tangente</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y3</span><span class="p">,</span> <span class="s1">&#39;g-&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y3</span><span class="p">,</span> <span class="s1">&#39;g-&#39;</span><span class="p">)</span> <span class="c1"># Subplot inferior esquerdo</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Função Tangente&#39;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># Gráfico 4: Quadrática</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y4</span><span class="p">,</span> <span class="s1">&#39;y-&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y4</span><span class="p">,</span> <span class="s1">&#39;y-&#39;</span><span class="p">)</span> <span class="c1"># Subplot inferior direito</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Função Quadrática&#39;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 
+<span class="c1"># Visualização da matriz:</span>
+<span class="c1"># [0,0] [0,1]</span>
+<span class="c1"># [1,0] [1,1]</span>
+
 <span class="c1"># Ajustar layout</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span> <span class="c1"># ajusta automaticamente o espaçamento e a distribuição entre os suplots</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -668,7 +734,7 @@ document.write(`
 </div>
 </section>
 <section id="personalizacao-de-graficos">
-<h3>3.2.7 Personalização de Gráficos<a class="headerlink" href="#personalizacao-de-graficos" title="Link to this heading">#</a></h3>
+<h3>3.2.8 Personalização de Gráficos<a class="headerlink" href="#personalizacao-de-graficos" title="Link to this heading">#</a></h3>
 <p>Matplotlib oferece amplas opções de personalização:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -680,42 +746,46 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 
 <span class="c1"># Definir estilo</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;seaborn-v0_8-darkgrid&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;seaborn-v0_8-darkgrid&#39;</span><span class="p">)</span> <span class="c1"># aplica um estilo predefinido do Seaborn (darkgrid) para melhorar a estética do gráfico</span>
 
-<span class="c1"># Plotar dados</span>
+<span class="c1"># Plotar a função seno com uma linha vermelha sólida (&#39;r-&#39;) de espessura 2, e adiciona uma legenda com o rótulo &#39;sen(x)&#39;</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;sen(x)&#39;</span><span class="p">)</span>
 
 <span class="c1"># Personalizar título e rótulos</span>
+<span class="c1"># Definir o título do gráfico com tamanho de fonte 20, em negrito, e adiciona um espaçamento de 20 pontos entre o título e o gráfico.</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Função Seno Personalizada&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="c1"># Definir os rótulos dos eixos X e Y com tamanho de fonte 14, em negrito, e adiciona um espaçamento de 10 pontos entre os rótulos e os eixos.</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Eixo X&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Eixo Y&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
 <span class="c1"># Personalizar eixos</span>
+<span class="c1"># Definir o tamanho da fonte dos valores nos eixos X e Y como 12.</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="c1"># Adicionar uma grade ao gráfico com linhas tracejadas e transparência de 70%.</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
 
 <span class="c1"># Adicionar anotações</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;Pico&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">),</span>
-             <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">1.5</span><span class="p">),</span>
-             <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;Pico&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">),</span> <span class="c1"># coordenadas do ponto a ser anotado e do texto da anotação</span>
+             <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">1.5</span><span class="p">),</span> <span class="c1"># propriedades da seta, cor, encolhimento e largura</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span> <span class="c1"># define o tamanho da fonte como 12</span>
 
-<span class="c1"># Adicionar legenda</span>
+<span class="c1"># Adicionar legenda ao gráfico com tamanho de fonte 14, localizada no canto inferior direito</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">)</span>
 
-<span class="c1"># Adicionar texto</span>
+<span class="c1"># Adicionar texto ao gráfico na posição (7, 0.5) exibindo a expressão matemática &quot;sin(x)&quot; com tamanho de fonte 20.</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$\sin(x)$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 
-<span class="c1"># Adicionar linhas de referência</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="c1"># Adicionar linhas de referência (cor preta, estilo sólida e transparência de 30%)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span> <span class="c1"># linha horizontal no eixo y = 0</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span> <span class="c1"># linha vertical no eixo x = pi</span>
 
-<span class="c1"># Limitar eixos</span>
+<span class="c1"># Definir os limites dos eixos X e Y para melhorar a visualização do gráfico</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span> <span class="c1"># ajuste automático do espaçamento dos elementos do gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1"># exibe o gráfico</span>
 </pre></div>
 </div>
 </div>
@@ -723,17 +793,138 @@ document.write(`
 <img alt="_images/0cac4715c6ad3389bafe315f01e1f0168b4788f774b0c94898c4c4fb02202293.png" src="_images/0cac4715c6ad3389bafe315f01e1f0168b4788f774b0c94898c4c4fb02202293.png" />
 </div>
 </div>
-</section>
-<section id="salvando-graficos">
-<h3>3.2.8 Salvando Gráficos<a class="headerlink" href="#salvando-graficos" title="Link to this heading">#</a></h3>
-<p>Matplotlib permite salvar gráficos em vários formatos:</p>
+<p>O código cria um gráfico da função seno com diversas personalizações estéticas e informativas, incluindo estilo visual, título, rótulos, grade, anotações, legenda, texto e linhas de referência, resultando em uma visualização clara e detalhada da função.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Criar um gráfico simples</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Criação dos dados: array de anos de 2015 a 2024 e listas com dados populacionais fictícios</span>
+<span class="n">anos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">2025</span><span class="p">)</span>  <span class="c1"># Cria um array com anos consecutivos</span>
+<span class="n">cidade_a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">120</span><span class="p">,</span> <span class="mi">125</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">138</span><span class="p">,</span> <span class="mi">145</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">172</span><span class="p">,</span> <span class="mi">180</span><span class="p">]</span>  <span class="c1"># População da cidade A</span>
+<span class="n">cidade_b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">80</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">120</span><span class="p">]</span>      <span class="c1"># População da cidade B</span>
+<span class="n">cidade_c</span> <span class="o">=</span> <span class="p">[</span><span class="mi">60</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>          <span class="c1"># População da cidade C</span>
+
+<span class="c1"># Define as cores para cada linha do gráfico usando códigos hexadecimais</span>
+<span class="n">cores</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#1f77b4&#39;</span><span class="p">,</span>  <span class="c1"># Azul</span>
+         <span class="s1">&#39;#ff7f0e&#39;</span><span class="p">,</span>  <span class="c1"># Laranja</span>
+         <span class="s1">&#39;#2ca02c&#39;</span><span class="p">]</span>  <span class="c1"># Verde</span>
+
+<span class="c1"># Cria uma nova figura com tamanho 10x6 polegadas</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Define o estilo visual do gráfico como seaborn-white (fundo branco com elementos do seaborn)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;seaborn-v0_8-white&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plota as três linhas do gráfico, cada uma com sua cor e espessura</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">anos</span><span class="p">,</span> <span class="n">cidade_a</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">cores</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Linha cidade A</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">anos</span><span class="p">,</span> <span class="n">cidade_b</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">cores</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Linha cidade B</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">anos</span><span class="p">,</span> <span class="n">cidade_c</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">cores</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Linha cidade C</span>
+
+<span class="c1"># Adiciona rótulos no final de cada linha, usando a mesma cor da linha correspondente</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">anos</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">cidade_a</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;Cidade A&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">cores</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>  <span class="c1"># Rótulo cidade A</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">anos</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">cidade_b</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;Cidade B&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">cores</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>  <span class="c1"># Rótulo cidade B</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">anos</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">cidade_c</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;Cidade C&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">cores</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>  <span class="c1"># Rótulo cidade C</span>
+
+<span class="c1"># Remove as bordas superior e direita do gráfico para um visual mais limpo</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>    <span class="c1"># Remove borda superior</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># Remove borda direita</span>
+
+<span class="c1"># Ajusta a espessura das bordas esquerda e inferior</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>    <span class="c1"># Espessura da borda esquerda</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;bottom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>  <span class="c1"># Espessura da borda inferior</span>
+
+<span class="c1"># Ajusta os limites do eixo X para acomodar os rótulos das linhas</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">anos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">anos</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Define os rótulos dos eixos X e Y com tamanho de fonte específico</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Ano&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;População (milhares)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+
+<span class="c1"># Define o título do gráfico</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Evolução da População nas Cidades&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="c1"># Adiciona grade horizontal (eixo y) com linha tracejada e 70% de opacidade</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="c1"># Ajusta automaticamente o layout para evitar sobreposição de elementos</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="c1"># Exibe o gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3ee3759fd811962d4c848ccfdee98eee08e6101c482900d40d5889618ad6a4db.png" src="_images/3ee3759fd811962d4c848ccfdee98eee08e6101c482900d40d5889618ad6a4db.png" />
+</div>
+</div>
+<p>Esse gráfico mostra a evolução populacional de três cidades fictícias ao longo de uma década, com as linhas identificadas ao final de cada uma, facilitando a leitura e comparação direta.</p>
+</section>
+<section id="salvando-graficos">
+<h3>3.2.9 Salvando Gráficos<a class="headerlink" href="#salvando-graficos" title="Link to this heading">#</a></h3>
+<p>Matplotlib permite salvar gráficos em vários formatos.
+Formatos de Arquivo:</p>
+<p>a) PNG (Portable Network Graphics)</p>
+<ul class="simple">
+<li><p>Formato com compressão sem perda</p></li>
+<li><p>Ideal para imagens com texto, linhas nítidas e áreas de cor sólida</p></li>
+<li><p>Suporta transparência</p></li>
+<li><p>Melhor escolha para uso web e apresentações</p></li>
+</ul>
+<p>b) PDF (Portable Document Format)</p>
+<ul class="simple">
+<li><p>Formato vetorial</p></li>
+<li><p>Mantém a qualidade em qualquer escala</p></li>
+<li><p>Ideal para documentos acadêmicos e publicações</p></li>
+<li><p>Tamanho de arquivo geralmente menor que PNG em alta resolução</p></li>
+</ul>
+<p>c) SVG (Scalable Vector Graphics)</p>
+<ul class="simple">
+<li><p>Formato vetorial baseado em XML</p></li>
+<li><p>Pode ser editado posteriormente</p></li>
+<li><p>Mantém a qualidade em qualquer escala</p></li>
+<li><p>Ideal para web e edição posterior</p></li>
+</ul>
+<p>d) JPG/JPEG</p>
+<ul class="simple">
+<li><p>Formato com compressão com perda</p></li>
+<li><p>Menor tamanho de arquivo</p></li>
+<li><p>Melhor para imagens fotográficas</p></li>
+<li><p>Não recomendado para gráficos com texto ou linhas finas</p></li>
+</ul>
+<p><strong>DPI</strong>, ou Dots Per Inch (pontos por polegada), é uma medida de resolução que indica a densidade de pontos individuais (pixels) em uma polegada de uma imagem ou impressão. Quanto maior o DPI, mais pontos são usados para representar a imagem, resultando em maior detalhe e nitidez. Em contextos de impressão, um DPI mais alto geralmente significa uma qualidade superior, enquanto para visualização em tela, um DPI menor pode ser suficiente, dependendo do tamanho da tela e da distância de visualização.</p>
+<ul class="simple">
+<li><p>300 DPI é considerado padrão para impressão de qualidade</p></li>
+<li><p>Para web, 72-150 DPI geralmente é suficiente</p></li>
+<li><p>Não afeta formatos vetoriais (PDF, SVG)</p></li>
+</ul>
+<p>O parâmetro <code class="docutils literal notranslate"><span class="pre">bbox_inches='tight'</span></code> na função <code class="docutils literal notranslate"><span class="pre">savefig</span></code> do Matplotlib é utilizado para ajustar automaticamente as bordas da figura, removendo espaços em branco desnecessários ao redor do gráfico. Ao especificar <code class="docutils literal notranslate"><span class="pre">bbox_inches='tight'</span></code>, o Matplotlib calcula o menor bounding box que contém todos os elementos do gráfico (como linhas, texto, legendas, etc.) e salva a figura com essas bordas ajustadas, garantindo que nenhum detalhe seja cortado e otimizando o uso do espaço disponível na imagem resultante.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Criar um gráfico de caminhada aleatória</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(),</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Gráfico de Exemplo&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Configurar a semente aleatória para reprodutibilidade</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Gerar e plotar dados de caminhada aleatória</span>
+<span class="n">dados_aleatorios</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dados_aleatorios</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Variação Acumulada&#39;</span><span class="p">)</span>
+
+<span class="c1"># Adicionar título e rótulos dos eixos</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Caminhada Aleatória - Variação Acumulada&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Número de Passos&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Valor Acumulado&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="c1"># Adicionar grade</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="c1"># Adicionar legenda</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Ajustar layout</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="c1"># Exibir gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 <span class="c1"># Salvar em diferentes formatos</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;grafico.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>  <span class="c1"># PNG</span>
@@ -746,7 +937,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3de48e8ed099d100f52815aec8ed1e600870629649580a683fcd24e7525db5dd.png" src="_images/3de48e8ed099d100f52815aec8ed1e600870629649580a683fcd24e7525db5dd.png" />
+<img alt="_images/617e8e5b50ff60fb0e8eec045e1abccc02e7f835ccd89042c5ba98e66e6c0127.png" src="_images/617e8e5b50ff60fb0e8eec045e1abccc02e7f835ccd89042c5ba98e66e6c0127.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
+</pre></div>
+</div>
 </div>
 </div>
 </section>
@@ -829,9 +1023,10 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-barras">3.2.3 Gráfico de Barras</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histograma">3.2.4 Histograma</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-pizza">3.2.5 Gráfico de Pizza</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subplots-multiplos-graficos">3.2.6 Subplots: Múltiplos Gráficos</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#personalizacao-de-graficos">3.2.7 Personalização de Gráficos</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#salvando-graficos">3.2.8 Salvando Gráficos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot">3.2.6 Boxplot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subplots-multiplos-graficos">3.2.7 Subplots: Múltiplos Gráficos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#personalizacao-de-graficos">3.2.8 Personalização de Gráficos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#salvando-graficos">3.2.9 Salvando Gráficos</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusao">3.3 Conclusão</a></li>
