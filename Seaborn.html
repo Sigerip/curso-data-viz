@@ -389,8 +389,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-categoricos">4.3.3 Gráficos Categóricos</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-regressao">4.3.4 Gráficos de Regressão</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-matriz">4.3.5 Gráficos de Matriz</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#facetgrid-multiplos-graficos-por-categoria">4.3.5 FacetGrid: Múltiplos Gráficos por Categoria</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#personalizacao-de-graficos-no-seaborn">4.3.6 Personalização de Gráficos no Seaborn</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#facetgrid-multiplos-graficos-por-categoria">4.3.6 FacetGrid: Múltiplos Gráficos por Categoria</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#personalizacao-de-graficos-no-seaborn">4.3.7 Personalização de Gráficos no Seaborn</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusao">4.4 Conclusão</a></li>
@@ -425,6 +425,7 @@ document.write(`
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.polynomial.polynomial</span><span class="w"> </span><span class="kn">import</span> <span class="n">polyfit</span>
 
 <span class="c1"># Verificar a versão do Seaborn</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Versão do Seaborn: </span><span class="si">{</span><span class="n">sns</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -481,7 +482,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e756da82e92f0f10a3be0cd783c5b0e0dd6e15b1ec9c4d6b31ad0f1d8dfdfda1.png" src="_images/e756da82e92f0f10a3be0cd783c5b0e0dd6e15b1ec9c4d6b31ad0f1d8dfdfda1.png" />
+<img alt="_images/07d525b871a852fb82f9d53fa4f3a05bc87123b0b900e7a4e1123f13aa328ba2.png" src="_images/07d525b871a852fb82f9d53fa4f3a05bc87123b0b900e7a4e1123f13aa328ba2.png" />
 </div>
 </div>
 <p>Contextos de Escala</p>
@@ -524,7 +525,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/212be45fd081dd995fd932984e8cfaa595dbd72c17fcd82ddfaab7a98fc221a4.png" src="_images/212be45fd081dd995fd932984e8cfaa595dbd72c17fcd82ddfaab7a98fc221a4.png" />
+<img alt="_images/cbf1866062b5043228ca65eda5a9e596630d7c393a7b935b25687333c2973e9c.png" src="_images/cbf1866062b5043228ca65eda5a9e596630d7c393a7b935b25687333c2973e9c.png" />
 </div>
 </div>
 <p>Cores Padrão</p>
@@ -695,12 +696,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a3c9fe4328f95b10bc355480e8d73f7c03420e5a19a5b39569b0689dacc1e031.png" src="_images/a3c9fe4328f95b10bc355480e8d73f7c03420e5a19a5b39569b0689dacc1e031.png" />
-<img alt="_images/327236ce38b0cc9a97d2363d1e132e35f10ab95fe4ee77f722230f781f22ef56.png" src="_images/327236ce38b0cc9a97d2363d1e132e35f10ab95fe4ee77f722230f781f22ef56.png" />
-<img alt="_images/7e8a1eba94482248145fdf5f869ea675ec36cb3c6948f2b60a0d4342e46baf1f.png" src="_images/7e8a1eba94482248145fdf5f869ea675ec36cb3c6948f2b60a0d4342e46baf1f.png" />
-<img alt="_images/1f5a942d7a866e43fb2de52f801b2d63ba3dab2fe16d67a1549395988a39a18d.png" src="_images/1f5a942d7a866e43fb2de52f801b2d63ba3dab2fe16d67a1549395988a39a18d.png" />
-<img alt="_images/7cec60a7dd9b64406320552246145233582774f8c597e8badebc365e394de1bc.png" src="_images/7cec60a7dd9b64406320552246145233582774f8c597e8badebc365e394de1bc.png" />
-<img alt="_images/c65860d032edd2698d8f71c11b3aaf2002e1efb2a8d47c127484959b77b2344f.png" src="_images/c65860d032edd2698d8f71c11b3aaf2002e1efb2a8d47c127484959b77b2344f.png" />
+<img alt="_images/1e12a7aac233d43043b521a87305629da24913570f3b6adaa1ac6586ccb2621e.png" src="_images/1e12a7aac233d43043b521a87305629da24913570f3b6adaa1ac6586ccb2621e.png" />
+<img alt="_images/847d69d073898f7634dabb1635ab7671a4f91f2b465d42feb557bca0108d1aff.png" src="_images/847d69d073898f7634dabb1635ab7671a4f91f2b465d42feb557bca0108d1aff.png" />
+<img alt="_images/983022915c0e428653a4a7a0ce137827b2b7572287b84535590d453ff80fd428.png" src="_images/983022915c0e428653a4a7a0ce137827b2b7572287b84535590d453ff80fd428.png" />
+<img alt="_images/58d52f13fd47bca4c44c166976281612112dc38b9fb2adfbc28204fc9cb7cafb.png" src="_images/58d52f13fd47bca4c44c166976281612112dc38b9fb2adfbc28204fc9cb7cafb.png" />
+<img alt="_images/79004000784620a56dc8b5e5adcde7d6227ccb23afccf24342678051d60d9b8e.png" src="_images/79004000784620a56dc8b5e5adcde7d6227ccb23afccf24342678051d60d9b8e.png" />
+<img alt="_images/39ea76db6b226d45a39968ea67f18ff77de9304aa8410913dbed4fcb524913dc.png" src="_images/39ea76db6b226d45a39968ea67f18ff77de9304aa8410913dbed4fcb524913dc.png" />
 </div>
 </div>
 </section>
@@ -737,42 +738,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/7765faf63eb538034ba95066f3bde901bd1677bf1781bf2e6da4c62fba3d5375.png" src="_images/7765faf63eb538034ba95066f3bde901bd1677bf1781bf2e6da4c62fba3d5375.png" />
-<img alt="_images/07b1af81e1883f763adb5392b7863502c17cdfc62c6b3491694fe9609603c951.png" src="_images/07b1af81e1883f763adb5392b7863502c17cdfc62c6b3491694fe9609603c951.png" />
-</div>
-</div>
-<p>Pairplot</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Usar o dataset iris</span>
-<span class="n">iris</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;iris&#39;</span><span class="p">)</span>
-
-<span class="c1"># Pairplot</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;species&#39;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Pairplot do Dataset Iris&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.02</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/f2f73063f75fea57a016364adb62d588599d1928a8b059eef7765f2ef68d3fd4.png" src="_images/f2f73063f75fea57a016364adb62d588599d1928a8b059eef7765f2ef68d3fd4.png" />
-</div>
-</div>
-<p>Heatmap</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Matriz de correlação</span>
-<span class="n">corr</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;species&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
-
-<span class="c1"># Heatmap</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Matriz de Correlação - Dataset Iris&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/9cd05429e7d46cc381018c0f7cdfcca64f89ed1697a0faf21a949e717f094685.png" src="_images/9cd05429e7d46cc381018c0f7cdfcca64f89ed1697a0faf21a949e717f094685.png" />
+<img alt="_images/6043c32632dd332ce489b9cf370463fa00cc4cb5b34a7eb8152db33c3c170e89.png" src="_images/6043c32632dd332ce489b9cf370463fa00cc4cb5b34a7eb8152db33c3c170e89.png" />
 </div>
 </div>
 </section>
@@ -1049,7 +1015,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/2b09f7d910a56519e4ac03f9830e868c3fad989949d2337da4950a4f69711f2b.png" src="_images/2b09f7d910a56519e4ac03f9830e868c3fad989949d2337da4950a4f69711f2b.png" />
+<img alt="_images/3104414eca2a6c7235663ebac9311c1fa35b7da20aa155d5bcfdc26de87f4b68.png" src="_images/3104414eca2a6c7235663ebac9311c1fa35b7da20aa155d5bcfdc26de87f4b68.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1147,7 +1113,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a26d1ae498a79c787a5b1291dc4e9188f19db8946de0bbe18fbaccd5e4386d9a.png" src="_images/a26d1ae498a79c787a5b1291dc4e9188f19db8946de0bbe18fbaccd5e4386d9a.png" />
+<img alt="_images/9ac7676f35f9b235da8ad8af2ff4ae1c53792365b8209ebb1c6c4fb6d8741444.png" src="_images/9ac7676f35f9b235da8ad8af2ff4ae1c53792365b8209ebb1c6c4fb6d8741444.png" />
 </div>
 </div>
 </section>
@@ -1348,7 +1314,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/250ac5552ca494403024b2c43bc9c553ac8d54ee4496c85b444f8a891a1b3a9f.png" src="_images/250ac5552ca494403024b2c43bc9c553ac8d54ee4496c85b444f8a891a1b3a9f.png" />
+<img alt="_images/0486fd7bcff446be51d12621d8ddbc3aafba66fafd7824e6a7509a12eefac62f.png" src="_images/0486fd7bcff446be51d12621d8ddbc3aafba66fafd7824e6a7509a12eefac62f.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1365,10 +1331,41 @@ document.write(`
 <img alt="_images/d9120b986753c87ecb0467a3907a45a3ff394e3373126e928c2584d2a7da1e35.png" src="_images/d9120b986753c87ecb0467a3907a45a3ff394e3373126e928c2584d2a7da1e35.png" />
 </div>
 </div>
+<p><strong>O Paradoxo de Simpson: Uma Explicação</strong></p>
+<p>O Paradoxo de Simpson é um fenômeno estatístico em que uma tendência aparece em diferentes grupos de dados, mas desaparece ou se inverte quando esses grupos são combinados. Em outras palavras, uma relação observada em subgrupos de uma população pode ser diferente ou oposta à relação observada na população inteira.</p>
+<p>Como ele ocorre?</p>
+<p>O paradoxo geralmente ocorre quando há uma variável de confusão (ou variável latente) que não está sendo considerada na análise inicial. Essa variável de confusão afeta tanto a variável independente quanto a variável dependente, criando uma correlação espúria entre elas nos subgrupos. Quando os subgrupos são combinados, o efeito da variável de confusão pode obscurecer ou inverter a relação original.</p>
+<p>Exemplo Clássico:</p>
+<p>Um exemplo comum é o de um estudo sobre a eficácia de um tratamento médico. Suponha que o tratamento pareça ser menos eficaz para todos os pacientes quando os dados são agregados. No entanto, ao analisar os dados separadamente para homens e mulheres, o tratamento se mostra eficaz para ambos os grupos. Isso pode acontecer se as mulheres, em geral, tiverem uma taxa de recuperação menor e também serem mais propensas a receber o tratamento.</p>
+<p>Importância:</p>
+<p>O Paradoxo de Simpson destaca a importância de considerar todas as variáveis relevantes e analisar os dados em diferentes níveis de agregação para evitar conclusões enganosas.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://waf.cs.illinois.edu/discovery/berkeley.csv&quot;</span><span class="p">)</span>
-<span class="n">df</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Gerar dados de exemplo para grupo abaixo de 50 anos</span>
+<span class="n">n_amostras</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">idades</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">n_amostras</span><span class="p">)</span>
+<span class="n">horas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">n_amostras</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_amostras</span><span class="p">))</span>
+<span class="n">horas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">horas</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">+</span> <span class="mf">0.4</span> <span class="o">*</span> <span class="n">idades</span> <span class="o">-</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">horas</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_amostras</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">abaixo_50</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;idade&#39;</span><span class="p">:</span> <span class="n">idades</span><span class="p">,</span> <span class="s1">&#39;horas_exercicio&#39;</span><span class="p">:</span> <span class="n">horas</span><span class="p">,</span> <span class="s1">&#39;probabilidade&#39;</span><span class="p">:</span> <span class="n">p</span><span class="p">})</span>
+<span class="n">abaixo_50</span><span class="p">[</span><span class="s1">&#39;grupo&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Abaixo de 50&#39;</span>
+
+<span class="c1"># Gerar dados de exemplo para grupo acima de 50 anos</span>
+<span class="n">n_amostras</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">idades</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="n">n_amostras</span><span class="p">)</span>
+<span class="n">horas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">n_amostras</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_amostras</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">horas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">horas</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mi">30</span> <span class="o">+</span> <span class="mf">0.3</span> <span class="o">*</span> <span class="n">idades</span> <span class="o">-</span> <span class="mf">2.8</span> <span class="o">*</span> <span class="n">horas</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_amostras</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">acima_50</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;idade&#39;</span><span class="p">:</span> <span class="n">idades</span><span class="p">,</span> <span class="s1">&#39;horas_exercicio&#39;</span><span class="p">:</span> <span class="n">horas</span><span class="p">,</span> <span class="s1">&#39;probabilidade&#39;</span><span class="p">:</span> <span class="n">p</span><span class="p">})</span>
+<span class="n">acima_50</span><span class="p">[</span><span class="s1">&#39;grupo&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Acima de 50&#39;</span>
+
+<span class="c1"># Combinar os dados</span>
+<span class="n">combinado</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">abaixo_50</span><span class="p">,</span> <span class="n">acima_50</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">combinado</span>
 </pre></div>
 </div>
 </div>
@@ -1391,47 +1388,47 @@ document.write(`
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Year</th>
-      <th>Major</th>
-      <th>Gender</th>
-      <th>Admission</th>
+      <th>idade</th>
+      <th>horas_exercicio</th>
+      <th>probabilidade</th>
+      <th>grupo</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>1973</td>
-      <td>C</td>
-      <td>F</td>
-      <td>Rejected</td>
+      <td>26</td>
+      <td>3.8</td>
+      <td>11.87</td>
+      <td>Abaixo de 50</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>1973</td>
-      <td>B</td>
-      <td>M</td>
-      <td>Accepted</td>
+      <td>39</td>
+      <td>2.6</td>
+      <td>18.18</td>
+      <td>Abaixo de 50</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>1973</td>
-      <td>Other</td>
-      <td>F</td>
-      <td>Accepted</td>
+      <td>48</td>
+      <td>4.3</td>
+      <td>22.33</td>
+      <td>Abaixo de 50</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>1973</td>
-      <td>Other</td>
-      <td>M</td>
-      <td>Accepted</td>
+      <td>34</td>
+      <td>1.0</td>
+      <td>23.52</td>
+      <td>Abaixo de 50</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>1973</td>
-      <td>Other</td>
-      <td>M</td>
-      <td>Rejected</td>
+      <td>30</td>
+      <td>1.6</td>
+      <td>19.64</td>
+      <td>Abaixo de 50</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1441,101 +1438,108 @@ document.write(`
       <td>...</td>
     </tr>
     <tr>
-      <th>12758</th>
-      <td>1973</td>
-      <td>Other</td>
-      <td>M</td>
-      <td>Accepted</td>
+      <th>95</th>
+      <td>56</td>
+      <td>3.6</td>
+      <td>37.39</td>
+      <td>Acima de 50</td>
     </tr>
     <tr>
-      <th>12759</th>
-      <td>1973</td>
-      <td>D</td>
-      <td>M</td>
-      <td>Accepted</td>
+      <th>96</th>
+      <td>74</td>
+      <td>3.8</td>
+      <td>43.64</td>
+      <td>Acima de 50</td>
     </tr>
     <tr>
-      <th>12760</th>
-      <td>1973</td>
-      <td>Other</td>
-      <td>F</td>
-      <td>Rejected</td>
+      <th>97</th>
+      <td>53</td>
+      <td>5.3</td>
+      <td>30.04</td>
+      <td>Acima de 50</td>
     </tr>
     <tr>
-      <th>12761</th>
-      <td>1973</td>
-      <td>Other</td>
-      <td>M</td>
-      <td>Rejected</td>
+      <th>98</th>
+      <td>55</td>
+      <td>4.5</td>
+      <td>33.36</td>
+      <td>Acima de 50</td>
     </tr>
     <tr>
-      <th>12762</th>
-      <td>1973</td>
-      <td>Other</td>
-      <td>M</td>
-      <td>Accepted</td>
+      <th>99</th>
+      <td>80</td>
+      <td>2.9</td>
+      <td>43.92</td>
+      <td>Acima de 50</td>
     </tr>
   </tbody>
 </table>
-<p>12763 rows × 4 columns</p>
+<p>200 rows × 4 columns</p>
 </div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Criar variáveis dummy para gênero e admissão para poder usar no regplot</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Gender_num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Gender&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;F&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Admission_num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Admission&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Accepted&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Função para plotar relação com ajuste linear e coeficiente de correlação</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plotar_relacao</span><span class="p">(</span><span class="n">dados</span><span class="p">,</span> <span class="n">coluna_x</span><span class="p">,</span> <span class="n">cor</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">titulo</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plotar gráfico de dispersão com ajuste linear&quot;&quot;&quot;</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dados</span><span class="p">[</span><span class="n">coluna_x</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dados</span><span class="p">[</span><span class="s1">&#39;probabilidade&#39;</span><span class="p">])</span>
 
-<span class="c1"># Configurar o estilo do plot</span>
-<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="c1"># Ajuste linear</span>
+    <span class="n">b</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">polyfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-<span class="c1"># Plot geral (mostrando o viés aparente contra mulheres)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Gender_num&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Admission_num&#39;</span><span class="p">,</span>
-            <span class="n">x_jitter</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">y_jitter</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-            <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mf">0.1</span><span class="p">},</span>
-            <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Taxa de Admissão Geral por Gênero&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Gênero (0=M, 1=F)&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Admitido (0=Não, 1=Sim)&#39;</span><span class="p">)</span>
+    <span class="c1"># Plotar dispersão</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">coluna_x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;probabilidade&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">dados</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">cor</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 
-<span class="c1"># Plot por departamento (mostrando a realidade por departamento)</span>
-<span class="c1"># Vamos usar o departamento A como exemplo</span>
-<span class="n">dept_A</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Major&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;A&#39;</span><span class="p">]</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">dept_A</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Gender_num&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Admission_num&#39;</span><span class="p">,</span>
-            <span class="n">x_jitter</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">y_jitter</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-            <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mf">0.1</span><span class="p">},</span>
-            <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Taxa de Admissão por Gênero (Departamento A)&#39;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Gênero (0=M, 1=F)&#39;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Admitido (0=Não, 1=Sim)&#39;</span><span class="p">)</span>
+    <span class="c1"># Plotar ajuste linear</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">m</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># Adicionar título e rótulos</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">titulo</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Probabilidade&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Calcular e mostrar coeficiente de correlação</span>
+    <span class="n">corr_coef</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;ρ = </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">corr_coef</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+
+
+<span class="c1"># Criar figura com subplots para idade</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Relação entre Idade e Probabilidade de Cardiopatia&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.05</span><span class="p">)</span>
+
+<span class="c1"># Plotar para cada grupo e combinado</span>
+<span class="n">plotar_relacao</span><span class="p">(</span><span class="n">abaixo_50</span><span class="p">,</span> <span class="s1">&#39;idade&#39;</span><span class="p">,</span> <span class="s1">&#39;#04c5ff&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;Abaixo de 50 anos&#39;</span><span class="p">)</span>
+<span class="n">plotar_relacao</span><span class="p">(</span><span class="n">acima_50</span><span class="p">,</span> <span class="s1">&#39;idade&#39;</span><span class="p">,</span> <span class="s1">&#39;#d9d142&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;Acima de 50 anos&#39;</span><span class="p">)</span>
+<span class="n">plotar_relacao</span><span class="p">(</span><span class="n">combinado</span><span class="p">,</span> <span class="s1">&#39;idade&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;Dados Combinados&#39;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Idade&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Idade&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Idade&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-<span class="c1"># Vamos imprimir também as taxas de admissão para melhor entendimento</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Taxas de Admissão Gerais:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Gender&#39;</span><span class="p">)[</span><span class="s1">&#39;Admission&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">unstack</span><span class="p">())</span>
+<span class="c1"># Criar figura com subplots para horas de exercício</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Relação entre Horas de Exercício e Probabilidade de Cardiopatia&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.05</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Taxas de Admissão no Departamento A:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">dept_A</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Gender&#39;</span><span class="p">)[</span><span class="s1">&#39;Admission&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">unstack</span><span class="p">())</span>
+<span class="c1"># Plotar para cada grupo e combinado</span>
+<span class="n">plotar_relacao</span><span class="p">(</span><span class="n">abaixo_50</span><span class="p">,</span> <span class="s1">&#39;horas_exercicio&#39;</span><span class="p">,</span> <span class="s1">&#39;#04c5ff&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;Abaixo de 50 anos&#39;</span><span class="p">)</span>
+<span class="n">plotar_relacao</span><span class="p">(</span><span class="n">acima_50</span><span class="p">,</span> <span class="s1">&#39;horas_exercicio&#39;</span><span class="p">,</span> <span class="s1">&#39;#d9d142&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;Acima de 50 anos&#39;</span><span class="p">)</span>
+<span class="n">plotar_relacao</span><span class="p">(</span><span class="n">combinado</span><span class="p">,</span> <span class="s1">&#39;horas_exercicio&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;Dados Combinados&#39;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Horas de Exercício&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Horas de Exercício&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Horas de Exercício&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/35bfb5e32c605ffe5d4496345ef2076176f92570eeb978aa2fa5aa2ffa314f0e.png" src="_images/35bfb5e32c605ffe5d4496345ef2076176f92570eeb978aa2fa5aa2ffa314f0e.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Taxas de Admissão Gerais:
-Admission  Accepted  Rejected
-Gender                       
-F          0.345753  0.654247
-M          0.442786  0.557214
-
-Taxas de Admissão no Departamento A:
-Admission  Accepted  Rejected
-Gender                       
-F          0.824074  0.175926
-M          0.724956  0.275044
-</pre></div>
-</div>
+<img alt="_images/4d70b3fdb7787c30a7503ba14c79dcf5296782b140a6f27e6cfa5cb9bb6a4782.png" src="_images/4d70b3fdb7787c30a7503ba14c79dcf5296782b140a6f27e6cfa5cb9bb6a4782.png" />
+<img alt="_images/eaa7fe33c65340b037a669762429b59787abfe1aba49ca7a67d7b19748a33c99.png" src="_images/eaa7fe33c65340b037a669762429b59787abfe1aba49ca7a67d7b19748a33c99.png" />
 </div>
 </div>
 </section>
@@ -1548,9 +1552,95 @@ M          0.724956  0.275044
 <li><p><code class="docutils literal notranslate"><span class="pre">sns.pairplot()</span></code>: Cria uma matriz de gráficos de dispersão, mostrando a relação entre todos os pares de variáveis em um conjunto de dados.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">sns.JointGrid()</span></code>: Cria um gráfico de dispersão com histogramas marginais, mostrando a distribuição de cada variável individualmente e a relação entre elas.</p></li>
 </ul>
+<p>O <strong>pairplot</strong> do Seaborn é uma ferramenta poderosa para visualizar relacionamentos entre múltiplas variáveis em um conjunto de dados. Ele cria uma matriz de gráficos onde cada variável numérica é plotada contra todas as outras, tanto em gráficos de dispersão (<em>scatter plots</em>) quanto em histogramas. A diagonal principal da matriz exibe histogramas para cada variável individual, mostrando sua distribuição. Os gráficos fora da diagonal principal mostram a relação entre pares de variáveis, permitindo identificar padrões, tendências e possíveis correlações.</p>
+<p>Além de sua funcionalidade básica, o <strong>pairplot</strong> oferece opções de personalização para aprimorar a análise. É possível adicionar uma variável categórica para colorir os pontos nos gráficos de dispersão, facilitando a identificação de grupos ou classes dentro dos dados. Também é possível ajustar o tipo de gráfico usado (por exemplo, substituir gráficos de dispersão por gráficos de densidade) e adicionar linhas de regressão para visualizar a força e direção das relações lineares entre as variáveis. Essas opções tornam o <strong>pairplot</strong> uma ferramenta flexível e valiosa para a exploração inicial de dados e a identificação de <em>insights</em> importantes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Usar o dataset iris</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;iris&#39;</span><span class="p">)</span>
+
+<span class="c1"># Pairplot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;species&#39;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Pairplot do Dataset Iris&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.02</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f2f73063f75fea57a016364adb62d588599d1928a8b059eef7765f2ef68d3fd4.png" src="_images/f2f73063f75fea57a016364adb62d588599d1928a8b059eef7765f2ef68d3fd4.png" />
+</div>
+</div>
+<p>O heatmap, ou mapa de calor, é uma representação gráfica de dados onde os valores individuais contidos em uma matriz são representados como cores. Essa visualização é particularmente útil para identificar padrões, correlações e variações em grandes conjuntos de dados. No contexto do Seaborn, o heatmap é frequentemente usado para visualizar matrizes de correlação, matrizes de confusão ou qualquer outra tabela de dados onde a magnitude dos valores é importante. A intensidade da cor geralmente corresponde à magnitude do valor, permitindo que o usuário identifique rapidamente os valores mais altos e mais baixos.</p>
+<p>Além de sua capacidade de destacar padrões, o heatmap do Seaborn oferece diversas opções de personalização para melhorar a clareza e a interpretação. É possível ajustar a paleta de cores para enfatizar diferentes aspectos dos dados, adicionar anotações para exibir os valores numéricos em cada célula e controlar a ordem das linhas e colunas para agrupar valores semelhantes. Essas opções tornam o heatmap uma ferramenta versátil para a análise exploratória de dados e a comunicação de insights complexos de forma visualmente intuitiva.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Matriz de correlação</span>
+<span class="n">corr</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;species&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+
+<span class="c1"># Heatmap</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Matriz de Correlação - Dataset Iris&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/9cd05429e7d46cc381018c0f7cdfcca64f89ed1697a0faf21a949e717f094685.png" src="_images/9cd05429e7d46cc381018c0f7cdfcca64f89ed1697a0faf21a949e717f094685.png" />
+</div>
+</div>
+<p>O <strong>clustermap</strong> do Seaborn é uma poderosa ferramenta de visualização que combina um mapa de calor com dendrogramas de agrupamento hierárquico nas margens. Esta visualização não apenas mostra a intensidade dos valores através de cores, como um heatmap tradicional, mas também reorganiza automaticamente as linhas e colunas com base na similaridade dos dados. Os dendrogramas nas bordas do gráfico ilustram como os grupos são formados, com a altura das linhas indicando a distância ou dissimilaridade entre os clusters. Esta característica torna o <strong>clustermap</strong> particularmente útil para identificar padrões ocultos, subgrupos e relações hierárquicas em conjuntos de dados complexos.</p>
+<p>O <strong>clustermap</strong> oferece diversas opções de personalização que aumentam sua utilidade analítica. É possível padronizar os dados por linhas ou colunas para facilitar comparações, escolher diferentes métodos de ligação para o agrupamento hierárquico (como “<em>ward</em>”, “<em>complete</em>” ou “<em>average</em>”), e selecionar métricas de distância apropriadas para diferentes tipos de dados. Além disso, o <strong>clustermap</strong> permite a adição de anotações, ajuste de paletas de cores e personalização dos dendrogramas. Estas características fazem do <strong>clustermap</strong> uma ferramenta essencial para análise exploratória em diversos campos, como genômica, análise de mercado financeiro, ou qualquer área onde a identificação de estruturas naturais nos dados seja importante.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Carregar o dataset flights</span>
+<span class="n">df_flights</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;flights&#39;</span><span class="p">)</span>
+
+<span class="c1"># Transformar o DataFrame para formato de matriz (pivot)</span>
+<span class="n">flights_pivot</span> <span class="o">=</span> <span class="n">df_flights</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;passengers&#39;</span><span class="p">)</span>
+
+<span class="c1"># Criar o clustermap</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">clustermap</span><span class="p">(</span><span class="n">flights_pivot</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;YlGnBu&quot;</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.0f&quot;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Clustermap do dataset Flights (número de passageiros)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.02</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/532c9e722f27257f5a50239a74890253d2c6e06b2bd919c498759a42d44af9cf.png" src="_images/532c9e722f27257f5a50239a74890253d2c6e06b2bd919c498759a42d44af9cf.png" />
+</div>
+</div>
+<p>O <strong>JointGrid</strong> do Seaborn é uma classe que permite criar gráficos compostos, combinando um gráfico bivariado central com gráficos univariados nas margens. Essa estrutura é ideal para visualizar a relação entre duas variáveis, ao mesmo tempo em que se observa a distribuição individual de cada uma delas. O gráfico central pode ser um scatter plot, um gráfico de densidade, um hexbin plot ou qualquer outra visualização bivariada, enquanto os gráficos marginais geralmente são histogramas ou KDE plots. Essa combinação oferece uma visão completa dos dados, facilitando a identificação de padrões, correlações e características individuais das variáveis.</p>
+<p>A flexibilidade do <strong>JointGrid</strong> permite personalizar cada componente do gráfico de forma independente. É possível escolher diferentes tipos de gráficos para o centro e as margens, ajustar as cores e estilos, adicionar anotações e muito mais. Além disso, o <strong>JointGrid</strong> oferece a capacidade de integrar funções estatísticas, como a regressão linear, diretamente na visualização. Essa combinação de recursos torna o <strong>JointGrid</strong> uma ferramenta poderosa para a análise exploratória de dados, permitindo uma compreensão mais profunda das relações entre variáveis e suas distribuições individuais.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Carregar o dataset penguins</span>
+<span class="n">penguins</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;penguins&#39;</span><span class="p">)</span>
+
+<span class="c1"># Remover linhas com valores nulos</span>
+<span class="n">penguins</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="c1"># Criar o JointGrid</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">JointGrid</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;flipper_length_mm&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">)</span>
+
+<span class="c1"># Adicionar scatter plot no centro e KDE plots nas margens</span>
+<span class="n">g</span><span class="o">.</span><span class="n">plot_joint</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">plot_marginals</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Adicionar título</span>
+<span class="n">g</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;JointGrid: Relação entre flipper_length_mm e body_mass_g no dataset Penguins&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.02</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6132406d1b946e045579cf3b9558814b793d8c200a582bb6f6e7b5cf7cecc1ae.png" src="_images/6132406d1b946e045579cf3b9558814b793d8c200a582bb6f6e7b5cf7cecc1ae.png" />
+</div>
+</div>
 </section>
 <section id="facetgrid-multiplos-graficos-por-categoria">
-<h3>4.3.5 FacetGrid: Múltiplos Gráficos por Categoria<a class="headerlink" href="#facetgrid-multiplos-graficos-por-categoria" title="Link to this heading">#</a></h3>
+<h3>4.3.6 FacetGrid: Múltiplos Gráficos por Categoria<a class="headerlink" href="#facetgrid-multiplos-graficos-por-categoria" title="Link to this heading">#</a></h3>
 <p>FacetGrid permite criar múltiplos gráficos separados por categorias:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1575,26 +1665,29 @@ M          0.724956  0.275044
 </div>
 </section>
 <section id="personalizacao-de-graficos-no-seaborn">
-<h3>4.3.6 Personalização de Gráficos no Seaborn<a class="headerlink" href="#personalizacao-de-graficos-no-seaborn" title="Link to this heading">#</a></h3>
+<h3>4.3.7 Personalização de Gráficos no Seaborn<a class="headerlink" href="#personalizacao-de-graficos-no-seaborn" title="Link to this heading">#</a></h3>
 <p>Seaborn permite personalizar gráficos de várias maneiras:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configurar o estilo</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;deep&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;deep&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># Criar um gráfico personalizado</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;survived&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">titanic</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;survived&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="n">errorbar</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;ci&#39;</span><span class="p">,</span> <span class="mi">95</span><span class="p">),</span> <span class="n">data</span><span class="o">=</span><span class="n">titanic</span><span class="p">)</span>
+
+<span class="c1"># Dimensionar o gráfico no eixo y</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.15</span><span class="p">)</span>  <span class="c1"># Define o limite superior do eixo y para 1.15</span>
 
 <span class="c1"># Personalizar o gráfico</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Taxa de Sobrevivência por Classe e Sexo - Titanic&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Classe&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Taxa de Sobrevivência&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Sexo&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">title_fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Taxa de Sobrevivência por Classe e Sexo - Titanic&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Classe&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Taxa de Sobrevivência&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Sexo&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">title_fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 
 <span class="c1"># Adicionar valores nas barras</span>
 <span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">containers</span><span class="p">:</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">bar_label</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.2f</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">bar_label</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.2f</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">label_type</span><span class="o">=</span><span class="s1">&#39;edge&#39;</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -1602,7 +1695,7 @@ M          0.724956  0.275044
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a0898d4b28daf766ea04703675b2be2266f5e1ff1d78f099f103ea03a5c7b0a1.png" src="_images/a0898d4b28daf766ea04703675b2be2266f5e1ff1d78f099f103ea03a5c7b0a1.png" />
+<img alt="_images/5004c7d1b5acedee4f58b2400a8bf4ceba397d3710e4edf5e923facabb9f7b12.png" src="_images/5004c7d1b5acedee4f58b2400a8bf4ceba397d3710e4edf5e923facabb9f7b12.png" />
 </div>
 </div>
 </section>
@@ -1686,8 +1779,8 @@ M          0.724956  0.275044
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-categoricos">4.3.3 Gráficos Categóricos</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-regressao">4.3.4 Gráficos de Regressão</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-matriz">4.3.5 Gráficos de Matriz</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#facetgrid-multiplos-graficos-por-categoria">4.3.5 FacetGrid: Múltiplos Gráficos por Categoria</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#personalizacao-de-graficos-no-seaborn">4.3.6 Personalização de Gráficos no Seaborn</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#facetgrid-multiplos-graficos-por-categoria">4.3.6 FacetGrid: Múltiplos Gráficos por Categoria</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#personalizacao-de-graficos-no-seaborn">4.3.7 Personalização de Gráficos no Seaborn</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusao">4.4 Conclusão</a></li>

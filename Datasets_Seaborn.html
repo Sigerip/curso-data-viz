@@ -448,50 +448,457 @@ titanic
 </div>
 </div>
 </div>
-<p>Vamos explorar cada um desses datasets em detalhes:</p>
 <section id="dataset-iris">
 <h2>5.1 Dataset Iris<a class="headerlink" href="#dataset-iris" title="Link to this heading">#</a></h2>
-<p>O dataset Iris é um dos conjuntos de dados mais famosos em estatística e aprendizado de máquina. Ele contém medidas de comprimento e largura de sépalas e pétalas de três espécies de íris.</p>
+<p>O dataset Iris é composto por medidas de três espécies de flores (Iris setosa, Iris versicolor e Iris virginica). Cada amostra no dataset possui as seguintes variáveis:</p>
+<ul class="simple">
+<li><p>sepal_length: Comprimento da sépala (em centímetros). A sépala é a parte verde que protege a flor quando ela ainda é um botão.</p></li>
+<li><p>sepal_width: Largura da sépala (em centímetros).</p></li>
+<li><p>petal_length: Comprimento da pétala (em centímetros). A pétala é a parte colorida da flor.</p></li>
+<li><p>petal_width: Largura da pétala (em centímetros).</p></li>
+<li><p>species: A espécie da flor (setosa, versicolor ou virginica). Esta é a variável que geralmente queremos prever ou entender com base nas outras medidas.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Carregar o dataset Iris</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Carregar o dataset</span>
 <span class="n">iris</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;iris&#39;</span><span class="p">)</span>
 
-<span class="c1"># Visualização do dataset</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">iris</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="c1"># Pairplot para visualizar relações entre variáveis</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;species&#39;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Relações entre Variáveis no Dataset Iris&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.02</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-<span class="c1"># Heatmap de correlação</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-<span class="n">corr</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;species&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Matriz de Correlação - Dataset Iris&#39;</span><span class="p">)</span>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
+      <th>species</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>145</th>
+      <td>6.7</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.3</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>146</th>
+      <td>6.3</td>
+      <td>2.5</td>
+      <td>5.0</td>
+      <td>1.9</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>147</th>
+      <td>6.5</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.0</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>148</th>
+      <td>6.2</td>
+      <td>3.4</td>
+      <td>5.4</td>
+      <td>2.3</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>149</th>
+      <td>5.9</td>
+      <td>3.0</td>
+      <td>5.1</td>
+      <td>1.8</td>
+      <td>virginica</td>
+    </tr>
+  </tbody>
+</table>
+<p>150 rows × 5 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualizações</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+
+<span class="c1"># Boxplot do comprimento da sépala por espécie</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;sepal_length&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">iris</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Boxplot do comprimento da sépala por espécie&#39;</span><span class="p">)</span>
+
+<span class="c1"># Violin plot do comprimento da pétala por espécie</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;petal_length&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">iris</span><span class="p">,</span> <span class="n">inner</span><span class="o">=</span><span class="s2">&quot;quartile&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Violin plot do comprimento da pétala por espécie&#39;</span><span class="p">)</span>
+
+<span class="c1"># Swarmplot da largura da sépala por espécie</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">swarmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;sepal_width&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">iris</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Swarmplot da largura da sépala por espécie&#39;</span><span class="p">)</span>
+
+<span class="c1"># Barplot da largura média da pétala por espécie</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;petal_width&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">iris</span><span class="p">,</span> <span class="n">errorbar</span><span class="o">=</span><span class="s1">&#39;sd&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Barplot da largura média da pétala por espécie&#39;</span><span class="p">)</span>
+
+<span class="c1"># Scatterplot: comprimento da sépala vs. comprimento da pétala</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;sepal_length&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;petal_length&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">iris</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Scatterplot: comprimento da sépala vs. comprimento da pétala&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 1200x1000 with 0 Axes&gt;
-</pre></div>
-</div>
-<img alt="_images/a90d1eda5549151ab4aeb5b406bd3f5c44a45ac7185a0976c2b4ba6b1958481c.png" src="_images/a90d1eda5549151ab4aeb5b406bd3f5c44a45ac7185a0976c2b4ba6b1958481c.png" />
-<img alt="_images/cc6474cf9184dd56371050ad6834e8f9569891856c14a1c6bafbb72a29181357.png" src="_images/cc6474cf9184dd56371050ad6834e8f9569891856c14a1c6bafbb72a29181357.png" />
+<img alt="_images/0541b31f473c7b545cc43256d06e5ff39ccea18c8142230f30fc560bebcfd600.png" src="_images/0541b31f473c7b545cc43256d06e5ff39ccea18c8142230f30fc560bebcfd600.png" />
 </div>
 </div>
 </section>
 <section id="dataset-titanic">
 <h2>5.2 Dataset Titanic<a class="headerlink" href="#dataset-titanic" title="Link to this heading">#</a></h2>
-<p>O dataset Titanic contém informações sobre os passageiros do Titanic, incluindo se sobreviveram ou não ao naufrágio.</p>
+<p>O dataset Titanic é um conjunto de dados clássico usado para aprendizado de máquina e análise exploratória de dados. Ele contém informações sobre os passageiros do navio Titanic e se eles sobreviveram ou não ao naufrágio. Aqui estão as principais variáveis:</p>
+<ul class="simple">
+<li><p>Survived: Indica se o passageiro sobreviveu (1) ou não (0). Esta é a variável alvo que geralmente queremos prever.</p></li>
+<li><p>Pclass: A classe do passageiro (1 = primeira classe, 2 = segunda classe, 3 = terceira classe).</p></li>
+<li><p>Sex: O sexo do passageiro (male ou female).</p></li>
+<li><p>Age: A idade do passageiro em anos.</p></li>
+<li><p>SibSp: Número de irmãos/cônjuges a bordo do Titanic.</p></li>
+<li><p>Parch: Número de pais/filhos a bordo do Titanic.</p></li>
+<li><p>Fare: A tarifa paga pelo passageiro.</p></li>
+<li><p>Embarked: Porto de embarque (C = Cherbourg, Q = Queenstown, S = Southampton).</p></li>
+<li><p>Class: A classe do passageiro (First, Second, Third).</p></li>
+<li><p>Who: Indica se o passageiro é um homem, mulher ou criança.</p></li>
+<li><p>Adult_male: Indica se o passageiro é um homem adulto (True/False).</p></li>
+<li><p>Deck: O deck em que a cabine do passageiro estava localizada.</p></li>
+<li><p>Embark_town: A cidade de embarque do passageiro. É uma versão mais descritiva da variável “embarked”.</p></li>
+<li><p>Alive: Indica se o passageiro sobreviveu (“yes” ou “no”). É uma versão categórica da variável “survived”.</p></li>
+<li><p>Alone: Indica se o passageiro estava sozinho (True/False).</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Carregar o dataset Titanic</span>
 <span class="n">titanic</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;titanic&#39;</span><span class="p">)</span>
 
-<span class="c1"># Visualizações</span>
+<span class="n">titanic</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>survived</th>
+      <th>pclass</th>
+      <th>sex</th>
+      <th>age</th>
+      <th>sibsp</th>
+      <th>parch</th>
+      <th>fare</th>
+      <th>embarked</th>
+      <th>class</th>
+      <th>who</th>
+      <th>adult_male</th>
+      <th>deck</th>
+      <th>embark_town</th>
+      <th>alive</th>
+      <th>alone</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>3</td>
+      <td>male</td>
+      <td>22.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>7.2500</td>
+      <td>S</td>
+      <td>Third</td>
+      <td>man</td>
+      <td>True</td>
+      <td>NaN</td>
+      <td>Southampton</td>
+      <td>no</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>1</td>
+      <td>female</td>
+      <td>38.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>71.2833</td>
+      <td>C</td>
+      <td>First</td>
+      <td>woman</td>
+      <td>False</td>
+      <td>C</td>
+      <td>Cherbourg</td>
+      <td>yes</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>3</td>
+      <td>female</td>
+      <td>26.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>7.9250</td>
+      <td>S</td>
+      <td>Third</td>
+      <td>woman</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>Southampton</td>
+      <td>yes</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>1</td>
+      <td>female</td>
+      <td>35.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>53.1000</td>
+      <td>S</td>
+      <td>First</td>
+      <td>woman</td>
+      <td>False</td>
+      <td>C</td>
+      <td>Southampton</td>
+      <td>yes</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>3</td>
+      <td>male</td>
+      <td>35.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>8.0500</td>
+      <td>S</td>
+      <td>Third</td>
+      <td>man</td>
+      <td>True</td>
+      <td>NaN</td>
+      <td>Southampton</td>
+      <td>no</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>886</th>
+      <td>0</td>
+      <td>2</td>
+      <td>male</td>
+      <td>27.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>13.0000</td>
+      <td>S</td>
+      <td>Second</td>
+      <td>man</td>
+      <td>True</td>
+      <td>NaN</td>
+      <td>Southampton</td>
+      <td>no</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>887</th>
+      <td>1</td>
+      <td>1</td>
+      <td>female</td>
+      <td>19.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>30.0000</td>
+      <td>S</td>
+      <td>First</td>
+      <td>woman</td>
+      <td>False</td>
+      <td>B</td>
+      <td>Southampton</td>
+      <td>yes</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>888</th>
+      <td>0</td>
+      <td>3</td>
+      <td>female</td>
+      <td>NaN</td>
+      <td>1</td>
+      <td>2</td>
+      <td>23.4500</td>
+      <td>S</td>
+      <td>Third</td>
+      <td>woman</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>Southampton</td>
+      <td>no</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>889</th>
+      <td>1</td>
+      <td>1</td>
+      <td>male</td>
+      <td>26.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>30.0000</td>
+      <td>C</td>
+      <td>First</td>
+      <td>man</td>
+      <td>True</td>
+      <td>C</td>
+      <td>Cherbourg</td>
+      <td>yes</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>890</th>
+      <td>0</td>
+      <td>3</td>
+      <td>male</td>
+      <td>32.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>7.7500</td>
+      <td>Q</td>
+      <td>Third</td>
+      <td>man</td>
+      <td>True</td>
+      <td>NaN</td>
+      <td>Queenstown</td>
+      <td>no</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+<p>891 rows × 15 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualizações</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 
 <span class="c1"># Sobrevivência por classe</span>
@@ -520,19 +927,178 @@ titanic
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/6ae485deb1742d1e335bb94016da5ef8e2c09a92e55a6f6e84936e6e8eaf91be.png" src="_images/6ae485deb1742d1e335bb94016da5ef8e2c09a92e55a6f6e84936e6e8eaf91be.png" />
+<img alt="_images/286e0e432dc7738fe3d187c55b58814e6d15582cb1772068b7a6ef67699e6644.png" src="_images/286e0e432dc7738fe3d187c55b58814e6d15582cb1772068b7a6ef67699e6644.png" />
 </div>
 </div>
 </section>
 <section id="dataset-tips">
 <h2>5.3 Dataset Tips<a class="headerlink" href="#dataset-tips" title="Link to this heading">#</a></h2>
 <p>O dataset Tips contém informações sobre gorjetas em um restaurante.</p>
+<ul class="simple">
+<li><p>total_bill: O valor total da conta em dólares.</p></li>
+<li><p>tip: O valor da gorjeta em dólares.</p></li>
+<li><p>sex: O sexo da pessoa que pagou a conta (Male ou Female).</p></li>
+<li><p>smoker: Indica se a pessoa que pagou a conta é fumante (Yes ou No).</p></li>
+<li><p>day: O dia da semana em que a conta foi paga (Sun, Sat, Thur, Fri).</p></li>
+<li><p>time: A hora do dia em que a conta foi paga (Dinner ou Lunch).</p></li>
+<li><p>size: O número de pessoas no grupo que pagou a conta.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Carregar o dataset Tips</span>
 <span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;tips&#39;</span><span class="p">)</span>
 
-<span class="c1"># Visualizações</span>
+<span class="n">tips</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>total_bill</th>
+      <th>tip</th>
+      <th>sex</th>
+      <th>smoker</th>
+      <th>day</th>
+      <th>time</th>
+      <th>size</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>16.99</td>
+      <td>1.01</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>10.34</td>
+      <td>1.66</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>21.01</td>
+      <td>3.50</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>23.68</td>
+      <td>3.31</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>24.59</td>
+      <td>3.61</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>239</th>
+      <td>29.03</td>
+      <td>5.92</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>240</th>
+      <td>27.18</td>
+      <td>2.00</td>
+      <td>Female</td>
+      <td>Yes</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>241</th>
+      <td>22.67</td>
+      <td>2.00</td>
+      <td>Male</td>
+      <td>Yes</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>242</th>
+      <td>17.82</td>
+      <td>1.75</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>243</th>
+      <td>18.78</td>
+      <td>3.00</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Thur</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+<p>244 rows × 7 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualizações</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 
 <span class="c1"># Relação entre conta total e gorjeta</span>
@@ -567,14 +1133,20 @@ titanic
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/d372b2df764ca1c3d6a0d2133196a63b8a74098bd3775b363d59f987df52f160.png" src="_images/d372b2df764ca1c3d6a0d2133196a63b8a74098bd3775b363d59f987df52f160.png" />
-<img alt="_images/fe5aeaa9daf2c7ed0c0bed4022d9c237cd2cb78a71b827b3a9ebd2dd4f26ff98.png" src="_images/fe5aeaa9daf2c7ed0c0bed4022d9c237cd2cb78a71b827b3a9ebd2dd4f26ff98.png" />
+<img alt="_images/16cf809d95a8bfb5e48253e14c3b255d1a2e08a4049ad7a7e9aae57b29a0f87f.png" src="_images/16cf809d95a8bfb5e48253e14c3b255d1a2e08a4049ad7a7e9aae57b29a0f87f.png" />
+<img alt="_images/0d7b776b4706ee748b2b02bf52ca184f734d0168e147244f8e1e12621d742741.png" src="_images/0d7b776b4706ee748b2b02bf52ca184f734d0168e147244f8e1e12621d742741.png" />
 </div>
 </div>
 </section>
 <section id="dataset-flights">
 <h2>5.4 Dataset Flights<a class="headerlink" href="#dataset-flights" title="Link to this heading">#</a></h2>
-<p>O dataset Flights contém informações sobre o número de passageiros de voos ao longo do tempo.</p>
+<p>O dataset Flights contém informações sobre o número de passageiros de voos ao longo do tempo.
+Transformada em série temporal, possui a seguinte estrutura:</p>
+<ul class="simple">
+<li><p>year: O ano da observação. Vemos anos como 1949, 1950, 1951, 1952 e 1953 nos dados.</p></li>
+<li><p>month: O mês da observação (Jan, Feb, Mar, etc.). Representa todos os meses do ano.</p></li>
+<li><p>passengers: O número de passageiros que viajaram naquele mês e ano específicos.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Carregar o dataset Flights</span>
@@ -584,8 +1156,25 @@ titanic
 <span class="n">flights_pivot</span> <span class="o">=</span> <span class="n">flights</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;passengers&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Dados em formato de matriz:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">flights_pivot</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
-
-<span class="c1"># Visualizações</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dados em formato de matriz:
+month  Jan  Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov  Dec
+year                                                             
+1949   112  118  132  129  121  135  148  148  136  119  104  118
+1950   115  126  141  135  125  149  170  170  158  133  114  140
+1951   145  150  178  163  172  178  199  199  184  162  146  166
+1952   171  180  193  181  183  218  230  242  209  191  172  194
+1953   196  196  236  235  229  243  264  272  237  211  180  201
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualizações</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 
 <span class="c1"># Heatmap de passageiros por mês e ano</span>
@@ -604,29 +1193,165 @@ titanic
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dados em formato de matriz:
-month  Jan  Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov  Dec
-year                                                             
-1949   112  118  132  129  121  135  148  148  136  119  104  118
-1950   115  126  141  135  125  149  170  170  158  133  114  140
-1951   145  150  178  163  172  178  199  199  184  162  146  166
-1952   171  180  193  181  183  218  230  242  209  191  172  194
-1953   196  196  236  235  229  243  264  272  237  211  180  201
-</pre></div>
-</div>
 <img alt="_images/19bb98f9dd8d994b5f16cf9a681e08af07c1a8b503d126c358431206f3ab56df.png" src="_images/19bb98f9dd8d994b5f16cf9a681e08af07c1a8b503d126c358431206f3ab56df.png" />
 </div>
 </div>
 </section>
 <section id="dataset-planets">
 <h2>5.5 Dataset Planets<a class="headerlink" href="#dataset-planets" title="Link to this heading">#</a></h2>
-<p>O dataset Planets contém informações sobre planetas descobertos fora do sistema solar.</p>
+<p>O dataset Planets contém informações sobre planetas descobertos fora do nosso sistema solar (exoplanetas), incluindo o método de detecção, o número de planetas no sistema, o período orbital, a massa, a distância e o ano da descoberta.</p>
+<ul class="simple">
+<li><p>method: O método de detecção utilizado para encontrar o planeta.</p></li>
+<li><p>number: O número de planetas descobertos em torno da mesma estrela.</p></li>
+<li><p>orbital_period: O período orbital do planeta em dias.</p></li>
+<li><p>mass: A massa do planeta em relação à massa de Júpiter.</p></li>
+<li><p>distance: A distância da estrela ao planeta em parsecs.</p></li>
+<li><p>year: O ano em que o planeta foi descoberto.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Carregar o dataset Planets</span>
 <span class="n">planets</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;planets&#39;</span><span class="p">)</span>
 
-<span class="c1"># Visualizações</span>
+<span class="n">planets</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>method</th>
+      <th>number</th>
+      <th>orbital_period</th>
+      <th>mass</th>
+      <th>distance</th>
+      <th>year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Radial Velocity</td>
+      <td>1</td>
+      <td>269.300000</td>
+      <td>7.10</td>
+      <td>77.40</td>
+      <td>2006</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Radial Velocity</td>
+      <td>1</td>
+      <td>874.774000</td>
+      <td>2.21</td>
+      <td>56.95</td>
+      <td>2008</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Radial Velocity</td>
+      <td>1</td>
+      <td>763.000000</td>
+      <td>2.60</td>
+      <td>19.84</td>
+      <td>2011</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Radial Velocity</td>
+      <td>1</td>
+      <td>326.030000</td>
+      <td>19.40</td>
+      <td>110.62</td>
+      <td>2007</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Radial Velocity</td>
+      <td>1</td>
+      <td>516.220000</td>
+      <td>10.50</td>
+      <td>119.47</td>
+      <td>2009</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1030</th>
+      <td>Transit</td>
+      <td>1</td>
+      <td>3.941507</td>
+      <td>NaN</td>
+      <td>172.00</td>
+      <td>2006</td>
+    </tr>
+    <tr>
+      <th>1031</th>
+      <td>Transit</td>
+      <td>1</td>
+      <td>2.615864</td>
+      <td>NaN</td>
+      <td>148.00</td>
+      <td>2007</td>
+    </tr>
+    <tr>
+      <th>1032</th>
+      <td>Transit</td>
+      <td>1</td>
+      <td>3.191524</td>
+      <td>NaN</td>
+      <td>174.00</td>
+      <td>2007</td>
+    </tr>
+    <tr>
+      <th>1033</th>
+      <td>Transit</td>
+      <td>1</td>
+      <td>4.125083</td>
+      <td>NaN</td>
+      <td>293.00</td>
+      <td>2008</td>
+    </tr>
+    <tr>
+      <th>1034</th>
+      <td>Transit</td>
+      <td>1</td>
+      <td>4.187757</td>
+      <td>NaN</td>
+      <td>260.00</td>
+      <td>2008</td>
+    </tr>
+  </tbody>
+</table>
+<p>1035 rows × 6 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualizações</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 
 <span class="c1"># Contagem de planetas descobertos por método</span>
@@ -662,13 +1387,211 @@ year
 </section>
 <section id="dataset-diamonds">
 <h2>5.6 Dataset Diamonds<a class="headerlink" href="#dataset-diamonds" title="Link to this heading">#</a></h2>
-<p>O dataset Diamonds contém informações sobre preços e atributos de diamantes.</p>
+<p>O dataset diamonds do Seaborn contém informações detalhadas sobre milhares de diamantes, sendo muito utilizado para análise exploratória e visualização de dados.</p>
+<ul class="simple">
+<li><p>carat: Peso do diamante em quilates, que é uma das principais medidas de tamanho.</p></li>
+<li><p>cut: Qualidade do corte do diamante (por exemplo, Ideal, Premium, Good). O corte influencia o brilho e o valor do diamante.</p></li>
+<li><p>color: Cor do diamante, classificada de D (incolor) até J (mais amarelado). Quanto mais próximo de D, mais valioso geralmente é o diamante.</p></li>
+<li><p>clarity: Grau de pureza do diamante, indicando a quantidade de inclusões ou imperfeições internas. Exemplos: SI2, SI1, VS1, VS2.</p></li>
+<li><p>depth: Profundidade total do diamante como porcentagem da largura média, importante para avaliar proporções e qualidade do corte.</p></li>
+<li><p>table: Largura da face superior do diamante (tabela) como porcentagem da largura média, também relacionada à qualidade do corte.</p></li>
+<li><p>price: Preço do diamante em dólares americanos.</p></li>
+<li><p>x: Comprimento do diamante em milímetros.</p></li>
+<li><p>y: Largura do diamante em milímetros.</p></li>
+<li><p>z: Profundidade do diamante em milímetros.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Carregar o dataset Diamonds</span>
 <span class="n">diamonds</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;diamonds&#39;</span><span class="p">)</span>
 
-<span class="c1"># Visualizações</span>
+<span class="n">diamonds</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>carat</th>
+      <th>cut</th>
+      <th>color</th>
+      <th>clarity</th>
+      <th>depth</th>
+      <th>table</th>
+      <th>price</th>
+      <th>x</th>
+      <th>y</th>
+      <th>z</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.23</td>
+      <td>Ideal</td>
+      <td>E</td>
+      <td>SI2</td>
+      <td>61.5</td>
+      <td>55.0</td>
+      <td>326</td>
+      <td>3.95</td>
+      <td>3.98</td>
+      <td>2.43</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.21</td>
+      <td>Premium</td>
+      <td>E</td>
+      <td>SI1</td>
+      <td>59.8</td>
+      <td>61.0</td>
+      <td>326</td>
+      <td>3.89</td>
+      <td>3.84</td>
+      <td>2.31</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.23</td>
+      <td>Good</td>
+      <td>E</td>
+      <td>VS1</td>
+      <td>56.9</td>
+      <td>65.0</td>
+      <td>327</td>
+      <td>4.05</td>
+      <td>4.07</td>
+      <td>2.31</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.29</td>
+      <td>Premium</td>
+      <td>I</td>
+      <td>VS2</td>
+      <td>62.4</td>
+      <td>58.0</td>
+      <td>334</td>
+      <td>4.20</td>
+      <td>4.23</td>
+      <td>2.63</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.31</td>
+      <td>Good</td>
+      <td>J</td>
+      <td>SI2</td>
+      <td>63.3</td>
+      <td>58.0</td>
+      <td>335</td>
+      <td>4.34</td>
+      <td>4.35</td>
+      <td>2.75</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>53935</th>
+      <td>0.72</td>
+      <td>Ideal</td>
+      <td>D</td>
+      <td>SI1</td>
+      <td>60.8</td>
+      <td>57.0</td>
+      <td>2757</td>
+      <td>5.75</td>
+      <td>5.76</td>
+      <td>3.50</td>
+    </tr>
+    <tr>
+      <th>53936</th>
+      <td>0.72</td>
+      <td>Good</td>
+      <td>D</td>
+      <td>SI1</td>
+      <td>63.1</td>
+      <td>55.0</td>
+      <td>2757</td>
+      <td>5.69</td>
+      <td>5.75</td>
+      <td>3.61</td>
+    </tr>
+    <tr>
+      <th>53937</th>
+      <td>0.70</td>
+      <td>Very Good</td>
+      <td>D</td>
+      <td>SI1</td>
+      <td>62.8</td>
+      <td>60.0</td>
+      <td>2757</td>
+      <td>5.66</td>
+      <td>5.68</td>
+      <td>3.56</td>
+    </tr>
+    <tr>
+      <th>53938</th>
+      <td>0.86</td>
+      <td>Premium</td>
+      <td>H</td>
+      <td>SI2</td>
+      <td>61.0</td>
+      <td>58.0</td>
+      <td>2757</td>
+      <td>6.15</td>
+      <td>6.12</td>
+      <td>3.74</td>
+    </tr>
+    <tr>
+      <th>53939</th>
+      <td>0.75</td>
+      <td>Ideal</td>
+      <td>D</td>
+      <td>SI2</td>
+      <td>62.2</td>
+      <td>55.0</td>
+      <td>2757</td>
+      <td>5.83</td>
+      <td>5.87</td>
+      <td>3.64</td>
+    </tr>
+  </tbody>
+</table>
+<p>53940 rows × 10 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualizações</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
 
 <span class="c1"># Distribuição de preços</span>
@@ -717,20 +1640,125 @@ year
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 1200x800 with 0 Axes&gt;
 </pre></div>
 </div>
-<img alt="_images/337ce02a251d36792de71afcc61da3e5829dac297bdf64160df8920218390d65.png" src="_images/337ce02a251d36792de71afcc61da3e5829dac297bdf64160df8920218390d65.png" />
+<img alt="_images/bd1cf7b1854153bc69eaba9ab93b7dac9ff445ee1d399c93ed7fb02c01ed1cdf.png" src="_images/bd1cf7b1854153bc69eaba9ab93b7dac9ff445ee1d399c93ed7fb02c01ed1cdf.png" />
 </div>
 </div>
 </section>
 <section id="dataset-car-crashes">
 <h2>5.7 Dataset Car Crashes<a class="headerlink" href="#dataset-car-crashes" title="Link to this heading">#</a></h2>
-<p>O dataset Car Crashes contém informações sobre acidentes de carro nos EUA.</p>
+<p>O dataset car_crashes do Seaborn reúne estatísticas sobre acidentes de trânsito nos estados dos EUA, incluindo fatores de risco e custos de seguro. Veja o que cada variável representa:</p>
+<ul class="simple">
+<li><p>total: Número total de mortes em acidentes de trânsito por 100 mil habitantes no estado.</p></li>
+<li><p>speeding: Número de mortes por 100 mil habitantes relacionadas ao excesso de velocidade.</p></li>
+<li><p>alcohol: Número de mortes por 100 mil habitantes relacionadas ao consumo de álcool.</p></li>
+<li><p>not_distracted: Número de mortes por 100 mil habitantes em acidentes onde não houve distração.</p></li>
+<li><p>no_previous: Número de mortes por 100 mil habitantes em acidentes envolvendo motoristas sem histórico de acidentes anteriores.</p></li>
+<li><p>ins_premium: Valor médio anual do prêmio do seguro automotivo no estado (em dólares).</p></li>
+<li><p>ins_losses: Perdas médias por seguro automotivo no estado (em dólares).</p></li>
+<li><p>abbrev: Abreviação do nome do estado (por exemplo, AL para Alabama, AK para Alaska).</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Carregar o dataset Car Crashes</span>
 <span class="n">car_crashes</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;car_crashes&#39;</span><span class="p">)</span>
 
-<span class="c1"># Visualizações</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="n">car_crashes</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>total</th>
+      <th>speeding</th>
+      <th>alcohol</th>
+      <th>not_distracted</th>
+      <th>no_previous</th>
+      <th>ins_premium</th>
+      <th>ins_losses</th>
+      <th>abbrev</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>18.8</td>
+      <td>7.332</td>
+      <td>5.640</td>
+      <td>18.048</td>
+      <td>15.040</td>
+      <td>784.55</td>
+      <td>145.08</td>
+      <td>AL</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>18.1</td>
+      <td>7.421</td>
+      <td>4.525</td>
+      <td>16.290</td>
+      <td>17.014</td>
+      <td>1053.48</td>
+      <td>133.93</td>
+      <td>AK</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>18.6</td>
+      <td>6.510</td>
+      <td>5.208</td>
+      <td>15.624</td>
+      <td>17.856</td>
+      <td>899.47</td>
+      <td>110.35</td>
+      <td>AZ</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>22.4</td>
+      <td>4.032</td>
+      <td>5.824</td>
+      <td>21.056</td>
+      <td>21.280</td>
+      <td>827.34</td>
+      <td>142.39</td>
+      <td>AR</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>12.0</td>
+      <td>4.200</td>
+      <td>3.360</td>
+      <td>10.920</td>
+      <td>10.680</td>
+      <td>878.41</td>
+      <td>165.63</td>
+      <td>CA</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualizações</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
 
 <span class="c1"># Total de acidentes por estado</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -749,6 +1777,7 @@ year
 <span class="n">corr</span> <span class="o">=</span> <span class="n">car_crashes</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;abbrev&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Correlação entre Variáveis&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
 
 <span class="c1"># Relação entre total de acidentes e acidentes relacionados a álcool</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
@@ -761,19 +1790,117 @@ year
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/8665e5ed8f56f42f1e41444667a9e5765f814e34a558c1958b21e8d95c9fcacf.png" src="_images/8665e5ed8f56f42f1e41444667a9e5765f814e34a558c1958b21e8d95c9fcacf.png" />
+<img alt="_images/cc99a1ba32048db6cff654f0347d2d829f6adf09d26a8dc856f499876fabd683.png" src="_images/cc99a1ba32048db6cff654f0347d2d829f6adf09d26a8dc856f499876fabd683.png" />
 </div>
 </div>
 </section>
 <section id="dataset-penguins">
 <h2>5.8 Dataset Penguins<a class="headerlink" href="#dataset-penguins" title="Link to this heading">#</a></h2>
-<p>O dataset Penguins contém medidas de diferentes espécies de pinguins.</p>
+<p>O dataset penguins do Seaborn contém informações sobre pinguins de diferentes espécies coletados em ilhas da Antártica. Veja o que cada variável representa:</p>
+<ul class="simple">
+<li><p>species: Espécie do pinguim (por exemplo, Adelie, Gentoo, Chinstrap).</p></li>
+<li><p>island: Ilha onde o pinguim foi encontrado (por exemplo, Torgersen, Biscoe, Dream).</p></li>
+<li><p>bill_length_mm: Comprimento do bico do pinguim em milímetros.</p></li>
+<li><p>bill_depth_mm: Profundidade (altura) do bico do pinguim em milímetros.</p></li>
+<li><p>flipper_length_mm: Comprimento da nadadeira (asa) do pinguim em milímetros.</p></li>
+<li><p>body_mass_g: Massa corporal do pinguim em gramas.</p></li>
+<li><p>sex: Sexo do pinguim (Male ou Female).</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Carregar o dataset Penguins</span>
 <span class="n">penguins</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;penguins&#39;</span><span class="p">)</span>
 
-<span class="c1"># Visualizações</span>
+<span class="n">penguins</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>species</th>
+      <th>island</th>
+      <th>bill_length_mm</th>
+      <th>bill_depth_mm</th>
+      <th>flipper_length_mm</th>
+      <th>body_mass_g</th>
+      <th>sex</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Adelie</td>
+      <td>Torgersen</td>
+      <td>39.1</td>
+      <td>18.7</td>
+      <td>181.0</td>
+      <td>3750.0</td>
+      <td>Male</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Adelie</td>
+      <td>Torgersen</td>
+      <td>39.5</td>
+      <td>17.4</td>
+      <td>186.0</td>
+      <td>3800.0</td>
+      <td>Female</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Adelie</td>
+      <td>Torgersen</td>
+      <td>40.3</td>
+      <td>18.0</td>
+      <td>195.0</td>
+      <td>3250.0</td>
+      <td>Female</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Adelie</td>
+      <td>Torgersen</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Adelie</td>
+      <td>Torgersen</td>
+      <td>36.7</td>
+      <td>19.3</td>
+      <td>193.0</td>
+      <td>3450.0</td>
+      <td>Female</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualizações</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 
 <span class="c1"># Distribuição de comprimento de bico por espécie</span>
